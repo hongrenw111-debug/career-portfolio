@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="王宏仁的作品集：AIGC 内容量产、求职 Agent、内容自动化发布与模型可靠性工程——每个结论都有证据边界。"
+    />
+    <meta name="theme-color" content="#f6f8fc" />
+    <title>王宏仁 — AI 运营 · AI 应用作品集</title>
+    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">跳到主要内容</a>
+
+    <header class="site-header" data-header>
+      <a class="brand" href="#top" aria-label="返回顶部">
+        <span class="brand-mark" aria-hidden="true">宏仁</span>
+        <span class="brand-copy">
+          <strong>王宏仁</strong>
+          <small>AI 运营 · AI 应用 · 工程底座</small>
+        </span>
+      </a>
+
+      <nav class="site-nav" aria-label="主导航">
+        <a href="#work">案例</a>
+        <a href="#method">方法</a>
+        <a href="#evidence">证据</a>
+      </nav>
+
+      <button class="header-action" type="button" data-resume-trigger>
+        查看面试摘要
+        <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9h9m-3.5-3.5L13 9l-3.5 3.5" /></svg>
+      </button>
+    </header>
+
+    <main id="main-content">
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="hero-grid section-shell">
+          <div class="hero-intro reveal">
+            <div class="availability"><i aria-hidden="true"></i><span>正在寻找新机会</span><b>AI 运营 · AI 应用 · 工程底座</b></div>
+            <h1 id="hero-title">
+              <span class="hero-title-line">把生成式 AI，</span>
+              <span class="hero-title-line">做成<span class="hero-title-signal">可复核的生产力。</span></span>
+            </h1>
+            <p class="hero-lede">
+              我做内容生产与自动化运营，也亲手写支撑它们的工具：AIGC 量产管线、求职 Agent、
+              自动发布引擎与模型可靠性网关——每个环节都有测试、护栏和可以复核的证据。
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#featured-project">
+                查看代表项目
+                <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9h9m-3.5-3.5L13 9l-3.5 3.5" /></svg>
+              </a>
+              <button class="button button-secondary" type="button" data-copy-summary>复制个人简介</button>
+            </div>
+            <p class="hero-note"><span>8 个真实项目</span><span>每个结论都有证据边界</span></p>
+          </div>
+
+          <section class="failure-atlas reveal" aria-labelledby="atlas-title" data-failure-atlas>
+            <header class="atlas-header">
+              <div>
+                <p>RECOVERY PATH</p>
+                <h2 id="atlas-title">一次失败请求，如何被安全处理？</h2>
+              </div>
+              <span class="atlas-live"><i aria-hidden="true"></i>在线演示</span>
+            </header>
+
+            <div class="fault-tabs" role="tablist" aria-label="选择故障类型">
+              <button type="button" role="tab" aria-selected="true" data-fault="network">网络出口</button>
+              <button type="button" role="tab" aria-selected="false" data-fault="quota">配额耗尽</button>
+              <button type="button" role="tab" aria-selected="false" data-fault="model">模型缺失</button>
+              <button type="button" role="tab" aria-selected="false" data-fault="backend">后端失联</button>
+            </div>
+
+            <div class="atlas-canvas" role="tabpanel" aria-live="polite">
+              <div class="route-line" aria-hidden="true"><span></span></div>
+              <ol class="atlas-route">
+                <li class="is-complete">
+                  <small>发现信号</small>
+                  <strong data-atlas-signal>连接失败</strong>
+                  <span>请求尚未向下游输出</span>
+                </li>
+                <li class="is-complete">
+                  <small>识别原因</small>
+                  <strong data-atlas-classify>出口节点异常</strong>
+                  <span>先识别根因，不做通用重试</span>
+                </li>
+                <li class="is-active">
+                  <small>确定责任</small>
+                  <strong data-atlas-owner>Provider Guard</strong>
+                  <span>只有一个恢复所有者</span>
+                </li>
+                <li>
+                  <small>执行决策</small>
+                  <strong data-atlas-decision>切换健康节点</strong>
+                  <span data-atlas-limit>总尝试次数不超过 3 次</span>
+                </li>
+              </ol>
+              <div class="atlas-outcome">
+                <span>安全结果</span>
+                <strong data-atlas-outcome>在未输出正文前安全重放</strong>
+                <p data-atlas-reason>节点故障属于可恢复网络边界；一旦正文已经发送，立即停止自动重放。</p>
+              </div>
+            </div>
+
+            <footer class="atlas-footer">
+              <span>来自 Provider Guard 项目</span>
+              <button type="button" data-project-open="agentgate">查看完整案例 →</button>
+            </footer>
+          </section>
+        </div>
+
+        <div class="proof-strip section-shell reveal" aria-label="运行验证快照">
+          <div class="proof-strip-title">
+            <span>最近一次验证</span>
+            <p data-snapshot-date>读取验证记录…</p>
+          </div>
+          <dl data-snapshot-metrics></dl>
+        </div>
+      </section>
+
+      <section class="work-section section-shell" id="work" aria-labelledby="work-title">
+        <header class="section-heading reveal">
+          <div>
+            <p class="section-label">代表项目</p>
+            <h2 id="work-title">真实问题，清晰取舍，<br />可以复核的结果。</h2>
+          </div>
+          <p>不是功能截图合集。每个案例都说明问题是什么、为什么这样设计，以及如何证明它有效。</p>
+        </header>
+
+        <div id="featured-project" class="featured-project reveal" data-featured-project></div>
+        <div class="project-register reveal" data-project-register aria-live="polite"></div>
+      </section>
+
+      <section class="method-section" id="method" aria-labelledby="method-title">
+        <div class="section-shell">
+          <header class="method-heading reveal">
+            <p class="section-label">我的工作方式</p>
+            <h2 id="method-title">先理解失败，再设计恢复。</h2>
+            <p>顺序很重要：先识别失败，再画边界，随后指定恢复所有者，最后建立可重复验证。</p>
+          </header>
+
+          <ol class="method-track">
+            <li class="reveal">
+              <span class="method-index">01</span>
+              <div class="method-symbol" aria-hidden="true">?</div>
+              <h3>分类</h3>
+              <p>网络、地区、配额、鉴权和模型缺失是不同故障，不能共享同一种重试。</p>
+              <small>Failure taxonomy</small>
+            </li>
+            <li class="reveal">
+              <span class="method-index">02</span>
+              <div class="method-symbol" aria-hidden="true">⊣</div>
+              <h3>划界</h3>
+              <p>首个正文或工具调用一旦发出，系统就跨过不可自动重放的边界。</p>
+              <small>Replay boundary</small>
+            </li>
+            <li class="reveal">
+              <span class="method-index">03</span>
+              <div class="method-symbol" aria-hidden="true">1</div>
+              <h3>定责</h3>
+              <p>共享依赖只有一个恢复所有者，避免多个守护进程互相放大故障。</p>
+              <small>Single owner</small>
+            </li>
+            <li class="reveal">
+              <span class="method-index">04</span>
+              <div class="method-symbol" aria-hidden="true">✓</div>
+              <h3>验证</h3>
+              <p>用部署哈希、端口所有权、健康端点与日志扫描代替“应该已经好了”。</p>
+              <small>Repeatable proof</small>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="capability-section section-shell" aria-labelledby="capability-title">
+        <header class="section-heading reveal">
+          <div>
+            <p class="section-label">能力与项目</p>
+            <h2 id="capability-title">能力不写在标签里，<br />而是落在项目里。</h2>
+          </div>
+          <p>矩阵只标记存在主要证据的能力，不把“接触过”写成“掌握”。</p>
+        </header>
+        <div class="capability-matrix reveal" data-capability-matrix></div>
+      </section>
+
+      <section class="evidence-section" id="evidence" aria-labelledby="evidence-title">
+        <div class="section-shell">
+          <header class="evidence-heading reveal">
+            <p class="section-label">证据边界</p>
+            <h2 id="evidence-title">哪些已经做到，哪些仍在继续。</h2>
+            <p>这样招聘方可以迅速判断哪些内容能现场展示，哪些仍在作品集化。</p>
+          </header>
+          <div class="evidence-ledger reveal" data-evidence-ledger></div>
+        </div>
+      </section>
+
+      <section class="closing-section section-shell reveal" aria-labelledby="closing-title">
+        <div class="closing-signal" aria-hidden="true"><span></span><span></span><span></span></div>
+        <p class="section-label">开始聊聊</p>
+        <h2 id="closing-title">不妨从一个真实故障开始。</h2>
+        <p>我会说明如何分类、在哪里停止重放、谁拥有恢复权，以及怎样证明修复成立。</p>
+        <div class="closing-actions">
+          <button class="button button-primary" type="button" data-resume-trigger>查看面试摘要</button>
+          <a class="button button-secondary" href="#work">回看工程案例</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer section-shell">
+      <div><strong>王宏仁</strong><span>AI Operations · AI Application · Reliability</span></div>
+      <p>用真实工程证据构建。</p>
+      <a href="#top">回到顶部 ↑</a>
+    </footer>
+
+    <dialog class="project-dialog" data-project-dialog aria-labelledby="project-dialog-title">
+      <div class="dialog-shell">
+        <button class="dialog-close" type="button" data-dialog-close aria-label="关闭项目详情">×</button>
+        <article data-dialog-content></article>
+      </div>
+    </dialog>
+
+    <dialog class="resume-dialog" data-resume-dialog aria-labelledby="resume-title">
+      <div class="dialog-shell resume-shell">
+        <button class="dialog-close" type="button" data-resume-close aria-label="关闭简历摘要">×</button>
+        <p class="section-label">面试摘要</p>
+        <h2 id="resume-title">面试版个人摘要</h2>
+        <div data-resume-content></div>
+        <div class="dialog-actions">
+          <button class="button button-primary" type="button" data-copy-resume>复制全部</button>
+          <button class="button button-secondary" type="button" data-resume-close>关闭</button>
+        </div>
+      </div>
+    </dialog>
+
+    <div class="toast" role="status" aria-live="polite" data-toast></div>
+  </body>
+</html>

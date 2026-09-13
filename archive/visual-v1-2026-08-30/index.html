@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="RA 的 AI 平台、后端与可靠性工程作品集：多模型可靠性、本地 AI 媒体流水线、Agent 工具调度与事件驱动全栈系统。"
+    />
+    <meta name="theme-color" content="#f1efe8" />
+    <title>RA / Systems Portfolio</title>
+    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">跳到主要内容</a>
+
+    <header class="site-header" data-header>
+      <a class="brand" href="#top" aria-label="返回顶部">
+        <span class="brand-mark" aria-hidden="true">RA</span>
+        <span class="brand-copy">
+          <strong>Systems portfolio</strong>
+          <small>AI PLATFORM · BACKEND · RELIABILITY</small>
+        </span>
+      </a>
+
+      <nav class="site-nav" aria-label="主导航">
+        <a href="#work"><span>01</span> 项目</a>
+        <a href="#method"><span>02</span> 方法</a>
+        <a href="#evidence"><span>03</span> 证据</a>
+      </nav>
+
+      <button class="header-action" type="button" data-resume-trigger>
+        简历摘要
+        <svg viewBox="0 0 16 16" aria-hidden="true">
+          <path d="M3 8h9M9 4l4 4-4 4" />
+        </svg>
+      </button>
+    </header>
+
+    <main id="main-content">
+      <section class="hero section-shell" id="top" aria-labelledby="hero-title">
+        <div class="hero-copy reveal">
+          <p class="eyebrow"><span></span> OPEN TO WORK / 2026</p>
+          <h1 id="hero-title">
+            <span class="hero-title-line">把不稳定的 AI 能力，</span>
+            <span class="hero-title-line">做成<mark>可运行、可恢复、</mark></span>
+            <span class="hero-title-line"><mark>可验证</mark>的系统。</span>
+          </h1>
+          <p class="hero-lede">
+            面向 AI 平台、后端与可靠性工程岗位。作品不以功能清单为终点，
+            而以故障边界、恢复路径、可观测证据和端到端交付为完成标准。
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#featured-project">
+              查看主项目
+              <svg viewBox="0 0 16 16" aria-hidden="true">
+                <path d="M3 8h9M9 4l4 4-4 4" />
+              </svg>
+            </a>
+            <button class="button button-quiet" type="button" data-copy-summary>
+              复制个人摘要
+            </button>
+          </div>
+        </div>
+
+        <aside class="proof-console reveal" aria-labelledby="proof-title">
+          <div class="console-head">
+            <div>
+              <p class="micro-label">VERIFICATION SNAPSHOT</p>
+              <h2 id="proof-title">Provider reliability</h2>
+            </div>
+            <span class="status-chip status-pass"><i></i> PASS</span>
+          </div>
+
+          <div class="topology" aria-label="双通道 Provider Guard 架构示意">
+            <div class="topology-node node-client">CLIENT</div>
+            <div class="topology-lines" aria-hidden="true">
+              <span></span><span></span>
+            </div>
+            <div class="topology-lanes">
+              <div class="topology-node"><b>LANE A</b><small>GUARD → BACKEND → NODE GROUP</small></div>
+              <div class="topology-node"><b>LANE B</b><small>GUARD → BACKEND → NODE GROUP</small></div>
+            </div>
+          </div>
+
+          <dl class="proof-metrics" data-snapshot-metrics></dl>
+
+          <div class="console-foot">
+            <span data-snapshot-date>读取验证记录…</span>
+            <button type="button" data-project-open="agentgate">查看证据链 →</button>
+          </div>
+        </aside>
+      </section>
+
+      <section class="work-section section-shell" id="work" aria-labelledby="work-title">
+        <header class="section-heading reveal">
+          <div>
+            <p class="section-index">01 / SELECTED WORK</p>
+            <h2 id="work-title">不是 Demo 墙，是工程档案。</h2>
+          </div>
+          <p>
+            每个案例都回答四件事：问题是什么、边界在哪里、如何恢复、拿什么证明。
+          </p>
+        </header>
+
+        <div id="featured-project" class="featured-project reveal" data-featured-project></div>
+
+        <div class="project-register" data-project-register aria-live="polite"></div>
+      </section>
+
+      <section class="method-section" id="method" aria-labelledby="method-title">
+        <div class="section-shell">
+          <header class="section-heading section-heading-inverse reveal">
+            <div>
+              <p class="section-index">02 / ENGINEERING METHOD</p>
+              <h2 id="method-title">先定义失败，再写成功路径。</h2>
+            </div>
+            <p>
+              我更关注系统在超时、配额耗尽、节点失联和进程重启时会发生什么。
+            </p>
+          </header>
+
+          <ol class="method-list">
+            <li class="reveal">
+              <span>01</span>
+              <div>
+                <h3>把故障分类成状态机</h3>
+                <p>网络、地区、配额、鉴权与模型缺失分别处理，避免用同一种重试掩盖不同根因。</p>
+              </div>
+            </li>
+            <li class="reveal">
+              <span>02</span>
+              <div>
+                <h3>只保留一个恢复所有者</h3>
+                <p>明确谁负责重试、谁负责恢复共享依赖，防止两个守护进程互相放大故障。</p>
+              </div>
+            </li>
+            <li class="reveal">
+              <span>03</span>
+              <div>
+                <h3>把“不可重放”写进边界</h3>
+                <p>首个正文或工具调用已经输出后绝不自动重放；取消信号必须一路传播到上游。</p>
+              </div>
+            </li>
+            <li class="reveal">
+              <span>04</span>
+              <div>
+                <h3>用验证器代替口头完成</h3>
+                <p>部署哈希、端口所有权、模型目录、日志脱敏和恢复策略全部进入可重复检查。</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="capability-section section-shell" aria-labelledby="capability-title">
+        <header class="section-heading reveal">
+          <div>
+            <p class="section-index">CAPABILITY MAP</p>
+            <h2 id="capability-title">一组项目，覆盖完整交付链。</h2>
+          </div>
+          <p>从协议与领域模型，到运行时恢复、自动化部署和面向人的控制界面。</p>
+        </header>
+        <div class="capability-matrix reveal" data-capability-matrix></div>
+      </section>
+
+      <section class="evidence-section section-shell" id="evidence" aria-labelledby="evidence-title">
+        <header class="section-heading reveal">
+          <div>
+            <p class="section-index">03 / EVIDENCE LEDGER</p>
+            <h2 id="evidence-title">公开事实与下一步，分开记录。</h2>
+          </div>
+          <p>不把本地可用冒充成公开产品，也不把规划中的功能写成已完成。</p>
+        </header>
+
+        <div class="evidence-ledger reveal" data-evidence-ledger></div>
+      </section>
+
+      <section class="closing-section section-shell reveal" aria-labelledby="closing-title">
+        <p class="section-index">NEXT CONVERSATION</p>
+        <h2 id="closing-title">如果岗位需要把 AI 原型推到生产边界，我们可以从故障场景聊起。</h2>
+        <div class="closing-actions">
+          <button class="button button-primary" type="button" data-resume-trigger>打开简历摘要</button>
+          <a class="button button-quiet" href="#work">返回项目档案</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer section-shell">
+      <p><strong>RA / SYSTEMS PORTFOLIO</strong> <span>Built from verified engineering evidence.</span></p>
+      <a href="#top">回到顶部 ↑</a>
+    </footer>
+
+    <dialog class="project-dialog" data-project-dialog aria-labelledby="project-dialog-title">
+      <div class="dialog-shell">
+        <button class="dialog-close" type="button" data-dialog-close aria-label="关闭项目详情">×</button>
+        <article data-dialog-content></article>
+      </div>
+    </dialog>
+
+    <dialog class="resume-dialog" data-resume-dialog aria-labelledby="resume-title">
+      <div class="dialog-shell resume-shell">
+        <button class="dialog-close" type="button" data-resume-close aria-label="关闭简历摘要">×</button>
+        <p class="section-index">INTERVIEW SUMMARY</p>
+        <h2 id="resume-title">面试版个人摘要</h2>
+        <div data-resume-content></div>
+        <div class="dialog-actions">
+          <button class="button button-primary" type="button" data-copy-resume>复制全部</button>
+          <button class="button button-quiet" type="button" data-resume-close>关闭</button>
+        </div>
+      </div>
+    </dialog>
+
+    <div class="toast" role="status" aria-live="polite" data-toast></div>
+  </body>
+</html>

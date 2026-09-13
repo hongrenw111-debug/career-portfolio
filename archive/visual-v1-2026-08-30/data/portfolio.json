@@ -1,0 +1,171 @@
+{
+  "profile": {
+    "name": "RA",
+    "role": "AI Platform / Backend / Reliability Engineer",
+    "summary": "面向 AI 平台、后端与可靠性工程岗位。能够把多模型调用、本地 AI 工作流和复杂业务原型推进到具备故障边界、恢复机制、自动验证与可维护文档的工程系统。"
+  },
+  "snapshot": {
+    "date": "2026-08-30 16:08 CST",
+    "label": "运行验证快照；后续源码有变更",
+    "metrics": [
+      { "value": "2 / 2", "label": "健康通道" },
+      { "value": "16", "label": "隔离节点" },
+      { "value": "0", "label": "15 分钟失败" },
+      { "value": "2 / 2", "label": "运行任务" }
+    ]
+  },
+  "projects": [
+    {
+      "slug": "agentgate",
+      "index": "CASE 01",
+      "name": "Provider Guard / AgentGate",
+      "shortName": "AgentGate",
+      "category": "AI PLATFORM · RELIABILITY",
+      "status": "本地运行 · 公开重构准备",
+      "statusType": "verified",
+      "featured": true,
+      "headline": "给模型调用增加一层真正理解故障的可靠性边界。",
+      "summary": "双账号 Gemini Provider Guard 将入口、Provider 后端、listener 与节点池分开管理。系统按根因决定换节点、重启后端或直接返回，并严格限制安全重放范围；两个通道共享一个 Clash 进程，由单一 Guard 负责恢复。AgentGate 是其计划中的通用化公开版本。",
+      "problem": "外部模型调用会同时受到网络出口、地区策略、本地后端、模型目录和上游配额影响。把所有错误都交给通用 retry，会产生重复调用、误重启和不可解释的失败。",
+      "solution": "建立故障分类矩阵、分离节点池、双路由健康探测、冷却状态、共享 Clash 的单一恢复所有者与首个下游响应发出后的不可重放边界，并用只读验证器核对运行状态。",
+      "architecture": ["Client", "Provider Guard", "Provider backend", "Separated listener / node group", "Gemini API"],
+      "facts": [
+        { "value": "2", "label": "分离通道", "note": "独立后端、listener、节点组与任务" },
+        { "value": "8 + 8", "label": "节点池", "note": "两组无重叠" },
+        { "value": "≤ 3", "label": "上游尝试", "note": "单一重试层约束" },
+        { "value": "15s", "label": "健康探测", "note": "连续失败才触发恢复" }
+      ],
+      "responsibilities": [
+        "设计网络、地区、配额、鉴权、模型缺失与后端异常的分类策略",
+        "实现节点粘性、冷却池、并行候选探测及安全连接中止",
+        "定义响应头或首个响应字节发送给下游后的不可重放边界",
+        "实现事务化安装、逐通道更新、回滚和部署一致性检查"
+      ],
+      "proof": [
+        "2026-08-30 16:08 运行快照：两个健康端点均返回 200；验证器另行确认两个通道的目标模型存在",
+        "同一快照确认 16 个节点分属两个无重叠池；旧智能路由入口已经退出",
+        "同一快照确认两个计划任务均处于启用和运行状态；当前工作区后续变更仍待重新部署验证",
+        "同一快照中的 Guard 日志扫描未命中本地 API key"
+      ],
+      "stack": ["Node.js", "PowerShell 7", "HTTP streaming", "State machine", "Windows Task Scheduler"],
+      "next": "提取通用 Provider adapter，加入 OpenTelemetry、故障注入演示与公开脱敏仓库。"
+    },
+    {
+      "slug": "local-ai-media",
+      "index": "CASE 02",
+      "name": "Local AI Media Pipeline",
+      "shortName": "Media Pipeline",
+      "category": "LOCAL AI · AUTOMATION",
+      "status": "本地验证 · 案例整理中",
+      "statusType": "verified",
+      "featured": false,
+      "headline": "在 6GB 显存约束下跑通图生视频、音频与剪辑交付链。",
+      "summary": "围绕消费级 Windows 设备构建 MiniMax H3 本地生成工作流，并将后端 API Runner、自动剪辑与剪映草稿导出串成可重复执行的媒体流水线。",
+      "problem": "高质量视频模型通常假设更大显存和手工 GUI 操作，难以在 6GB 显存、16GB 内存的机器上稳定复现。",
+      "solution": "固定模型与采样配置、关闭高占用缓存路径，以模板化 API Runner 驱动生成，再交给自动剪辑与草稿导出流程。",
+      "architecture": ["Input asset", "ComfyUI API", "MiniMax H3 / LightX2V", "Media assembly", "JianYing draft"],
+      "facts": [
+        { "value": "6GB", "label": "目标显存", "note": "消费级 RTX 3060" },
+        { "value": "6", "label": "生成步数", "note": "固定可复现配置" },
+        { "value": "864×480", "label": "输出画幅", "note": "0.4MP 模式" }
+      ],
+      "responsibilities": [
+        "验证低显存启动参数与 LightX2V 工作流组合",
+        "将 GUI 工作流抽成模板化后端 API 调用",
+        "连接自动视频生成、媒体组装和剪映草稿导出",
+        "沉淀音频、镜头与提示词约束，减少重复试错"
+      ],
+      "proof": [
+        "固定工作流、模型、采样器、步数与输出尺寸",
+        "提供纯后端 Runner，输入和提示词可以脚本化替换",
+        "生成与剪辑使用各自隔离的 Python 运行环境"
+      ],
+      "stack": ["ComfyUI", "MiniMax H3", "LightX2V", "Node.js", "Python", "pyJianYingDraft"],
+      "next": "补充匿名化性能记录、失败样例与一键演示包。"
+    },
+    {
+      "slug": "agent-router",
+      "index": "CASE 03",
+      "name": "Agent Skill Router",
+      "shortName": "Skill Router",
+      "category": "AGENT ENGINEERING · DEVTOOLS",
+      "status": "工作流运行 · 文档化中",
+      "statusType": "active",
+      "featured": false,
+      "headline": "让自然语言意图自动落到正确工具，而不是要求用户背命令。",
+      "summary": "通过意图矩阵连接代码图谱、诊断、TDD、浏览器、设计资产和本地生成工具，并按需调度 230+ 专业角色，控制上下文体积。",
+      "problem": "工具和 Skill 增多后，用户需要记忆命令；一次性加载全部角色又会造成上下文污染和 Token 浪费。",
+      "solution": "采用轻量意图路由、按需加载角色与跨模型分工，让规划、检索和执行由最适合的 Agent 承担。",
+      "architecture": ["Natural language", "Intent matrix", "Skill / tool resolver", "Role dispatcher", "Execution evidence"],
+      "facts": [
+        { "value": "230+", "label": "专业角色", "note": "按需检索加载" },
+        { "value": "8", "label": "意图域", "note": "覆盖研发与创作" },
+        { "value": "3", "label": "协作 Agent", "note": "规划、执行与桌面协同" }
+      ],
+      "responsibilities": [
+        "建立自然语言到图谱、诊断、实现、设计和自动化工具的映射",
+        "设计角色库按需检索，避免全量上下文注入",
+        "划分跨模型规划、快速执行和桌面协同职责",
+        "通过共享索引沉淀跨会话项目状态和用户约束"
+      ],
+      "proof": [
+        "共享记忆索引可被 Codex、ZCode 与 WorkBuddy 读取",
+        "角色库保留在本地，通过单一调度入口按需加载",
+        "意图矩阵明确覆盖代码、调试、实现、设计、浏览器和多媒体工作流"
+      ],
+      "stack": ["Agent routing", "Local skills", "Knowledge graph", "Shared memory", "PowerShell 7"],
+      "next": "增加调用轨迹、路由理由与可重复基准任务，形成可演示的 Agent DevTool。"
+    },
+    {
+      "slug": "cs2-simulator",
+      "index": "CASE 04",
+      "name": "CS2 Arbitrage Simulator",
+      "shortName": "CS2 Simulator",
+      "category": "FULL STACK · DOMAIN MODELING",
+      "status": "模拟模式 · 持续开发",
+      "statusType": "active",
+      "featured": false,
+      "headline": "把跨市场价差问题建模为可回放、可对账、可恢复的模拟系统。",
+      "summary": "TypeScript 全栈项目覆盖采集扩展、服务端、领域模型、事件持久化与 Web 控制台，重点处理金额精度、批次确认、历史关联和恢复演练。",
+      "problem": "套利判断不仅是价格相减，还涉及手续费、订单簿深度、余额变化、历史导入、批次执行和失败后的账本一致性。",
+      "solution": "将领域逻辑与基础设施分层，以事件账本重建状态，通过导入审阅、批次重校验和恢复演练保护模拟数据。",
+      "architecture": ["Collector extension", "HTTP server", "Domain model", "Persistence", "Web console"],
+      "facts": [
+        { "value": "23", "label": "API 路由", "note": "采集、账本、机会与恢复" },
+        { "value": "120", "label": "TypeScript 文件", "note": "当前图谱快照" },
+        { "value": "54", "label": "测试 / E2E 文件", "note": "当前源码审计" }
+      ],
+      "responsibilities": [
+        "设计 Money 值对象、逐档订单簿执行和四段机会评估模型",
+        "实现追加式事件账本、幂等导入、状态重建、备份及恢复演练",
+        "实现只读采集白名单、一次性交接、CSRF、历史审阅和单调检查点",
+        "构建机会、账本、交易批次、系统健康和恢复页面"
+      ],
+      "proof": [
+        "领域、持久化、服务端、Web 和采集扩展边界明确",
+        "当前源码审计识别 23 个 HTTP 路由及 54 个测试或 E2E spec 文件；本轮未宣称全部通过",
+        "所有对外执行语义保持模拟模式，不宣称真实资金交易"
+      ],
+      "stack": ["TypeScript", "Node.js", "React", "SQLite", "Browser extension", "Event ledger"],
+      "next": "补齐公开演示数据、端到端测试录像与一键本地预览。"
+    }
+  ],
+  "capabilities": [
+    { "name": "协议与 API", "projects": ["agentgate", "cs2-simulator"] },
+    { "name": "可靠性与恢复", "projects": ["agentgate", "local-ai-media", "cs2-simulator"] },
+    { "name": "Agent 工程", "projects": ["agentgate", "agent-router"] },
+    { "name": "自动化与运维", "projects": ["agentgate", "local-ai-media", "agent-router"] },
+    { "name": "领域建模", "projects": ["cs2-simulator"] },
+    { "name": "端到端交付", "projects": ["agentgate", "local-ai-media", "agent-router", "cs2-simulator"] }
+  ],
+  "resume": {
+    "headline": "AI 平台 / 后端 / 可靠性工程方向",
+    "intro": "擅长把 AI API、本地模型工作流和复杂业务原型推进到具备故障分类、恢复边界、自动验证与可维护文档的工程系统。",
+    "bullets": [
+      "设计并运行双通道 Provider Guard：隔离后端与节点池，按根因执行换节点、后端恢复或直接失败，并限制单请求上游尝试次数。",
+      "为消费级 6GB 显存设备固化 MiniMax H3 本地视频工作流，并连接后端生成、自动剪辑与剪映草稿导出。",
+      "构建自然语言 Skill Router 与 230+ 角色按需调度机制，通过共享记忆支持多 Agent 跨会话协作。",
+      "开发 TypeScript 全栈套利模拟系统，覆盖采集、领域模型、事件账本、历史审阅、对账与恢复演练。"
+    ]
+  }
+}
