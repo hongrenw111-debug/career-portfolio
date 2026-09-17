@@ -8,10 +8,22 @@
     "date": "2026-08-30 16:08 CST",
     "label": "运行验证快照；后续源码有变更",
     "metrics": [
-      { "value": "2 / 2", "label": "健康通道" },
-      { "value": "16", "label": "隔离节点" },
-      { "value": "0", "label": "15 分钟失败" },
-      { "value": "2 / 2", "label": "运行任务" }
+      {
+        "value": "2 / 2",
+        "label": "健康通道"
+      },
+      {
+        "value": "16",
+        "label": "隔离节点"
+      },
+      {
+        "value": "0",
+        "label": "15 分钟失败"
+      },
+      {
+        "value": "2 / 2",
+        "label": "运行任务"
+      }
     ]
   },
   "projects": [
@@ -28,12 +40,34 @@
       "summary": "双账号 Gemini Provider Guard 将入口、Provider 后端、listener 与节点池分开管理。系统按根因决定换节点、重启后端或直接返回，并严格限制安全重放范围；两个通道共享一个 Clash 进程，由单一 Guard 负责恢复。AgentGate 是其计划中的通用化公开版本。",
       "problem": "外部模型调用会同时受到网络出口、地区策略、本地后端、模型目录和上游配额影响。把所有错误都交给通用 retry，会产生重复调用、误重启和不可解释的失败。",
       "solution": "建立故障分类矩阵、分离节点池、双路由健康探测、冷却状态、共享 Clash 的单一恢复所有者与首个下游响应发出后的不可重放边界，并用只读验证器核对运行状态。",
-      "architecture": ["Client", "Provider Guard", "Provider backend", "Separated listener / node group", "Gemini API"],
+      "architecture": [
+        "Client",
+        "Provider Guard",
+        "Provider backend",
+        "Separated listener / node group",
+        "Gemini API"
+      ],
       "facts": [
-        { "value": "2", "label": "分离通道", "note": "独立后端、listener、节点组与任务" },
-        { "value": "8 + 8", "label": "节点池", "note": "两组无重叠" },
-        { "value": "≤ 3", "label": "上游尝试", "note": "单一重试层约束" },
-        { "value": "15s", "label": "健康探测", "note": "连续失败才触发恢复" }
+        {
+          "value": "2",
+          "label": "分离通道",
+          "note": "独立后端、listener、节点组与任务"
+        },
+        {
+          "value": "8 + 8",
+          "label": "节点池",
+          "note": "两组无重叠"
+        },
+        {
+          "value": "≤ 3",
+          "label": "上游尝试",
+          "note": "单一重试层约束"
+        },
+        {
+          "value": "15s",
+          "label": "健康探测",
+          "note": "连续失败才触发恢复"
+        }
       ],
       "responsibilities": [
         "设计网络、地区、配额、鉴权、模型缺失与后端异常的分类策略",
@@ -47,7 +81,13 @@
         "同一快照确认两个计划任务均处于启用和运行状态；当前工作区后续变更仍待重新部署验证",
         "同一快照中的 Guard 日志扫描未命中本地 API key"
       ],
-      "stack": ["Node.js", "PowerShell 7", "HTTP streaming", "State machine", "Windows Task Scheduler"],
+      "stack": [
+        "Node.js",
+        "PowerShell 7",
+        "HTTP streaming",
+        "State machine",
+        "Windows Task Scheduler"
+      ],
       "next": "提取通用 Provider adapter，加入 OpenTelemetry、故障注入演示与公开脱敏仓库。"
     },
     {
@@ -63,12 +103,34 @@
       "summary": "面向 BOSS直聘、猎聘、智联的半自动求职 Agent：LLM 行为层负责解构 JD、映射证据、生成定制简历与话术，Playwright 机械层负责搜索与投递，两层以 JSON 作业文件解耦；取材红线与节奏护栏约束全流程。",
       "problem": "自动投递工具普遍用同一份简历群发，回复率低还容易编造经历；而人工定制一份简历要一小时，覆盖不了批量岗位。",
       "solution": "把定制做成可核查的流程：JD 解构为需求清单，逐条在主简历中找证据行，定制内容 100% 取材主简历；对齐分不足或质检不过的职位标记 cannot-align，直接放弃投递。",
-      "architecture": ["JD 输入", "需求解构 / 证据映射", "定制简历 / 话术", "对齐质检 + cannot-align", "Playwright 投递层"],
+      "architecture": [
+        "JD 输入",
+        "需求解构 / 证据映射",
+        "定制简历 / 话术",
+        "对齐质检 + cannot-align",
+        "Playwright 投递层"
+      ],
       "facts": [
-        { "value": "107", "label": "测试全绿", "note": "2026-09-14 node --test 实测" },
-        { "value": "3", "label": "投递平台", "note": "BOSS直聘 / 猎聘 / 智联" },
-        { "value": "100%", "label": "取材红线", "note": "定制内容逐句可回指主简历" },
-        { "value": "±20%", "label": "间隔抖动", "note": "节奏护栏防风控硬闯" }
+        {
+          "value": "107",
+          "label": "测试全绿",
+          "note": "2026-09-14 node --test 实测"
+        },
+        {
+          "value": "3",
+          "label": "投递平台",
+          "note": "BOSS直聘 / 猎聘 / 智联"
+        },
+        {
+          "value": "100%",
+          "label": "取材红线",
+          "note": "定制内容逐句可回指主简历"
+        },
+        {
+          "value": "±20%",
+          "label": "间隔抖动",
+          "note": "节奏护栏防风控硬闯"
+        }
       ],
       "responsibilities": [
         "设计取材红线与 cannot-align 拦截：缺口保持缺口，宁可不投也不编造",
@@ -82,7 +144,13 @@
         "docs/adr 四份决策记录覆盖节奏护栏、自研而非 fork、行为层/机械层分层与简历事实源",
         "投递默认 dry-run 起步；真实投递前需真机校准选择器，当前如实标注为进行中"
       ],
-      "stack": ["Node.js", "Playwright", "LLM 结构化调用", "docx 自动排版", "JSONL 状态"],
+      "stack": [
+        "Node.js",
+        "Playwright",
+        "LLM 结构化调用",
+        "docx 自动排版",
+        "JSONL 状态"
+      ],
       "next": "真机校准三平台选择器并完成小批次真实投递；补充定制简历前后对照样例。"
     },
     {
@@ -98,12 +166,34 @@
       "summary": "面向批量美术资产生产的 AIGC 工作流：以强制垫图加特征提示词约束固定角色一致性与画风，配合浏览器自动化与 Canvas 无损提取，把单张资产制作从小时级压到分钟级，支持百张级批量交付。",
       "problem": "大模型批量生图时角色面部形变、画风漂移，逐张手调不可扩展；要达到交付标准还需要透明通道、白底处理与规格对齐。",
       "solution": "参考图垫图锁定角色特征，结构化提示词约束画风与细节；离线 canvas drawImage / toDataURL 无损提取原图，再走白底智能抠图、边缘羽化与规格对齐的固定后处理链。",
-      "architecture": ["需求 / 原画参考", "垫图 + 提示词约束", "图像模型生成", "Canvas 无损提取", "抠图 / 羽化 / 规格交付"],
+      "architecture": [
+        "需求 / 原画参考",
+        "垫图 + 提示词约束",
+        "图像模型生成",
+        "Canvas 无损提取",
+        "抠图 / 羽化 / 规格交付"
+      ],
       "facts": [
-        { "value": "1小时→1分钟", "label": "单图周期", "note": "含后处理的端到端耗时" },
-        { "value": "百张级", "label": "批量交付", "note": "立绘、图标与连续动作姿态" },
-        { "value": "RGBA", "label": "透明通道", "note": "羽化处理后按规格交付" },
-        { "value": "双约束", "label": "一致性控制", "note": "强制垫图 + 特征提示词" }
+        {
+          "value": "1小时→1分钟",
+          "label": "单图周期",
+          "note": "含后处理的端到端耗时"
+        },
+        {
+          "value": "百张级",
+          "label": "批量交付",
+          "note": "立绘、图标与连续动作姿态"
+        },
+        {
+          "value": "RGBA",
+          "label": "透明通道",
+          "note": "羽化处理后按规格交付"
+        },
+        {
+          "value": "双约束",
+          "label": "一致性控制",
+          "note": "强制垫图 + 特征提示词"
+        }
       ],
       "responsibilities": [
         "设计角色一致性控制方案：垫图锁定面部与服饰，提示词模板约束画风",
@@ -116,42 +206,81 @@
         "单图制作周期由小时级压缩至 1 分钟以内",
         "产出资产直接用于实际交付场景，覆盖立绘、图标与连续动作姿态"
       ],
-      "stack": ["ComfyUI / 图像模型", "Playwright", "HTML5 Canvas", "提示词工程", "图像后处理"],
+      "stack": [
+        "ComfyUI / 图像模型",
+        "Playwright",
+        "HTML5 Canvas",
+        "提示词工程",
+        "图像后处理"
+      ],
       "next": "沉淀参数化模板与失败样例库，补充生成前后对比展示。"
     },
     {
       "slug": "xhs-content-engine",
       "index": "CASE 04",
-      "name": "小红书内容自动化引擎",
+      "name": "小红书内容自动化引擎（含 AIGC 合规检测）",
       "shortName": "XHS 内容引擎",
-      "category": "CONTENT OPS · AUTOMATION",
-      "status": "流水线就绪 · 真机小批量验证中",
+      "category": "CONTENT OPS · COMPLIANCE",
+      "status": "合规检测 + 数据闭环已实测 · 发布为人工确认",
       "statusType": "active",
       "featured": false,
-      "headline": "从热点嗅探到图文发布，把内容运营做成一条带护栏的流水线。",
-      "summary": "内容运营自动化引擎：AI 全网热点嗅探与选题、图文卡片自动生成与排版，到小红书创作者中心的全自动静默发布；支持发布 / 存草稿双模式，默认落草稿保安全。",
-      "problem": "内容运营的日常被选题、做图、排版、发布切碎，人工节奏跟不上热点；而完全无人值守的自动发布又有误发风险。",
-      "solution": "热点嗅探驱动选题，模板化生成 3:4 超清图文卡片，浏览器自动化以真实键盘节奏填写并提交；发布是显式动作，默认只存草稿等待人工确认。",
-      "architecture": ["热点嗅探 / 选题", "图文生成", "排版渲染", "创作者中心自动化", "草稿 / 发布"],
+      "headline": "用平台真实的审核拒绝数据，反向校准发布前的合规检测。",
+      "summary": "内容运营自动化引擎：热点嗅探与选题、图文卡片生成与排版、发布前 AIGC 合规检测（17 条规则）、创作者中心数据回收与周报。合规规则不是凭条文推测，而是先用平台实际给出的拒绝原文校准，再回到语料上验证误杀。",
+      "problem": "内容运营被选题、做图、排版、发布切碎，人工节奏跟不上热点；而平台对 AI 内容的约束是硬性的——《广告法》第九条、小红书《AI 内容治理规则》、《AI 生成合成内容标识办法》第十条。本项目实际运营的账号 6 篇已发布内容中 2 篇被平台判「未通过」，违规代价是真实的。",
+      "solution": "在发布链路上加一层可复现的合规闸门：检测器为纯函数（零 IO / 零网络 / 零 LLM），block 级问题在发布时硬拦截，warn 级只提示不阻断；存量违规内容用确定性修复器处理，修复后复检通过才允许发布。AIGC 声明自动勾选并验证，验证不过即拒绝发布。",
+      "architecture": [
+        "热点嗅探 / 选题",
+        "文案两道工序",
+        "卡片渲染",
+        "合规检测（17 条规则）",
+        "发布闸门 / 草稿",
+        "数据回收 / 周报"
+      ],
       "facts": [
-        { "value": "3", "label": "环节闭环", "note": "嗅探 → 生成 → 发布/草稿" },
-        { "value": "3:4", "label": "超清卡片", "note": "批量上传与排版" },
-        { "value": "双模式", "label": "发布护栏", "note": "默认存草稿，发布需显式指定" },
-        { "value": "静默", "label": "后台运行", "note": "无头不切屏、不抢焦点" }
+        {
+          "value": "17",
+          "label": "合规规则",
+          "note": "按来源分组的可查证规则"
+        },
+        {
+          "value": "175",
+          "label": "自动化测试",
+          "note": "全绿，含合规 45 / 修复器 19"
+        },
+        {
+          "value": "2/6",
+          "label": "平台真实拒绝",
+          "note": "据此反向校准规则"
+        },
+        {
+          "value": "13→0",
+          "label": "存量违规清零",
+          "note": "确定性修复，改动 0.15%"
+        }
       ],
       "responsibilities": [
-        "实现全网 AI 热点嗅探与智能选题中台",
-        "打通图文自动生成与批量渲染流水线",
-        "实现小红书创作者中心静默发布：真实键盘节奏、上传等待与提交确认",
-        "设计发布 / 存草稿双模式护栏，默认草稿防误发"
+        "实现热点嗅探、选题中台与图文自动生成流水线",
+        "实现发布前 AIGC 合规检测：纯函数检测器 + 分级闸门（block 拦截 / warn 提示）",
+        "从平台「修改建议」取证拒绝原文，据此补出站外导流与诱导互动两类规则",
+        "实现确定性合规修复器（默认 dry-run，写盘前自检，修复后复检）",
+        "打通创作者中心数据回收 → metrics.jsonl → 周报（LLM 故障可降级）"
       ],
       "proof": [
-        "发布动作必须显式指定，默认落草稿——该护栏经 2026-09-14 回归修复后由测试确认",
-        "git 历史含三次迭代提交：生成流水线、多图上传闭环、热点选品中台",
-        "发布流程覆盖图片上传等待、话题下拉处理与提交后响应等待"
+        "用平台权威数据校准规则：从创作者中心「修改建议」取到拒绝原文，发现 2 篇在旧规则下完全通过却被平台实际拒绝——《腾讯元宝实测》因「存在外部平台信息或联系方式」，《用AI做旅行攻略》因「诱导他人进行点赞、评论、收藏等互动行为」。补规则后这 2 篇均能在发布前被拦下，命中文本与平台原文一致",
+        "防误杀经真实语料回归：新增「诱导互动」规则初版无放行窗口时，44 篇真实语料误杀 16 篇（多为「收藏起来，免得找不到」这类正常建议），加放行窗口后误杀清零；这些真实命中已固化为回归测试",
+        "闸门端到端验证：对平台已拒的笔记执行发布命令，闸门在打开浏览器之前即拦下并退出，未进入发布流程",
+        "存量合规清零：44 篇中 13 篇命中阻断项，经确定性修复后未通过 13 → 0，总字符 92534 → 92395（-0.15%），正常内容原样保留",
+        "真实数据闭环：从创作者中心采集真实数据写入 metrics.jsonl 并生成周报；实测该页 table 数为 0，原基于表格的解析永远抓不到数据，故重写为解析真实 DOM 文本结构",
+        "工程验证：tsc --noEmit 零错误，175 个测试全部通过，密钥机检通过"
       ],
-      "stack": ["Node.js", "Playwright / CDP", "内容生成 LLM", "图像渲染", "creator-buddy 规范"],
-      "next": "真机小批量验证发布成功率；补充曝光与互动数据回流作为下一阶段。"
+      "stack": [
+        "Node.js",
+        "TypeScript",
+        "Playwright / CDP",
+        "内容生成 LLM",
+        "合规规则引擎"
+      ],
+      "next": "采集列语义按真机数据复核；发布保持人工确认，不做无人值守自动发布（平台禁止 AI 自动运营账号）。"
     },
     {
       "slug": "local-ai-media",
@@ -166,11 +295,29 @@
       "summary": "围绕消费级 Windows 设备构建 MiniMax H3 本地生成工作流，并将后端 API Runner、自动剪辑与剪映草稿导出串成可重复执行的媒体流水线。",
       "problem": "高质量视频模型通常假设更大显存和手工 GUI 操作，难以在 6GB 显存、16GB 内存的机器上稳定复现。",
       "solution": "固定模型与采样配置、关闭高占用缓存路径，以模板化 API Runner 驱动生成，再交给自动剪辑与草稿导出流程。",
-      "architecture": ["Input asset", "ComfyUI API", "MiniMax H3 / LightX2V", "Media assembly", "JianYing draft"],
+      "architecture": [
+        "Input asset",
+        "ComfyUI API",
+        "MiniMax H3 / LightX2V",
+        "Media assembly",
+        "JianYing draft"
+      ],
       "facts": [
-        { "value": "6GB", "label": "目标显存", "note": "消费级 RTX 3060" },
-        { "value": "6", "label": "生成步数", "note": "固定可复现配置" },
-        { "value": "864×480", "label": "输出画幅", "note": "0.4MP 模式" }
+        {
+          "value": "6GB",
+          "label": "目标显存",
+          "note": "消费级 RTX 3060"
+        },
+        {
+          "value": "6",
+          "label": "生成步数",
+          "note": "固定可复现配置"
+        },
+        {
+          "value": "864×480",
+          "label": "输出画幅",
+          "note": "0.4MP 模式"
+        }
       ],
       "responsibilities": [
         "验证低显存启动参数与 LightX2V 工作流组合",
@@ -183,7 +330,14 @@
         "提供纯后端 Runner，输入和提示词可以脚本化替换",
         "生成与剪辑使用各自隔离的 Python 运行环境"
       ],
-      "stack": ["ComfyUI", "MiniMax H3", "LightX2V", "Node.js", "Python", "pyJianYingDraft"],
+      "stack": [
+        "ComfyUI",
+        "MiniMax H3",
+        "LightX2V",
+        "Node.js",
+        "Python",
+        "pyJianYingDraft"
+      ],
       "next": "补充匿名化性能记录、失败样例与一键演示包。"
     },
     {
@@ -199,11 +353,29 @@
       "summary": "通过意图矩阵连接代码图谱、诊断、TDD、浏览器、设计资产和本地生成工具，并按需调度 230+ 专业角色，控制上下文体积。",
       "problem": "工具和 Skill 增多后，用户需要记忆命令；一次性加载全部角色又会造成上下文污染和 Token 浪费。",
       "solution": "采用轻量意图路由、按需加载角色与跨模型分工，让规划、检索和执行由最适合的 Agent 承担。",
-      "architecture": ["Natural language", "Intent matrix", "Skill / tool resolver", "Role dispatcher", "Execution evidence"],
+      "architecture": [
+        "Natural language",
+        "Intent matrix",
+        "Skill / tool resolver",
+        "Role dispatcher",
+        "Execution evidence"
+      ],
       "facts": [
-        { "value": "230+", "label": "专业角色", "note": "按需检索加载" },
-        { "value": "8", "label": "意图域", "note": "覆盖研发与创作" },
-        { "value": "3", "label": "协作 Agent", "note": "规划、执行与桌面协同" }
+        {
+          "value": "230+",
+          "label": "专业角色",
+          "note": "按需检索加载"
+        },
+        {
+          "value": "8",
+          "label": "意图域",
+          "note": "覆盖研发与创作"
+        },
+        {
+          "value": "3",
+          "label": "协作 Agent",
+          "note": "规划、执行与桌面协同"
+        }
       ],
       "responsibilities": [
         "建立自然语言到图谱、诊断、实现、设计和自动化工具的映射",
@@ -216,7 +388,13 @@
         "角色库保留在本地，通过单一调度入口按需加载",
         "意图矩阵明确覆盖代码、调试、实现、设计、浏览器和多媒体工作流"
       ],
-      "stack": ["Agent routing", "Local skills", "Knowledge graph", "Shared memory", "PowerShell 7"],
+      "stack": [
+        "Agent routing",
+        "Local skills",
+        "Knowledge graph",
+        "Shared memory",
+        "PowerShell 7"
+      ],
       "next": "增加调用轨迹、路由理由与可重复基准任务，形成可演示的 Agent DevTool。"
     },
     {
@@ -232,11 +410,29 @@
       "summary": "TypeScript 全栈项目覆盖采集扩展、服务端、领域模型、事件持久化与 Web 控制台，重点处理金额精度、批次确认、历史关联和恢复演练。",
       "problem": "套利判断不仅是价格相减，还涉及手续费、订单簿深度、余额变化、历史导入、批次执行和失败后的账本一致性。",
       "solution": "将领域逻辑与基础设施分层，以事件账本重建状态，通过导入审阅、批次重校验和恢复演练保护模拟数据。",
-      "architecture": ["Collector extension", "HTTP server", "Domain model", "Persistence", "Web console"],
+      "architecture": [
+        "Collector extension",
+        "HTTP server",
+        "Domain model",
+        "Persistence",
+        "Web console"
+      ],
       "facts": [
-        { "value": "23", "label": "API 路由", "note": "采集、账本、机会与恢复" },
-        { "value": "120", "label": "TypeScript 文件", "note": "当前图谱快照" },
-        { "value": "54", "label": "测试 / E2E 文件", "note": "当前源码审计" }
+        {
+          "value": "23",
+          "label": "API 路由",
+          "note": "采集、账本、机会与恢复"
+        },
+        {
+          "value": "120",
+          "label": "TypeScript 文件",
+          "note": "当前图谱快照"
+        },
+        {
+          "value": "54",
+          "label": "测试 / E2E 文件",
+          "note": "当前源码审计"
+        }
       ],
       "responsibilities": [
         "设计 Money 值对象、逐档订单簿执行和四段机会评估模型",
@@ -249,7 +445,14 @@
         "当前源码审计识别 23 个 HTTP 路由及 54 个测试或 E2E spec 文件；本轮未宣称全部通过",
         "所有对外执行语义保持模拟模式，不宣称真实资金交易"
       ],
-      "stack": ["TypeScript", "Node.js", "React", "SQLite", "Browser extension", "Event ledger"],
+      "stack": [
+        "TypeScript",
+        "Node.js",
+        "React",
+        "SQLite",
+        "Browser extension",
+        "Event ledger"
+      ],
       "next": "补齐公开演示数据、端到端测试录像与一键本地预览。"
     },
     {
@@ -265,11 +468,30 @@
       "summary": "面向 Windows 的本地 AI 角色互动游戏：主客户端连接本地或 OpenAI 兼容模型、语音合成、Spine 4.2 动画、多会话与多场景系统；独立 Puppet 客户端使用本地面部追踪驱动角色，可作为 OBS 浏览器源。",
       "problem": "角色互动体验不是把聊天接口接到立绘上：模型回复、语音播放、口型、表情、动作、场景和环境音必须在资源受限的本地设备上保持同步，还要处理会话持久化、资源加载和多音频竞争。",
       "solution": "将对话状态、Provider 配置、语音总线、Spine 动作轨道和场景系统拆成明确模块；场景纹理按需加载，环境音支持昼夜切换与语音闪避，面捕作为独立 Web 客户端隔离运行。",
-      "architecture": ["Player input", "LLM provider", "Dialogue state", "Voice / audio bus", "Spine runtime", "Scene system"],
+      "architecture": [
+        "Player input",
+        "LLM provider",
+        "Dialogue state",
+        "Voice / audio bus",
+        "Spine runtime",
+        "Scene system"
+      ],
       "facts": [
-        { "value": "34", "label": "场景变体", "note": "8 个场景 × 4 时段 + 2 张插画" },
-        { "value": "74", "label": "环境音轨", "note": "本地资产清单实测" },
-        { "value": "2", "label": "交互客户端", "note": "游戏本体与独立面捕皮套" }
+        {
+          "value": "34",
+          "label": "场景变体",
+          "note": "8 个场景 × 4 时段 + 2 张插画"
+        },
+        {
+          "value": "74",
+          "label": "环境音轨",
+          "note": "本地资产清单实测"
+        },
+        {
+          "value": "2",
+          "label": "交互客户端",
+          "note": "游戏本体与独立面捕皮套"
+        }
       ],
       "responsibilities": [
         "构建 Spine 4.2 多轨动作、姿态切换、表情、眨眼与实时口型系统",
@@ -283,20 +505,90 @@
         "当前本地资产清单包含 74 条环境音；独立 Puppet 客户端包含本地面捕启停、平滑和镜像入口",
         "2026-09-05 交接记录包含浏览器验收，但公开前仍需修复已知安全与并发缺陷并重新回归"
       ],
-      "stack": ["JavaScript", "Vite", "Spine WebGL", "MediaPipe", "Web Audio", "Local LLM / TTS"],
+      "stack": [
+        "JavaScript",
+        "Vite",
+        "Spine WebGL",
+        "MediaPipe",
+        "Web Audio",
+        "Local LLM / TTS"
+      ],
       "next": "修复 Provider URL 拼接、输出转义、密钥存储和音频并发问题，替换不可公开分发素材后补齐 E2E 与演示录像。"
     }
   ],
   "capabilities": [
-    { "name": "AI 运营与内容生产", "projects": ["aigc-pipeline", "xhs-content-engine", "job-apply-agent"] },
-    { "name": "LLM 应用与提示词工程", "projects": ["job-apply-agent", "aigc-pipeline", "agent-router"] },
-    { "name": "协议与 API", "projects": ["agentgate", "cs2-simulator", "ryzachat-ai"] },
-    { "name": "可靠性与恢复", "projects": ["agentgate", "local-ai-media", "cs2-simulator"] },
-    { "name": "Agent 工程", "projects": ["agentgate", "agent-router", "job-apply-agent"] },
-    { "name": "自动化与运维", "projects": ["agentgate", "local-ai-media", "agent-router", "xhs-content-engine"] },
-    { "name": "领域建模", "projects": ["cs2-simulator"] },
-    { "name": "实时多媒体", "projects": ["local-ai-media", "ryzachat-ai"] },
-    { "name": "端到端交付", "projects": ["agentgate", "local-ai-media", "agent-router", "cs2-simulator", "ryzachat-ai"] }
+    {
+      "name": "AI 运营与内容生产",
+      "projects": [
+        "aigc-pipeline",
+        "xhs-content-engine",
+        "job-apply-agent"
+      ]
+    },
+    {
+      "name": "LLM 应用与提示词工程",
+      "projects": [
+        "job-apply-agent",
+        "aigc-pipeline",
+        "agent-router"
+      ]
+    },
+    {
+      "name": "协议与 API",
+      "projects": [
+        "agentgate",
+        "cs2-simulator",
+        "ryzachat-ai"
+      ]
+    },
+    {
+      "name": "可靠性与恢复",
+      "projects": [
+        "agentgate",
+        "local-ai-media",
+        "cs2-simulator"
+      ]
+    },
+    {
+      "name": "Agent 工程",
+      "projects": [
+        "agentgate",
+        "agent-router",
+        "job-apply-agent"
+      ]
+    },
+    {
+      "name": "自动化与运维",
+      "projects": [
+        "agentgate",
+        "local-ai-media",
+        "agent-router",
+        "xhs-content-engine"
+      ]
+    },
+    {
+      "name": "领域建模",
+      "projects": [
+        "cs2-simulator"
+      ]
+    },
+    {
+      "name": "实时多媒体",
+      "projects": [
+        "local-ai-media",
+        "ryzachat-ai"
+      ]
+    },
+    {
+      "name": "端到端交付",
+      "projects": [
+        "agentgate",
+        "local-ai-media",
+        "agent-router",
+        "cs2-simulator",
+        "ryzachat-ai"
+      ]
+    }
   ],
   "resume": {
     "headline": "AI 运营 / AI 应用落地方向",

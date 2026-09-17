@@ -1,11 +1,22 @@
 # Portfolio Roadmap
 
-## Milestone 1 — Foundation（本次已完成）
+## Milestone 1 — Foundation（已完成）
 
 - 建立独立作品集目录，不修改或复制现有敏感项目文件。
 - 完成主页、五个案例详情、能力矩阵、证据账本与简历摘要。
 - 建立内容验证、敏感信息扫描和 Node 测试。
 - 记录 Provider Guard 与 CS2 项目的事实边界。
+
+## Milestone 1.5 — 合规案例强化（2026-09-16 完成）
+
+- 小红书内容引擎升级为「含 AIGC 合规检测」，案例重心从"全自动发布"转为**合规闸门**。
+- 补入最强证据：**用平台真实审核拒绝数据反向校准规则**
+  （2 篇在旧规则下通过却被平台拒绝 → 取证拒绝原文 → 补规则 → 可提前拦下）。
+- 同步更新 `data/portfolio.json`（facts 4 条 / proof 6 条）、
+  `docs/case-studies/xhs-content-engine.md`、`docs/EVIDENCE_REGISTER.md`、
+  `docs/RESUME_BULLETS.md` 四处，保持口径一致。
+- 证据边界如实标注：列语义待真机复核、标题前缀撞车信号弱、未做规模化发布验证。
+- 校验：`npm run check` 通过（8 个项目、6 个测试全绿）、站点实测渲染正常。
 
 ## Milestone 2 — Identity & Distribution
 
