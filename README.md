@@ -10,7 +10,7 @@
 
 - 清爽、专业、带轻量玻璃质感的响应式单页作品集主页
 - 可切换网络、配额、模型与后端故障的 Failure Atlas
-- 八个案例的可访问详情对话框（AI 运营向：Job Apply Agent / AIGC 量产管线 / 小红书内容引擎；工程向：Provider Guard / Media Pipeline / Skill Router / CS2 Simulator / RyzaChat）
+- 八个案例的可访问详情对话框（AI 运营向：FlowForge / 小红书内容引擎 / Job Apply Agent / AIGC 量产管线；工程向：Provider Guard / ego-win / cs2-arb / RyzaChat）
 - Provider Guard 验证快照
 - Capability × Evidence 能力矩阵
 - 已完成 / 正在作品集化 / 公开边界证据账本
@@ -23,7 +23,6 @@
 需要 Node.js 20 或更高版本。
 
 ```powershell
-cd "C:\Users\Ra\Documents\ChatGPT\反代\career-portfolio"
 npm run dev
 ```
 
@@ -49,6 +48,7 @@ npm run check
 检查内容包括：
 
 - 八个项目的数据完整性与唯一 slug
+- 每个案例是否都有对应的 `docs/case-studies/<slug>.md` 深度文档
 - HTML 本地资源是否存在
 - 公开资源中是否出现本地绝对路径、疑似密钥、Cookie 或占位文案
 - CS2 项目是否明确保持模拟语义
@@ -58,14 +58,14 @@ npm run check
 
 | 项目 | 当前依据 | 公开状态 |
 |---|---|---|
+| FlowForge AI 导演 | GitHub 开源仓库、GitHub Actions CI 209 测试全绿 | 公开开源；持续保活中 |
+| 小红书内容引擎 | 当前源码、175+ 测试全绿、0-LLM 合规闸门与真实数据周报 | 流水线就绪；半自动发布与数据闭环 |
 | Job Apply Agent | 当前源码、ADR、2026-09-14 node --test 107/107 实测 | 本地运行；真机选择器校准与小批次试水中 |
+| ego-win | 上游 SDK 逐字节 vendored、63/63 单测、上游套件 68/69 | 本地运行；仓库待公开 |
 | AIGC 量产管线 | 当前工作流配置、产出资产与一致性方案记录 | 个人工作流日用；对比展示待补 |
-| 小红书内容引擎 | 当前源码、git 三次迭代提交与 2026-09-14 回归修复 | 流水线就绪；真机小批量验证中 |
 | Provider Guard / AgentGate | 当前源码、维护合同、2026-08-30 只读运行验证 | 本地运行；通用公开版本待重构 |
-| Local AI Media Pipeline | 已沉淀的 MiniMax H3 / ComfyUI 本地配置与 Runner | 本地验证；性能证据待匿名化 |
-| Agent Skill Router | 跨 Agent 共享记忆、意图矩阵和本地角色调度配置 | 工作流运行；演示轨迹待补 |
-| CS2 Simulator | 当前代码图谱和只读源码审计 | 模拟模式；公开仓库待清理和新鲜测试 |
-| RyzaChat:AI | 当前源码图谱、资产清单与 2026-09-05 项目交接记录 | 本地运行；安全加固和公开素材替换中 |
+| cs2-arb | 当前源码、258 项离线测试全绿（2026-10-22）、三份 ADR | 决策辅助；不做自动交易 |
+| RyzaChat:AI | 当前源码图谱、资产清单（298 骨骼/74 音轨/OBS 独立皮套） | 本地运行；安全加固和公开素材替换中 |
 
 详细边界见 [`docs/EVIDENCE_REGISTER.md`](docs/EVIDENCE_REGISTER.md)。
 
@@ -112,8 +112,8 @@ career-portfolio/
 
 ## 下一阶段
 
-1. ~~补充真实姓名~~（已完成：站点品牌已切换为"王宏仁"）；补充公开邮箱、GitHub 与 PDF 简历下载。
+1. 补充公开邮箱、GitHub 主页与 PDF 简历下载。
 2. 将 AgentGate 抽成独立、脱敏、可公开仓库。
 3. 为核心项目各录制 60–90 秒演示。
-4. 增加三篇 Engineering Notes：Provider 故障恢复、6GB VRAM 预算、Skill 路由上下文治理。
+4. 增加三篇 Engineering Notes：Provider 故障恢复、Token 语义压缩、合规纯函数闸门。
 5. 统一执行并记录 CS2 项目的 `pnpm check` 与 Playwright E2E 结果。

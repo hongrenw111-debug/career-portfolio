@@ -1,4 +1,4 @@
-import { readFile, stat } from "node:fs/promises";
+import { readFile, readdir, stat } from "node:fs/promises";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -34,6 +34,18 @@ await Promise.all(localReferences.map((reference) => mustExist(reference.replace
 const data = JSON.parse(await readFile(resolve(root, "data/portfolio.json"), "utf8"));
 if (!Array.isArray(data.projects) || data.projects.length !== 8) {
   failures.push("作品集必须包含 8 个核心项目");
+}
+
+// 每个案例必须有对应的深度文档，且文档不得引用已退役的 slug
+const caseStudySlugs = new Set(
+  (await readdir(resolve(root, "docs/case-studies")))
+    .filter((name) => name.endsWith(".md"))
+    .map((name) => name.replace(/\.md$/, ""))
+);
+for (const project of data.projects ?? []) {
+  if (!caseStudySlugs.has(project.slug)) {
+    failures.push(`案例 ${project.slug} 缺少 docs/case-studies/${project.slug}.md`);
+  }
 }
 
 const slugs = new Set();

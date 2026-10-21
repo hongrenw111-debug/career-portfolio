@@ -6,6 +6,7 @@ dist/
 *.log
 desktop*.png
 mobile*.png
+artifacts/*-audit*.png
 .env
 .env.*
 !.env.example

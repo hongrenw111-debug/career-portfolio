@@ -25,7 +25,7 @@ test("every project separates current proof from future work", () => {
 });
 
 test("CS2 project is explicitly presented as simulation", () => {
-  const cs2 = data.projects.find((project) => project.slug === "cs2-simulator");
+  const cs2 = data.projects.find((project) => project.slug === "cs2-arb");
   assert.ok(cs2);
   assert.match(`${cs2.status} ${cs2.proof.join(" ")}`, /模拟|SIMULATION/i);
 });
