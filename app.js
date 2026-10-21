@@ -99,6 +99,19 @@
     }
   }
 
+  function renderContacts(contacts) {
+    if (!Array.isArray(contacts) || contacts.length === 0) return;
+    const markup = contacts.map((contact) => `
+      <a href="${escapeHtml(contact.href)}"${contact.href.startsWith("http") ? ' target="_blank" rel="noopener noreferrer"' : ""}>
+        <span>${escapeHtml(contact.label)}</span>
+        <strong>${escapeHtml(contact.value)}</strong>
+      </a>
+    `).join("");
+    document.querySelectorAll("[data-contact-links]").forEach((element) => {
+      element.innerHTML = markup;
+    });
+  }
+
   function renderSnapshot(snapshot) {
     elements.snapshotMetrics.innerHTML = snapshot.metrics.map((metric) => `
       <div>
@@ -209,7 +222,7 @@
               <th scope="row">${escapeHtml(capability.name)}</th>
               ${projects.map((project) => {
                 const present = capability.projects.includes(project.slug);
-                return `<td><span class="matrix-dot${present ? " is-present" : ""}" aria-label="${present ? "有对应证据" : "无主要证据"}">${present ? "✓" : "·"}</span></td>`;
+                return `<td><span class="matrix-dot${present ? " is-present" : ""}" role="img" aria-label="${present ? "有对应证据" : "无主要证据"}"></span></td>`;
               }).join("")}
             </tr>
           `).join("")}
@@ -485,6 +498,7 @@
       state.data = await response.json();
 
       renderSnapshot(state.data.snapshot);
+      renderContacts(state.data.profile.contacts);
       const featured = state.data.projects.find((project) => project.featured);
       renderFeatured(featured);
       renderProjectRegister(state.data.projects.filter((project) => !project.featured));
