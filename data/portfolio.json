@@ -147,14 +147,14 @@
         {
           "value": "100%",
           "label": "开源公开",
-          "note": "GitHub 托管持续保活"
+          "note": "GitHub 公开仓库，MIT 许可"
         }
       ],
       "responsibilities": [
         "设计 Agent 原生 AI 导演调度协议与分镜脚本规约",
         "实现基于 CDP 的浏览器会话复用与 Google Flow 自动化生成管线",
         "研发尾帧接力模式与逐镜 MAD（平均绝对差）连贯性质检算法",
-        "建立多系统 GitHub Actions CI 保活矩阵与伪视频完整性熔断门禁"
+        "建立 Ubuntu + Windows 双系统 GitHub Actions CI 与伪视频完整性熔断门禁"
       ],
       "proof": [
         "GitHub 公开开源（hongrenw111-debug/flowforge），配置自动化持续集成",
@@ -645,7 +645,7 @@
     "headline": "AI 运营 / AI 应用落地方向",
     "intro": "广告学背景 + AI 工程实操的复合型选手：既能策划内容与商业转化，也能亲手搭建开源 AI 导演工作台、AIGC 量产管线、小红书合规引擎与求职 Agent，并用严格的测试与护栏保证它们可靠运行。",
     "bullets": [
-      "主导开源 FlowForge（AI 导演调度工作台）：实现首创尾帧接力模式（MAD=2.00 连贯运镜衔接），复用 Chrome 会话零 API Key 驱动 Google Flow，双系统 CI 209 测试全绿。",
+      "主导开源 FlowForge（AI 导演调度工作台）：实现首创尾帧接力模式（MAD=2.00 连贯运镜衔接），复用 Chrome 会话零 API Key 驱动 Google Flow，Ubuntu + Windows 双系统 CI 209 测试通过。",
       "构建小红书内容自动化引擎与 0-LLM 合规检测闸门：17 条规则反向校准平台真实拒绝日志，未通过违规 13→0 清零，打通无 table DOM 的真实指标采集链路（当前 6 篇已发布样本），175 自动化测试全绿。",
       "独立开发 job-apply-agent 求职 Agent：JD 解构、证据映射、按岗定制简历与话术，取材红线加 cannot-align 拦截保证不编造经历，159 项测试保障全流程。",
       "开发 ego-win：用 CDP 实现 ego lite 官方 harness 在 Windows 上缺失的原生绑定层，上游 SDK 逐字节不改；63 个单元测试与上游 68/69 真实浏览器用例双闸门把关。",

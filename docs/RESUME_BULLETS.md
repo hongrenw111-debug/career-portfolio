@@ -10,7 +10,7 @@
 
 - 主导开发并公开开源 Agent 原生 AI 导演调度工作台（FlowForge），复用本地 Chrome 会话安全上下文，通过 CDP 协议零 API Key 驱动 Google Flow 电影级生成管线。
 - 首创尾帧接力模式（抽取上一镜第 8 秒末尾帧注入下一镜首帧），实测 MAD（平均绝对差）= 2.00 像素级无缝运镜，配合原画首帧锚定彻底解决长视频角色变脸难题。
-- 研发伪视频损坏熔断门禁（moov atom 完整性探测与 <100KB 自动重试），配置 Ubuntu + Windows 双系统 GitHub Actions CI，全量 209 个单元测试全绿保活。
+- 研发伪视频损坏熔断门禁（moov atom 完整性探测与 <100KB 自动重试），配置 Ubuntu + Windows 双系统 GitHub Actions CI，全量 209 个单元测试回归通过（最后一次成功运行 2026-09-01）。
 
 ## 小红书内容自动化引擎（含 AIGC 合规检测）
 
