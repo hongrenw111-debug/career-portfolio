@@ -22,24 +22,28 @@
     ]
   },
   "snapshot": {
-    "date": "2026-10-22 CST",
-    "label": "本机重跑的最新验证快照；下列数字均为当场实测",
+    "date": "截至 2026-10-22",
+    "label": "各项目最近一次验证记录，日期与来源逐项标注",
     "metrics": [
       {
         "value": "209",
-        "label": "FlowForge CI 绿"
+        "label": "FlowForge CI 测试",
+        "note": "2026-09-01 · CI 最后成功"
       },
       {
         "value": "175",
-        "label": "小红书合规单测"
+        "label": "小红书合规单测",
+        "note": "2026-10-22 本机实测"
       },
       {
         "value": "159",
-        "label": "求职 Agent 单测"
+        "label": "求职 Agent 单测",
+        "note": "2026-10-22 本机实测"
       },
       {
         "value": "258",
-        "label": "cs2-arb 单测"
+        "label": "cs2-arb 单测",
+        "note": "2026-10-22 本机实测"
       }
     ]
   },
@@ -50,6 +54,7 @@
       "name": "Provider Guard / AgentGate",
       "shortName": "AgentGate",
       "category": "AI PLATFORM · RELIABILITY",
+      "domain": "模型可靠性",
       "status": "本地运行 · 公开重构准备",
       "statusType": "verified",
       "featured": false,
@@ -113,6 +118,7 @@
       "name": "FlowForge 开源 AI 导演调度工作台",
       "shortName": "FlowForge",
       "category": "AGENT NATIVE · VIDEO ENGINE",
+      "domain": "生成式视频",
       "status": "公开开源 · 双系统 CI 全绿",
       "statusType": "verified",
       "featured": false,
@@ -177,6 +183,7 @@
       "name": "Job Apply Agent 求职触达系统",
       "shortName": "Job Apply Agent",
       "category": "AGENT ENGINEERING · LLM APPLICATION",
+      "domain": "求职自动化",
       "status": "本地运行 · 真机校准中",
       "statusType": "active",
       "featured": false,
@@ -240,6 +247,7 @@
       "name": "小红书内容自动化引擎（含 AIGC 合规检测）",
       "shortName": "XHS 内容引擎",
       "category": "CONTENT OPS · COMPLIANCE",
+      "domain": "内容运营",
       "status": "合规检测 + 数据闭环已实测 · 175 测试全绿",
       "statusType": "verified",
       "featured": true,
@@ -308,6 +316,7 @@
       "name": "ego-win · ego lite 官方 harness 的 Windows 宿主",
       "shortName": "ego-win",
       "category": "RUNTIME PORT · CDP BINDING",
+      "domain": "浏览器自动化",
       "status": "本地运行 · 仓库待公开",
       "statusType": "active",
       "featured": false,
@@ -371,6 +380,7 @@
       "name": "AIGC 图像量产与一致性工作流",
       "shortName": "AIGC 量产管线",
       "category": "AIGC PRODUCTION · CONTENT OPS",
+      "domain": "批量生图",
       "status": "个人工作流 · 日用交付中",
       "statusType": "active",
       "featured": false,
@@ -433,6 +443,7 @@
       "name": "cs2-arb · CS2 跨平台套利决策辅助工具",
       "shortName": "cs2-arb",
       "category": "DOMAIN MODELING · DECISION SUPPORT",
+      "domain": "决策建模",
       "status": "仅模拟与决策辅助 · 258 测试全绿",
       "statusType": "verified",
       "featured": false,
@@ -497,6 +508,7 @@
       "name": "RyzaChat:AI Character Game",
       "shortName": "RyzaChat:AI",
       "category": "REALTIME AI · INTERACTIVE MEDIA",
+      "domain": "实时交互媒体",
       "status": "本地原型 · 有已知未修项",
       "statusType": "active",
       "featured": false,

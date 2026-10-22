@@ -117,6 +117,7 @@
       <div>
         <dd>${escapeHtml(metric.value)}</dd>
         <dt>${escapeHtml(metric.label)}</dt>
+        ${metric.note ? `<span class="proof-note">${escapeHtml(metric.note)}</span>` : ""}
       </div>
     `).join("");
     elements.snapshotDate.textContent = `${snapshot.date} · ${snapshot.label}`;
@@ -154,8 +155,7 @@
   function renderFeatured(project) {
     elements.featured.innerHTML = `
       <article class="featured-case-header">
-        <span>${escapeHtml(project.index)}</span>
-        <p>${escapeHtml(project.category)}</p>
+        <p>${escapeHtml(project.domain)}</p>
         <b><i aria-hidden="true"></i>${escapeHtml(project.status)}</b>
       </article>
       <div class="featured-case-body">
@@ -189,13 +189,10 @@
   function renderProjectRegister(projects) {
     elements.projectRegister.innerHTML = projects.map((project) => `
       <article class="project-row" data-project-row="${escapeHtml(project.slug)}">
-        <div class="project-row-top">
-          <span class="project-row-index">${escapeHtml(project.index)}</span>
-          <span class="project-row-status">${escapeHtml(project.status)}</span>
-        </div>
+        <p class="project-row-status">${escapeHtml(project.status)}</p>
         <div class="project-row-title">
           <h3>${escapeHtml(project.shortName)}</h3>
-          <p>${escapeHtml(project.category)}</p>
+          <p>${escapeHtml(project.domain)}</p>
         </div>
         <p class="project-row-summary">${escapeHtml(project.headline)}</p>
         <div class="project-row-footer">
@@ -237,19 +234,16 @@
 
     elements.evidenceLedger.innerHTML = `
       <article class="ledger-column">
-        <span class="ledger-number">01</span>
         <h3>已经验证</h3>
         <p>可以在面试中展示配置、流程或检查结果的现有能力。</p>
         <ul>${verified.map((project) => `<li>${escapeHtml(project.shortName)} — ${escapeHtml(project.status)}</li>`).join("")}</ul>
       </article>
       <article class="ledger-column">
-        <span class="ledger-number">02</span>
         <h3>正在作品集化</h3>
         <p>工程能力已经存在，但公开仓库、匿名数据与录屏仍按阶段补齐。</p>
         <ul>${data.projects.map((project) => `<li>${escapeHtml(project.shortName)} — ${escapeHtml(project.next)}</li>`).join("")}</ul>
       </article>
       <article class="ledger-column">
-        <span class="ledger-number">03</span>
         <h3>公开边界</h3>
         <p>对招聘方展示机制与证据，不暴露账号、密钥、Cookie、真实节点和私人历史数据。</p>
         <ul>
@@ -264,7 +258,6 @@
   function projectDialogMarkup(project) {
     return `
       <header class="dialog-hero">
-        <p class="section-label">${escapeHtml(project.index)} · ${escapeHtml(project.category)}</p>
         <h2 id="project-dialog-title">${escapeHtml(project.name)}</h2>
         <p>${escapeHtml(project.headline)}</p>
       </header>
@@ -368,6 +361,10 @@
       Object.entries(fields).forEach(([key, element]) => {
         if (element) element.textContent = definition[key];
       });
+      const canvas = atlas.querySelector(".atlas-canvas");
+      canvas.classList.remove("is-updated");
+      void canvas.offsetWidth;
+      canvas.classList.add("is-updated");
     };
 
     tabs.forEach((tab, index) => {
