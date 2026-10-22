@@ -56,6 +56,18 @@ npm run check
 - CS2 项目是否明确保持模拟语义
 - 键盘跳转、对话框标签、reduced-motion 和移动端样式是否存在
 
+## 简历 PDF
+
+`assets/wang-hongren-resume.pdf`（2 页）由 `docs/resume-source.html` 渲染，改完 HTML 后重新打印即可：
+
+```powershell
+& "C:\Program Files\Google\Chrome\Application\chrome.exe" --headless=new --disable-gpu `
+  --no-pdf-header-footer --print-to-pdf="assets\wang-hongren-resume.pdf" `
+  "file:///C:/Users/Ra/Documents/ChatGPT/反代/career-portfolio/docs/resume-source.html"
+```
+
+数字口径必须与 `data/portfolio.json` 保持一致；页面与简历的测试数字都标注实测日期。
+
 ## 内容事实源
 
 | 项目 | 当前依据 | 公开状态 |

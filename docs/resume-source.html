@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<title>王宏仁 · 简历 2026-10</title>
+<style>
+  @page { size: A4; margin: 12mm 13mm 11mm; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    color: #14171c; background: #fff;
+    font-family: "Microsoft YaHei", "微软雅黑", "PingFang SC", "Source Han Sans SC", sans-serif;
+    font-size: 9.6pt; line-height: 1.62; -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  a { color: #14171c; text-decoration: none; }
+  strong { font-weight: 700; }
+
+  header { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; padding-bottom: 9px; border-bottom: 2px solid #14171c; }
+  .name { font-size: 22pt; font-weight: 800; letter-spacing: .02em; line-height: 1.1; }
+  .role { margin-top: 3px; font-size: 10pt; font-weight: 600; color: #2b5d3f; }
+  .meta { text-align: right; font-size: 8.6pt; line-height: 1.55; color: #3d434d; }
+  .meta b { font-weight: 600; color: #14171c; }
+
+  .facts { margin: 7px 0 0; font-size: 8.6pt; color: #3d434d; }
+  .facts span { margin-right: 14px; white-space: nowrap; }
+
+  section { margin-top: 13px; }
+  h2 {
+    margin: 0 0 6px; padding-bottom: 3px; border-bottom: 1px solid #d5d9e0;
+    font-size: 10.4pt; font-weight: 700; letter-spacing: .06em; color: #14171c;
+  }
+  h2::before { content: ""; display: inline-block; width: 3px; height: 11px; margin-right: 7px; vertical-align: -1px; background: #2b7a4b; }
+
+  ul { margin: 0; padding-left: 15px; }
+  li { margin: 0 0 2.5px; }
+  li::marker { color: #7b828d; }
+  p { margin: 0; }
+
+  .item { margin-bottom: 9px; page-break-inside: avoid; }
+  .item-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+  .item-title { font-size: 10.2pt; font-weight: 700; }
+  .item-title small { margin-left: 7px; font-size: 8.6pt; font-weight: 500; color: #5a616b; }
+  .item-when { flex: none; font-size: 8.4pt; color: #5a616b; }
+  .item-note { margin: 1px 0 4px; font-size: 8.7pt; color: #4a515b; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 0 22px; }
+  .two-col .item { margin-bottom: 7px; }
+
+  .kv { font-size: 9pt; }
+  .kv b { display: inline-block; min-width: 62px; font-weight: 600; color: #3d434d; }
+
+  .foot-note { margin-top: 11px; padding-top: 7px; border-top: 1px solid #e3e6eb; font-size: 8.2pt; color: #6a727d; }
+  .link { color: #2b5d3f; font-weight: 600; }
+  .keep { page-break-inside: avoid; }
+</style>
+</head>
+<body>
+
+  <header>
+    <div>
+      <div class="name">王宏仁</div>
+      <div class="role">AI 运营 / AI 应用 · 会造工具的内容运营</div>
+    </div>
+    <div class="meta">
+      <div><b>15765520658</b> · hongrenw111@gmail.com</div>
+      <div>微信 Fate1763645992 · 现居沈阳</div>
+      <div>作品集 <span class="link">hongrenw111-debug.github.io/career-portfolio</span></div>
+    </div>
+  </header>
+
+  <div class="facts">
+    <span>22 岁 · 男</span>
+    <span>东北林业大学 · 广告学 · 本科（2022.09–2026.06）</span>
+    <span>求职方向：AI 运营 / AI 应用 / 内容运营</span>
+    <span>可即时到岗</span>
+  </div>
+
+  <section>
+    <h2>核心优势</h2>
+    <ul>
+      <li><strong>内容运营的完整闭环</strong>：选题、文案、图文卡片渲染、发布前合规检测、创作者中心数据回收与周报，全部串成可重跑的流水线；合规规则不是凭条文推测，而是用平台真实拒绝日志反向校准。</li>
+      <li><strong>能把 AI 工作流做成可交付的工程</strong>：独立开发求职 Agent、AIGC 量产管线与自动化发布引擎，习惯给每一步加测试、护栏和失败分类，能说清哪些结论有证据、哪些还没验证。</li>
+      <li><strong>有公开可查的代码</strong>：开源 FlowForge（AI 导演调度工作台，Ubuntu + Windows 双系统 CI），并为浏览器自动化 harness 补齐 Windows 原生绑定层（上游 SDK 逐字节不改）。</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>项目经历</h2>
+
+    <div class="item">
+      <div class="item-head">
+        <div class="item-title">小红书内容自动化引擎<small>含 AIGC 合规检测 · 独立开发</small></div>
+        <div class="item-when">2026</div>
+      </div>
+      <div class="item-note">把「追热点」与「合规」拆成可检测的环节：热点嗅探与选题 → 文案两道工序 → 卡片渲染 → 合规闸门 → 发布 → 数据回收。</div>
+      <ul>
+        <li>实现发布前合规闸门：17 条按来源分组的规则，检测器为<strong>纯函数（零 IO / 零网络 / 零 LLM）</strong>，block 级硬拦截、warn 级只提示，AIGC 声明自动勾选并验证，验证不过即拒绝发布。</li>
+        <li>用平台真实审核数据校准规则：从创作者中心取证 2 篇「旧规则全过、实际被拒」的笔记原文，据此补出站外导流与诱导互动两类规则，两篇均可在发布前被拦下。</li>
+        <li>防误杀经真实语料回归：新增规则初版在 44 篇语料上误杀 16 篇（多为正常建议语），加放行窗口后误杀清零并固化为回归测试；存量违规 <strong>13 → 0</strong>，总字符改动 0.15%。</li>
+        <li>打通真实数据链路：实测该页 table 数为 0，原基于表格的解析永远抓不到数据，改为解析真实 DOM 文本结构，写入 metrics.jsonl 并生成周报（LLM 故障可降级）。</li>
+        <li><strong>175 项自动化测试全绿</strong>（含合规 45、修复器 19，2026-10-22 本机实测）。</li>
+      </ul>
+    </div>
+
+    <div class="item">
+      <div class="item-head">
+        <div class="item-title">Job Apply Agent 求职触达系统<small>独立开发 · 本地运行</small></div>
+        <div class="item-when">2026</div>
+      </div>
+      <div class="item-note">面向 BOSS直聘 / 猎聘 / 智联的半自动求职 Agent：不做同一份简历群发，而是把「按岗定制」做成可核查的流程。</div>
+      <ul>
+        <li>LLM 行为层（JD 解构为需求清单、逐条证据映射、定制简历与 ≤50 字话术、对齐质检）与 Playwright 机械层（搜索、投递、记录）以 JSON 作业文件解耦，LLM 故障不影响已排队的动作。</li>
+        <li><strong>取材红线</strong>：定制内容逐句可回指主简历；对齐分不足或质检不过的职位标记 cannot-align，直接放弃投递，从机制上避免编造经历。</li>
+        <li>节奏护栏：每轮投递上限、连续失败熔断、间隔 ±20% 抖动、验证码与风控信号秒级停机；默认 dry-run 起步。</li>
+        <li><strong>159 项测试全绿</strong>（2026-10-22 本机实测）；真实投递前仍需真机校准三平台选择器，如实标注为进行中。</li>
+      </ul>
+    </div>
+
+    <div class="item">
+      <div class="item-head">
+        <div class="item-title">FlowForge · 开源 AI 导演调度工作台<small>GitHub 公开 · 主创</small></div>
+        <div class="item-when">2026</div>
+      </div>
+      <ul>
+        <li>以「尾帧接力」把单次生成串成连贯长视频（连贯度 MAD 2.00），复用浏览器会话驱动生成，<strong>零 API Key</strong> 即可跑通。</li>
+        <li>为产物加伪视频熔断：moov atom 完整性探测与 &lt;100KB 自动重试，避免把坏文件交付给下游剪辑。</li>
+        <li>配置 Ubuntu + Windows 双系统 GitHub Actions，<strong>209 项测试</strong>回归（最后一次成功运行 2026-09-01）。</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="keep">
+    <h2>技能与教育</h2>
+    <div class="kv"><b>内容与运营</b>热点选题、图文内容生产、发布合规规则设计（《广告法》第九条、小红书 AI 内容治理规则、AIGC 标识办法）、数据回收与周报</div>
+    <div class="kv"><b>技术栈</b>Node.js / TypeScript / Python；Playwright 与 CDP 浏览器自动化；LLM 结构化输出与提示词约束；图像与视频生成工作流；GitHub Actions</div>
+    <div class="kv"><b>教育背景</b>东北林业大学 · 广告学 · 本科（2022.09–2026.06）；主修广告策划与创意、消费者行为学、市场调查与数据分析、广告文案写作</div>
+  </section>
+
+  <section class="keep" style="page-break-before: always;">
+    <h2>其他项目</h2>
+    <div class="two-col">
+      <div class="item">
+        <div class="item-head">
+          <div class="item-title">AIGC 图像量产与一致性工作流</div>
+          <div class="item-when">日用</div>
+        </div>
+        <p class="item-note">强制垫图 + 提示词规范解决角色形变与画风漂移；单图制作由 1 小时压缩到 1 分钟，支持百张级批量交付。</p>
+      </div>
+      <div class="item">
+        <div class="item-head">
+          <div class="item-title">ego-win · Windows 宿主</div>
+          <div class="item-when">2026</div>
+        </div>
+        <p class="item-note">用 Chrome DevTools Protocol 实现官方 harness 依赖的原生绑定；上游 SDK 逐字节 vendored（83 万字节未改），63 个单测、上游套件 68/69 通过。</p>
+      </div>
+      <div class="item">
+        <div class="item-head">
+          <div class="item-title">Provider Guard 模型可靠性网关</div>
+          <div class="item-when">本地运行</div>
+        </div>
+        <p class="item-note">把网络、配额、模型缺失、后端失联分成不同故障：按根因换节点、冷却或直接返回；首个正文发出后划为不可重放边界，共享依赖只设一个恢复所有者。</p>
+      </div>
+      <div class="item">
+        <div class="item-head">
+          <div class="item-title">cs2-arb 决策辅助工具</div>
+          <div class="item-when">258 测试</div>
+        </div>
+        <p class="item-note">把手续费结构、7 天冷却期与余额折价建成可配置模型；只做决策辅助，不做自动交易，三份 ADR 记录取舍。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="keep">
+    <h2>作品集与公开证据</h2>
+    <ul>
+      <li><strong>8 个案例的可核对档案</strong>：每个案例写清约束、关键取舍、运行机制、验证证据，以及仍未完成的公开化工作；页面上每个数字都标注来源与实测日期，包括已经过时的 CI 记录。</li>
+      <li><strong>公开边界不美化</strong>：FlowForge 已公开开源；ego-win 与 Provider Guard 的通用版本仍在公开化过程中，按「本地运行」如实标注，不写成线上生产。</li>
+      <li><strong>面试可现场展开的主线</strong>：一次平台驳回 → 规则如何从拒绝日志反推 → 闸门卡在哪一层 → 哪些结论目前证据不足。</li>
+      <li>作品集：<span class="link">hongrenw111-debug.github.io/career-portfolio</span> · GitHub：<span class="link">github.com/hongrenw111-debug</span></li>
+    </ul>
+  </section>
+
+  <div class="foot-note">
+    本简历与作品集口径一致：所有测试数字标注实测日期；未验证的结论在作品集中如实标为进行中。更新于 2026-10-22。
+  </div>
+
+</body>
+</html>
