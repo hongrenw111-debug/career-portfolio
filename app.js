@@ -37,8 +37,8 @@
       owner: "Provider Guard",
       decision: "切换健康节点",
       limit: "总尝试次数不超过 3 次",
-      outcome: "在未输出正文前安全重放",
-      reason: "节点故障属于可恢复网络边界；一旦正文已经发送，立即停止自动重放。"
+      outcome: "在未输出响应头或响应字节前安全重放",
+      reason: "节点故障属于可恢复网络边界；一旦响应头或首个响应字节已发往客户端，立即停止自动重放。"
     },
     quota: {
       signal: "429 / RESOURCE_EXHAUSTED",
@@ -120,16 +120,12 @@
         ${metric.note ? `<span class="proof-note">${escapeHtml(metric.note)}</span>` : ""}
       </div>
     `).join("");
-    elements.snapshotDate.textContent = `${snapshot.date} · ${snapshot.label}`;
+    elements.snapshotDate.textContent = `${snapshot.date}，${snapshot.label}`;
   }
 
   function renderArchitecture(project) {
-    return project.architecture.map((node, index) => `
-      <div class="architecture-node">
-        <span>${String(index + 1).padStart(2, "0")}</span>
-        ${escapeHtml(node)}
-      </div>
-      ${index < project.architecture.length - 1 ? '<div class="architecture-arrow" aria-hidden="true"></div>' : ""}
+    return project.architecture.map((node) => `
+      <li class="architecture-node">${escapeHtml(node)}</li>
     `).join("");
   }
 
@@ -147,39 +143,39 @@
     return project.facts.map((fact) => `
       <div class="fact">
         <strong>${escapeHtml(fact.value)}</strong>
-        <span>${escapeHtml(fact.label)} · ${escapeHtml(fact.note)}</span>
+        <span>${escapeHtml(fact.label)}（${escapeHtml(fact.note)}）</span>
       </div>
     `).join("");
   }
 
   function renderFeatured(project) {
     elements.featured.innerHTML = `
-      <article class="featured-case-header">
+      <div class="featured-case-header">
         <p>${escapeHtml(project.domain)}</p>
-        <b><i aria-hidden="true"></i>${escapeHtml(project.status)}</b>
-      </article>
+        <strong>${escapeHtml(project.status)}</strong>
+      </div>
       <div class="featured-case-body">
         <article class="featured-copy">
           <h3>${escapeHtml(project.headline)}</h3>
           <p>${escapeHtml(project.summary)}</p>
           <div class="case-decisions">
             <article>
-              <span>真实问题</span>
+              <strong>真实问题</strong>
               <p>${escapeHtml(project.problem)}</p>
             </article>
             <article>
-              <span>关键取舍</span>
+              <strong>关键取舍</strong>
               <p>${escapeHtml(project.solution)}</p>
             </article>
           </div>
           <div class="project-actions">
-            <button class="text-action" type="button" data-project-open="${escapeHtml(project.slug)}">查看完整案例 <span aria-hidden="true">→</span></button>
+            <button class="button button-secondary" type="button" data-project-open="${escapeHtml(project.slug)}">查看完整案例</button>
             <span>${escapeHtml(project.stack.slice(0, 3).join(" / "))}</span>
           </div>
         </article>
         <aside class="featured-system" aria-label="${escapeHtml(project.shortName)} 架构与事实">
-          <p class="system-label">系统路径与已验证事实</p>
-          <div class="architecture-chain">${renderArchitecture(project)}</div>
+          <div class="system-label">系统路径与已验证事实</div>
+          <ol class="architecture-chain">${renderArchitecture(project)}</ol>
           <div class="fact-grid">${renderFacts(project)}</div>
         </aside>
       </div>
@@ -189,15 +185,22 @@
   function renderProjectRegister(projects) {
     elements.projectRegister.innerHTML = projects.map((project) => `
       <article class="project-row" data-project-row="${escapeHtml(project.slug)}">
-        <p class="project-row-status">${escapeHtml(project.status)}</p>
+        <div class="project-row-top">
+          <span class="project-row-domain">${escapeHtml(project.domain)}</span>
+          <p class="project-row-status">${escapeHtml(project.status)}</p>
+        </div>
         <div class="project-row-title">
           <h3>${escapeHtml(project.shortName)}</h3>
-          <p>${escapeHtml(project.domain)}</p>
         </div>
         <p class="project-row-summary">${escapeHtml(project.headline)}</p>
         <div class="project-row-footer">
-          <span>${escapeHtml(project.stack.slice(0, 3).join(" / "))}</span>
-          <button class="project-row-open" type="button" data-project-open="${escapeHtml(project.slug)}" aria-label="打开 ${escapeHtml(project.shortName)} 详情">→</button>
+          <div class="project-row-tags">
+            <span>${escapeHtml(project.stack.slice(0, 3).join(" / "))}</span>
+          </div>
+          <div class="project-row-actions">
+            ${project.demoUrl ? `<a class="project-row-demo" href="${escapeHtml(project.demoUrl)}" target="_blank" rel="noopener noreferrer">打开看板</a>` : ""}
+            <button class="project-row-open" type="button" data-project-open="${escapeHtml(project.slug)}" aria-label="打开 ${escapeHtml(project.shortName)} 详情">查看</button>
+          </div>
         </div>
       </article>
     `).join("");
@@ -209,7 +212,7 @@
       <table class="capability-table">
         <thead>
           <tr>
-            <th scope="col">工程能力</th>
+            <th scope="col">工程与运营能力</th>
             ${projects.map((project) => `<th scope="col">${escapeHtml(project.shortName)}</th>`).join("")}
           </tr>
         </thead>
@@ -236,30 +239,35 @@
       <article class="ledger-column">
         <h3>已经验证</h3>
         <p>可以在面试中展示配置、流程或检查结果的现有能力。</p>
-        <ul>${verified.map((project) => `<li>${escapeHtml(project.shortName)} — ${escapeHtml(project.status)}</li>`).join("")}</ul>
+        <ul>${verified.map((project) => `<li>${escapeHtml(project.shortName)}：${escapeHtml(project.status)}</li>`).join("")}</ul>
       </article>
       <article class="ledger-column">
         <h3>正在作品集化</h3>
-        <p>工程能力已经存在，但公开仓库、匿名数据与录屏仍按阶段补齐。</p>
-        <ul>${data.projects.map((project) => `<li>${escapeHtml(project.shortName)} — ${escapeHtml(project.next)}</li>`).join("")}</ul>
+        <p>工程能力已经存在，公开仓库、匿名数据与录屏按阶段补齐。</p>
+        <ul>${data.projects.map((project) => `<li>${escapeHtml(project.shortName)}：${escapeHtml(project.next)}</li>`).join("")}</ul>
       </article>
       <article class="ledger-column">
         <h3>公开边界</h3>
-        <p>对招聘方展示机制与证据，不暴露账号、密钥、Cookie、真实节点和私人历史数据。</p>
+        <p>只展示机制与实测证据，不暴露账号、密钥、节点或个人原始数据。</p>
         <ul>
-          <li>已运行与计划功能分开标注</li>
-          <li>CS2 系统始终标记为 SIMULATION ONLY</li>
-          <li>${active.length} 个持续开发案例不宣称生产上线</li>
+          <li>已运行能力与计划项分开标注</li>
+          <li>CS2 案例明确标注仅模拟与决策辅助</li>
+          <li>${active.length} 个本地持续迭代项目不宣称线上运行</li>
         </ul>
       </article>
     `;
   }
 
   function projectDialogMarkup(project) {
+    const demoAction = project.demoUrl
+      ? `<div class="dialog-demo"><a class="button button-primary" href="${escapeHtml(project.demoUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(project.demoLabel || "查看在线交互看板")}</a></div>`
+      : "";
+
     return `
       <header class="dialog-hero">
-        <h2 id="project-dialog-title">${escapeHtml(project.name)}</h2>
+        <h2 id="project-dialog-title" tabindex="-1">${escapeHtml(project.name)}</h2>
         <p>${escapeHtml(project.headline)}</p>
+        ${demoAction}
       </header>
 
       <div class="dialog-facts">${renderFacts(project, true)}</div>
@@ -274,7 +282,7 @@
       </section>
       <section class="dialog-section">
         <h3>架构</h3>
-        <div class="architecture-chain">${renderArchitecture(project)}</div>
+        <ol class="architecture-chain">${renderArchitecture(project)}</ol>
       </section>
       <section class="dialog-section">
         <h3>负责内容</h3>
@@ -292,6 +300,7 @@
         <h3>下一步</h3>
         <p class="next-box">${escapeHtml(project.next)}</p>
       </section>
+      <p class="dialog-scroll-end">已展示完整架构、验证证据与边界限制。</p>
     `;
   }
 
@@ -303,6 +312,7 @@
     state.activeProject = slug;
     elements.dialogContent.innerHTML = projectDialogMarkup(project);
     elements.projectDialog.showModal();
+    elements.dialogContent.querySelector("#project-dialog-title")?.focus({ preventScroll: true });
     if (updateUrl) history.replaceState(null, "", `#project=${encodeURIComponent(slug)}`);
   }
 
@@ -317,7 +327,7 @@
   function resumeText() {
     const { profile, resume } = state.data;
     return [
-      `${profile.name} — ${resume.headline}`,
+      `${profile.name}（${resume.headline}）`,
       "",
       resume.intro,
       "",
@@ -361,18 +371,14 @@
       Object.entries(fields).forEach(([key, element]) => {
         if (element) element.textContent = definition[key];
       });
-      const canvas = atlas.querySelector(".atlas-canvas");
-      canvas.classList.remove("is-updated");
-      void canvas.offsetWidth;
-      canvas.classList.add("is-updated");
     };
 
     tabs.forEach((tab, index) => {
       tab.addEventListener("click", () => activate(tab.dataset.fault));
       tab.addEventListener("keydown", (event) => {
-        if (!['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+        if (!["ArrowLeft", "ArrowRight"].includes(event.key)) return;
         event.preventDefault();
-        const direction = event.key === 'ArrowRight' ? 1 : -1;
+        const direction = event.key === "ArrowRight" ? 1 : -1;
         const next = tabs[(index + direction + tabs.length) % tabs.length];
         next.focus();
         activate(next.dataset.fault);
@@ -424,38 +430,12 @@
     });
   }
 
-  function setupReveal() {
-    const items = document.querySelectorAll(".reveal");
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
-      items.forEach((item) => item.classList.add("is-visible"));
-      return;
-    }
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-
-    items.forEach((item) => {
-      const rect = item.getBoundingClientRect();
-      if (rect.top < window.innerHeight * 1.08 && rect.bottom > -40) {
-        item.classList.add("is-visible");
-      } else {
-        observer.observe(item);
-      }
-    });
-  }
-
   function setupSectionTracking() {
     if (!("IntersectionObserver" in window)) return;
     const sections = ["work", "method", "evidence"]
       .map((id) => document.getElementById(id))
       .filter(Boolean);
-    const links = new Map([...document.querySelectorAll(".site-nav a")]
+    const links = new Map([...document.querySelectorAll(".site-nav a[href^='#']")]
       .map((link) => [link.getAttribute("href").slice(1), link]));
 
     const observer = new IntersectionObserver((entries) => {
@@ -503,12 +483,10 @@
       renderEvidenceLedger(state.data);
       bindInteractions();
       setupFailureAtlas();
-      setupReveal();
       setupSectionTracking();
       handleInitialHash();
     } catch (error) {
       renderError(error);
-      setupReveal();
     }
   }
 

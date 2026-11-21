@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f4f2ec" />
+  <meta name="description" content="adbench-zh 中文营销 AIGC 评测基准：30 条商业 Brief、6 个模型 359 条实测采样、千篇有效成本与双异构裁判位置偏见校准看板。" />
+  <title>adbench-zh 中文营销 AIGC 评测基准与有效成本看板</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main-content">跳到正文</a>
+
+  <header class="masthead">
+    <div class="container masthead-inner">
+      <a class="brand-mark" href="#top">
+        <span class="brand-seal" aria-hidden="true">测</span>
+        <span class="brand-name">adbench-zh</span>
+        <span class="brand-note">中文营销 AIGC 评测基准</span>
+      </a>
+      <nav class="masthead-nav" aria-label="主导航">
+        <a class="back-portfolio-link" href="../" id="backPortfolioLink" hidden>返回作品集</a>
+        <a href="#leaderboard-section">排行榜</a>
+        <a href="#charts-section">帕累托与护栏</a>
+        <a href="#calibration-section">尺子校准</a>
+        <a href="#badcases-section">真实案例</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <h1 id="hero-title"><span class="clause-keep">测中文营销文案，</span><span class="clause-keep">先验尺子与有效成本</span></h1>
+        <p class="hero-lead">
+          基于 30 条跨行业跨渠道结构化商业 Brief（含 40% 对抗陷阱），完成 6 个主力模型两套提示词共 359 次真实采样，并公开零大模型硬检迭代、双异构裁判位置翻转率与 19 题盲测局限。
+        </p>
+        <div class="hero-actions">
+          <a class="btn-primary" href="#leaderboard-section">浏览实测排行榜</a>
+          <a class="btn-secondary" href="#badcases-section">查验 14 例真实 Bad Case</a>
+        </div>
+        <dl class="meta-strip" id="heroMetaPills">
+          <div>
+            <dt>运行批次</dt>
+            <dd>mvp30-v1</dd>
+          </div>
+          <div>
+            <dt>有效生成</dt>
+            <dd>359 / 360</dd>
+          </div>
+          <div>
+            <dt>牌价快照</dt>
+            <dd>2026-11-19</dd>
+          </div>
+          <div>
+            <dt>双异构裁判</dt>
+            <dd><span class="nowrap">Gemini 4 Neon</span> + <span class="nowrap">Grok 4.7</span></dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="ledger-grid" id="findingsGrid" aria-label="核心实测账本">
+        <div class="ledger-cell ledger-cell-lead">
+          <div class="ledger-value">-50.6%</div>
+          <div class="ledger-label">DeepSeek 有效成本降幅</div>
+          <div class="ledger-note">Guarded 护栏把通过率从 43.3% 拉升到 86.7%，千篇成本降至 ¥11.35。</div>
+        </div>
+        <div class="ledger-cell">
+          <div class="ledger-value">359 / 360</div>
+          <div class="ledger-label">真实采样与非零 Token 计价</div>
+          <div class="ledger-note">6 个模型各跑 Baseline 与 Guarded 两套提示词，覆盖 40% 陷阱 Brief。</div>
+        </div>
+        <div class="ledger-cell">
+          <div class="ledger-value">100.0%</div>
+          <div class="ledger-label">双裁判共识一致率（<span class="nowrap">κ = 1.000</span>）</div>
+          <div class="ledger-note">Grok 4.7 位置翻转 32.5%，剔除翻转后 26 对共识样本完全一致。</div>
+        </div>
+        <div class="ledger-cell">
+          <div class="ledger-value">81.8% vs 0/8</div>
+          <div class="ledger-label">19 / 50 题盲测（Self-κ 为 N/A）</div>
+          <div class="ledger-note">分胜负的 11 题 Gemini 一致率 81.8%，人类判平的 8 题 AI 全员 0 判平，未达重测区间不虚报 κ。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main id="main-content" class="container">
+    <section class="section-block" id="leaderboard-section" aria-labelledby="leaderboard-heading">
+      <div class="section-head">
+        <div>
+          <h2 id="leaderboard-heading">模型综合评测排行榜</h2>
+          <p class="section-sub">
+            千篇有效可用成本等于总推理成本除以零大模型一次全过样本数再乘以 1000，按 2026-11-19 公开牌价快照折算人民币。
+          </p>
+        </div>
+      </div>
+
+      <div class="filters-bar">
+        <label for="filterVariant">
+          提示词组别
+          <select id="filterVariant">
+            <option value="guarded" selected>Guarded（带护栏运营版）</option>
+            <option value="baseline">Baseline（常规提示词）</option>
+            <option value="all">全部对比</option>
+          </select>
+        </label>
+        <label for="filterChannel">
+          渠道切片
+          <select id="filterChannel">
+            <option value="all" selected>全渠道（30 条）</option>
+            <option value="xiaohongshu">小红书图文（10 条）</option>
+            <option value="douyin_script">抖音口播脚本（10 条）</option>
+            <option value="feed_ad">信息流短文案（10 条）</option>
+          </select>
+        </label>
+        <label for="filterIndustry">
+          行业切片
+          <select id="filterIndustry">
+            <option value="all" selected>全行业（30 条）</option>
+            <option value="beauty_skincare">美妆护肤（8 条）</option>
+            <option value="tech_3c_ai">3C 数码与 AI（8 条）</option>
+            <option value="gaming_acg">游戏与二次元（7 条）</option>
+            <option value="jp_crossborder">日系跨境（7 条）</option>
+          </select>
+        </label>
+        <label for="sortMetric">
+          排序指标
+          <select id="sortMetric">
+            <option value="overallPassRate" selected>L1 总通过率</option>
+            <option value="effectiveCost">千篇有效成本（低到高）</option>
+            <option value="l2WinRate">L2 双裁判胜率</option>
+            <option value="slop">AI 油腻度（低到高）</option>
+          </select>
+        </label>
+      </div>
+
+      <p class="mobile-scroll-hint" aria-hidden="true">向右滑动查看完整 12 项分维指标</p>
+      <div class="table-frame">
+        <table class="data-table" id="leaderboardTable">
+          <thead>
+            <tr>
+              <th scope="col">模型</th>
+              <th scope="col">L1 总通过率</th>
+              <th scope="col">有效成本每千篇</th>
+              <th scope="col">L2 一致胜率*</th>
+              <th scope="col">档位</th>
+              <th scope="col">提示词</th>
+              <th scope="col">样本</th>
+              <th scope="col">合规</th>
+              <th scope="col">事实忠实</th>
+              <th scope="col">格式契约</th>
+              <th scope="col">油腻分</th>
+              <th scope="col">原始每千篇</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboardBody">
+            <tr>
+              <td><strong>Kimi K3.1 Pro</strong></td>
+              <td><span class="badge badge-pass">100.0%</span></td>
+              <td class="num-strong">¥24.52</td>
+              <td>62.5%</td>
+              <td><span class="badge badge-value">主力均衡</span></td>
+              <td><span class="badge badge-guarded">guarded</span></td>
+              <td>30</td>
+              <td>100.0%</td>
+              <td>100.0%</td>
+              <td>100.0%</td>
+              <td>0.0 分</td>
+              <td>¥24.52</td>
+            </tr>
+            <tr>
+              <td><strong>Qwen 3.8 Max</strong></td>
+              <td><span class="badge badge-pass">100.0%</span></td>
+              <td class="num-strong">¥24.95</td>
+              <td>47.8%</td>
+              <td><span class="badge badge-flagship">旗舰档</span></td>
+              <td><span class="badge badge-guarded">guarded</span></td>
+              <td>30</td>
+              <td>100.0%</td>
+              <td>100.0%</td>
+              <td>100.0%</td>
+              <td>0.0 分</td>
+              <td>¥24.95</td>
+            </tr>
+            <tr>
+              <td><strong>Claude Sonnet 5.5</strong></td>
+              <td><span class="badge badge-pass">100.0%</span></td>
+              <td class="num-strong">¥134.30</td>
+              <td>70.3%</td>
+              <td><span class="badge badge-flagship">旗舰档</span></td>
+              <td><span class="badge badge-guarded">guarded</span></td>
+              <td>30</td>
+              <td>100.0%</td>
+              <td>100.0%</td>
+              <td>100.0%</td>
+              <td>0.0 分</td>
+              <td>¥134.30</td>
+            </tr>
+            <tr>
+              <td><strong>GLM 5.3 Flash</strong></td>
+              <td><span class="badge badge-pass">93.3%</span></td>
+              <td class="num-strong">¥7.30</td>
+              <td>84.6%</td>
+              <td><span class="badge badge-lite">轻量经济</span></td>
+              <td><span class="badge badge-guarded">guarded</span></td>
+              <td>30</td>
+              <td>100.0%</td>
+              <td>100.0%</td>
+              <td>93.3%</td>
+              <td>0.0 分</td>
+              <td>¥6.82</td>
+            </tr>
+            <tr>
+              <td><strong>DeepSeek V4.1 Flash</strong></td>
+              <td><span class="badge badge-warn">86.7%</span></td>
+              <td class="num-strong">¥11.35</td>
+              <td>25.0%</td>
+              <td><span class="badge badge-value">主力均衡</span></td>
+              <td><span class="badge badge-guarded">guarded</span></td>
+              <td>30</td>
+              <td>100.0%</td>
+              <td>100.0%</td>
+              <td>86.7%</td>
+              <td>0.0 分</td>
+              <td>¥9.84</td>
+            </tr>
+            <tr>
+              <td><strong>MiniMax M3.1 Flash</strong></td>
+              <td><span class="badge badge-warn">76.7%</span></td>
+              <td class="num-strong">¥6.75</td>
+              <td>0.0%</td>
+              <td><span class="badge badge-lite">轻量经济</span></td>
+              <td><span class="badge badge-guarded">guarded</span></td>
+              <td>30</td>
+              <td>96.7%</td>
+              <td>96.7%</td>
+              <td>76.7%</td>
+              <td>0.0 分</td>
+              <td>¥5.18</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="footnote">
+        *注：L2 一致胜率来自 Guarded 组 40 对抽样下的双异构裁判非翻转一致票（全局参考口径，各模型出场次数在 14 到 49 次之间）；油腻分为确定性套话扣分值，越低越好。
+      </p>
+    </section>
+
+    <section class="section-block" id="charts-section" aria-labelledby="charts-heading">
+      <div class="section-head">
+        <div>
+          <h2 id="charts-heading">成本质量帕累托与护栏 ROI 对照</h2>
+          <p class="section-sub">
+            将推理价格除以一次硬检通过率，识别只看 API 牌价发现不了的无效重试成本与过度提示溢价。
+          </p>
+        </div>
+      </div>
+
+      <div class="charts-split">
+        <div class="chart-column">
+          <h3>成本与质量帕累托象限（Guarded 组）</h3>
+          <p class="chart-caption">横轴为千篇有效成本的对数刻度，纵轴为 L2 双裁判一致胜率，越靠近左上角越合算。</p>
+          <div class="chart-legend" aria-label="模型档位图例">
+            <span class="legend-item"><span class="legend-swatch swatch-flagship"></span>旗舰档位</span>
+            <span class="legend-item"><span class="legend-swatch swatch-value"></span>主力均衡档</span>
+            <span class="legend-item"><span class="legend-swatch swatch-lite"></span>轻量经济档</span>
+          </div>
+          <div class="svg-stage" id="paretoChartWrap">
+            <ul class="static-chart-summary">
+              <li>GLM 5.3 Flash：千篇有效成本 ¥7.30，L2 一致胜率 84.6%（14 次出场）。</li>
+              <li>Claude Sonnet 5.5：千篇有效成本 ¥134.30，L2 一致胜率 70.3%（49 次出场）。</li>
+              <li>Kimi K3.1 Pro 与 Qwen 3.8 Max：千篇有效成本 ¥24.52 与 ¥24.95，胜率 62.5% 与 47.8%。</li>
+              <li>DeepSeek V4.1 Flash：千篇有效成本 ¥11.35，胜率 25.0%。</li>
+              <li>MiniMax M3.1 Flash：千篇有效成本最低（¥6.75），但 L2 对抗 0 胜 17 负。</li>
+            </ul>
+          </div>
+          <div class="mobile-pareto-list" id="paretoMobileReadout" aria-label="帕累托象限数据明细"></div>
+        </div>
+
+        <div class="chart-column">
+          <h3>Baseline 到 Guarded 护栏 ROI 对照</h3>
+          <p class="chart-caption">拆分为通过率变化与有效成本变化两列独立坐标，避免混轴引起正负误读。</p>
+          <div class="chart-legend" aria-label="变化指标图例">
+            <span class="legend-item"><span class="legend-swatch swatch-pass"></span>通过率提升</span>
+            <span class="legend-item"><span class="legend-swatch swatch-warn"></span>通过率回落</span>
+            <span class="legend-item"><span class="legend-swatch swatch-cost-down"></span>有效成本降低</span>
+            <span class="legend-item"><span class="legend-swatch swatch-cost-up"></span>有效成本上升</span>
+          </div>
+          <div class="roi-stage" id="roiChartWrap">
+            <ul class="static-chart-summary">
+              <li>DeepSeek V4.1 Flash 使用护栏提示词后通过率提升 43.3 个百分点，千篇有效成本降低 50.6%。</li>
+              <li>GLM 5.3 Flash 使用护栏提示词后通过率提升 40.0 个百分点，千篇有效成本降低 13.9%。</li>
+              <li>Claude Sonnet 5.5 使用护栏提示词后通过率提升 30.0 个百分点，千篇有效成本降低 19.8%。</li>
+              <li>Kimi K3.1 Pro 使用护栏提示词后通过率提升 13.3 个百分点，千篇有效成本降低 2.0%。</li>
+              <li>Qwen 3.8 Max 在基线组已达 96.7%，使用护栏后升至 100.0% 而有效成本反升 52.9%。</li>
+              <li>MiniMax M3.1 Flash 使用护栏后通过率回落 6.7 个百分点，有效成本反升 44.2%。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block" id="calibration-section" aria-labelledby="calibration-heading">
+      <div class="section-head">
+        <div>
+          <h2 id="calibration-heading">尺子校准与诚实证据边界</h2>
+          <p class="section-sub">
+            先审计零大模型硬检的误杀，再审计双裁判的位置偏见与人机对齐缝隙，最后写清哪些结论当前还没有足够证据支撑。
+          </p>
+        </div>
+      </div>
+
+      <div class="calibration-split">
+        <div class="calibration-block">
+          <h3>L2 异构双裁判位置互换翻转率</h3>
+          <div id="judgeFlipBars">
+            <div class="flip-bar-row">
+              <div class="flip-bar-head"><span>Gemini 4 Neon（39 对）</span><span>位置翻转 3 次（7.7%）</span></div>
+              <div class="flip-track"><div class="flip-fill" style="width: 8%;"></div></div>
+            </div>
+            <div class="flip-bar-row">
+              <div class="flip-bar-head"><span>Grok 4.7（40 对）</span><span>位置翻转 13 次（32.5%）</span></div>
+              <div class="flip-track"><div class="flip-fill flip-fill-high" style="width: 33%;"></div></div>
+            </div>
+          </div>
+          <div class="callout-strip" id="crossJudgeCallout">
+            交叉一致性（39 对重叠）：含翻转总体一致率 71.8%（κ = 0.551），剔除位置翻转后 26 对共识样本一致率跃升至 100.0%（κ = 1.000）。
+          </div>
+        </div>
+
+        <div class="calibration-block">
+          <h3>L3 人工双盲标注（19 / 50 题）与 Anti-Tie 实证</h3>
+          <p class="calibration-note" id="l3StatusNote">
+            已完成 19 / 50 题双盲标注（选择分布 A=7，TIE=8，B=4）；前 19 题尚未进入间隔不小于 15 的隐藏重测区间，因此 Self-Kappa 明确标为 N/A。
+          </p>
+          <div class="table-frame">
+            <table class="data-table compact">
+              <thead>
+                <tr>
+                  <th scope="col">裁判</th>
+                  <th scope="col">总一致</th>
+                  <th scope="col">整体κ</th>
+                  <th scope="col">判平(8)</th>
+                  <th scope="col">胜负(11)</th>
+                  <th scope="col">Self-κ</th>
+                </tr>
+              </thead>
+              <tbody id="l3BreakdownBody">
+                <tr>
+                  <td data-label="裁判">Gemini 4 Neon</td>
+                  <td data-label="总一致">47.4%</td>
+                  <td data-label="整体κ">0.249</td>
+                  <td data-label="判平(8)">0/8</td>
+                  <td data-label="胜负(11)" class="num-strong">9/11（81.8%）</td>
+                  <td data-label="Self-κ" class="num-muted">N/A</td>
+                </tr>
+                <tr>
+                  <td data-label="裁判">Grok 4.7</td>
+                  <td data-label="总一致">36.8%</td>
+                  <td data-label="整体κ">0.189</td>
+                  <td data-label="判平(8)">0/8</td>
+                  <td data-label="胜负(11)" class="num-strong">7/11（63.6%）</td>
+                  <td data-label="Self-κ" class="num-muted">N/A</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="calibration-split">
+        <div class="calibration-block">
+          <h3>L1 真实语料误杀校准（v1 升级至 v2，零 API 成本）</h3>
+          <div class="table-frame">
+            <table class="data-table compact">
+              <thead>
+                <tr>
+                  <th scope="col">误杀类型</th>
+                  <th scope="col">真实语料样例</th>
+                  <th scope="col">v2 修复方案</th>
+                </tr>
+              </thead>
+              <tbody id="l1FixesBody">
+                <tr>
+                  <td data-label="误杀类型">量词词边界误匹配</td>
+                  <td data-label="真实语料样例">「蓝牙5.4支持双设备切换」被误切为「5.4支」</td>
+                  <td data-label="v2 修复方案">单位「支」增加负向先行断言</td>
+                </tr>
+                <tr>
+                  <td data-label="误杀类型">中文「一折」多义误杀</td>
+                  <td data-label="真实语料样例">「头梁一折塞进内胆包」被误判为「1折」折扣</td>
+                  <td data-label="v2 修复方案">仅搭配打、享、低至、全场等折扣词时触发</td>
+                </tr>
+                <tr>
+                  <td data-label="误杀类型">单数与兑换券换算</td>
+                  <td data-label="真实语料样例">「撕开1条抹茶粉」与「80抽召唤券」换算</td>
+                  <td data-label="v2 修复方案">豁免单数通用量词并支持同源单位换算</td>
+                </tr>
+                <tr>
+                  <td data-label="误杀类型">场景时长与产品规格混淆</td>
+                  <td data-label="真实语料样例">「戴3小时」「整理1小时会议录音」场景痛点</td>
+                  <td data-label="v2 修复方案">以 scenarioFacts 字段授权合理场景时长描述</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="calibration-block">
+          <h3>证据边界与限制说明</h3>
+          <ul class="boundary-list" id="boundariesList">
+            <li>评测集为 30 条商业 Brief MVP 样本，L2 抽样 40 对对比，其中 GLM 5.3 Flash 在 L2 仅出现 14 次，跨模型胜率排名为阶段性实证而非最终大样本结论。</li>
+            <li>单人双盲标注实际完成 19 / 50 题，0 / 10 题进入间隔不小于 15 的隐藏重测区间，因此不虚报 Intra-Rater Self-Kappa。</li>
+            <li>推理通过本地 OpenAI 兼容网关统一调度采样，成本字段按 2026-11-19 公开牌价表快照折算，非实际账单扣费。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block" id="badcases-section" aria-labelledby="badcases-heading">
+      <div class="section-head">
+        <div>
+          <h2 id="badcases-heading">真实 Bad Case 与校准案例浏览器</h2>
+          <p class="section-sub">
+            全部直接采自实测输出与双裁判判词，点击条目展开原文对比、拦截信号与运营结论。
+          </p>
+        </div>
+      </div>
+
+      <div class="pills-filter" id="badCaseFilters"></div>
+      <div class="badcases-list" id="badCasesList">
+        <details class="case-item" open>
+          <summary class="case-summary">
+            <div class="case-head-main">
+              <div class="case-tags">
+                <span class="badge badge-fail">合规尾注自爆</span>
+                <span class="badge badge-baseline">brief-002</span>
+                <span class="badge badge-baseline">deepseek-v4.1-flash</span>
+                <span class="badge badge-baseline">baseline</span>
+              </div>
+              <div class="case-title-line">deepseek-v4.1-flash 拒绝了违禁宣传，却在正文末尾附上“合规替换说明”反被拦截</div>
+            </div>
+            <span class="case-toggle-label">收起详情</span>
+          </summary>
+          <div class="case-detail">
+            <p class="snippet-context-note">说明：下方展示正文首段节选；本例触发拦截的违禁原词位于模型文末附加的审校说明中，具体命中原文见下方红字信号。</p>
+            <div class="snippet-box">模型在正文尾部附带自证清白的审校附注，原封不动重述了「7天根治黄褐斑」与「评论区扣1」违禁原词，导致自动发布流将其直接截停。</div>
+            <div class="takeaway-box">运营结论：自动化投放链路直连 API 输出时，审校尾注会把违禁原词发上线；Guarded 提示词通过禁止输出说明消除了此类泄漏。</div>
+          </div>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="colophon">
+    <div class="container colophon-inner">
+      <div class="colophon-meta">
+        <strong>adbench-zh</strong>
+        <span>纯静态数据看板（无后端、无跟踪脚本，源码仓库待整理公开）</span>
+      </div>
+      <span id="footerGeneratedAt">数据快照生成于 mvp30-v1</span>
+    </div>
+  </footer>
+
+  <div class="chart-tooltip" id="chartTooltip" hidden></div>
+
+  <script src="./app.js"></script>
+</body>
+</html>

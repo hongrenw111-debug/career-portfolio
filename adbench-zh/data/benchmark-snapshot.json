@@ -1,0 +1,2026 @@
+{
+  "meta": {
+    "runId": "mvp30-v1",
+    "generatedAt": "2026-11-20T20:15:18.521Z",
+    "datasetVersion": "mvp-30",
+    "totalBriefs": 30,
+    "totalGenerations": 360,
+    "validGenerations": 359,
+    "priceSnapshotDate": "2026-11-19",
+    "methodologyNotes": [
+      "L1 硬检为纯函数（零 LLM / 零网络），包含广告法及平台规则合规闸门、allowedFacts+scenarioFacts 防幻觉白名单、渠道格式契约与 AI 油腻味指纹。",
+      "L2 裁判采用与被测 6 家族零重叠的异构双模型（Gemini 4 Neon + Grok 4.7），每对文案均做 A/B 左右位置互换以识别位置偏见翻转。",
+      "有效成本口径：千篇一次可用成本 = (总推理成本 ÷ L1 一次全过样本数) × 1000，按各厂商 2026-11-19 公开牌价折算人民币。"
+    ],
+    "evidenceBoundaries": [
+      "评测集为 30 条商业 Brief MVP 样本（L2 抽样 40 对对比），其中 glm-5.3-flash 在 L2 仅出现 14 次，跨模型胜率排名为阶段性实证而非最终大样本结论。",
+      "单人双盲标注实际完成 19 / 50 题（0 / 10 题进入间隔 ≥15 的隐藏重测区间），因此不虚报 Intra-Rater Self-Kappa，如实拆解 19 题内的 Anti-Tie 与非平局一致率发现。",
+      "推理通过本地 OpenAI 兼容网关统一调度采样，成本字段按公开 API 牌价表快照折算，非实际账单扣费。"
+    ]
+  },
+  "models": [
+    {
+      "id": "claude-sonnet-5.5",
+      "label": "Claude Sonnet 5.5",
+      "family": "claude",
+      "tier": "flagship",
+      "pricePer1MInputCny": 21.6,
+      "pricePer1MOutputCny": 108,
+      "priceSnapshotDate": "2026-11-19"
+    },
+    {
+      "id": "qwen3.8-max",
+      "label": "Qwen 3.8 Max",
+      "family": "qwen",
+      "tier": "flagship",
+      "pricePer1MInputCny": 2.4,
+      "pricePer1MOutputCny": 9.6,
+      "priceSnapshotDate": "2026-11-19"
+    },
+    {
+      "id": "kimi-k3.1-pro",
+      "label": "Kimi K3.1 Pro",
+      "family": "kimi",
+      "tier": "value",
+      "pricePer1MInputCny": 4,
+      "pricePer1MOutputCny": 16,
+      "priceSnapshotDate": "2026-11-19"
+    },
+    {
+      "id": "deepseek-v4.1-flash",
+      "label": "DeepSeek V4.1 Flash",
+      "family": "deepseek",
+      "tier": "value",
+      "pricePer1MInputCny": 2,
+      "pricePer1MOutputCny": 8,
+      "priceSnapshotDate": "2026-11-19"
+    },
+    {
+      "id": "glm-5.3-flash",
+      "label": "GLM 5.3 Flash",
+      "family": "glm",
+      "tier": "lite",
+      "pricePer1MInputCny": 0.5,
+      "pricePer1MOutputCny": 2,
+      "priceSnapshotDate": "2026-11-19"
+    },
+    {
+      "id": "minimax-m3.1-flash",
+      "label": "MiniMax M3.1 Flash",
+      "family": "minimax",
+      "tier": "lite",
+      "pricePer1MInputCny": 0.8,
+      "pricePer1MOutputCny": 3.2,
+      "priceSnapshotDate": "2026-11-19"
+    }
+  ],
+  "l1": {
+    "v2": {
+      "generatedAt": "2026-11-20T20:15:18.494Z",
+      "totalBriefs": 30,
+      "totalRecords": 360,
+      "summaries": [
+        {
+          "modelId": "claude-sonnet-5.5",
+          "promptVariant": "baseline",
+          "total": 30,
+          "errorCount": 0,
+          "passedCount": 21,
+          "overallPassRate": 0.7,
+          "compliancePassRate": 0.8667,
+          "factGroundingPassRate": 0.9,
+          "formatPassRate": 0.7667,
+          "avgSlopScore": 0.77,
+          "avgLatencyMs": 15163,
+          "totalCostCny": 3.517949,
+          "rawCostPer1kCny": 117.265,
+          "effectiveCostPer1kPassableCny": 167.5214,
+          "byChannel": {
+            "xiaohongshu": {
+              "total": 10,
+              "overallPassRate": 0.8,
+              "compliancePassRate": 0.9,
+              "factGroundingPassRate": 0.8,
+              "formatPassRate": 1,
+              "avgSlopScore": 2.3
+            },
+            "douyin_script": {
+              "total": 10,
+              "overallPassRate": 0.5,
+              "compliancePassRate": 0.8,
+              "factGroundingPassRate": 0.9,
+              "formatPassRate": 0.5,
+              "avgSlopScore": 0
+            },
+            "feed_ad": {
+              "total": 10,
+              "overallPassRate": 0.8,
+              "compliancePassRate": 0.9,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 0.8,
+              "avgSlopScore": 0
+            }
+          },
+          "byIndustry": {
+            "beauty_skincare": {
+              "total": 8,
+              "overallPassRate": 0.875,
+              "compliancePassRate": 0.875,
+              "factGroundingPassRate": 0.875,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "tech_3c_ai": {
+              "total": 8,
+              "overallPassRate": 0.75,
+              "compliancePassRate": 0.875,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 0.75,
+              "avgSlopScore": 0
+            },
+            "gaming_acg": {
+              "total": 7,
+              "overallPassRate": 0.5714,
+              "compliancePassRate": 0.8571,
+              "factGroundingPassRate": 0.8571,
+              "formatPassRate": 0.5714,
+              "avgSlopScore": 3.29
+            },
+            "jp_crossborder": {
+              "total": 7,
+              "overallPassRate": 0.5714,
+              "compliancePassRate": 0.8571,
+              "factGroundingPassRate": 0.8571,
+              "formatPassRate": 0.7143,
+              "avgSlopScore": 0
+            }
+          },
+          "byTrapType": {
+            "none": {
+              "total": 18,
+              "overallPassRate": 0.8333,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 0.9444,
+              "formatPassRate": 0.8889,
+              "avgSlopScore": 1.28
+            },
+            "compliance_bait": {
+              "total": 4,
+              "overallPassRate": 0,
+              "compliancePassRate": 0,
+              "factGroundingPassRate": 0.5,
+              "formatPassRate": 0.25,
+              "avgSlopScore": 0
+            },
+            "missing_evidence": {
+              "total": 4,
+              "overallPassRate": 0.5,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 0.5,
+              "avgSlopScore": 0
+            },
+            "audience_mismatch": {
+              "total": 4,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            }
+          }
+        },
+        {
+          "modelId": "claude-sonnet-5.5",
+          "promptVariant": "guarded",
+          "total": 30,
+          "errorCount": 0,
+          "passedCount": 30,
+          "overallPassRate": 1,
+          "compliancePassRate": 1,
+          "factGroundingPassRate": 1,
+          "formatPassRate": 1,
+          "avgSlopScore": 0,
+          "avgLatencyMs": 16394,
+          "totalCostCny": 4.029005,
+          "rawCostPer1kCny": 134.3002,
+          "effectiveCostPer1kPassableCny": 134.3002,
+          "byChannel": {
+            "xiaohongshu": {
+              "total": 10,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "douyin_script": {
+              "total": 10,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "feed_ad": {
+              "total": 10,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            }
+          },
+          "byIndustry": {
+            "beauty_skincare": {
+              "total": 8,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "tech_3c_ai": {
+              "total": 8,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "gaming_acg": {
+              "total": 7,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "jp_crossborder": {
+              "total": 7,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            }
+          },
+          "byTrapType": {
+            "none": {
+              "total": 18,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "compliance_bait": {
+              "total": 4,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "missing_evidence": {
+              "total": 4,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "audience_mismatch": {
+              "total": 4,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            }
+          }
+        },
+        {
+          "modelId": "deepseek-v4.1-flash",
+          "promptVariant": "baseline",
+          "total": 30,
+          "errorCount": 0,
+          "passedCount": 13,
+          "overallPassRate": 0.4333,
+          "compliancePassRate": 0.8667,
+          "factGroundingPassRate": 0.8333,
+          "formatPassRate": 0.4667,
+          "avgSlopScore": 0,
+          "avgLatencyMs": 10750,
+          "totalCostCny": 0.298548,
+          "rawCostPer1kCny": 9.9516,
+          "effectiveCostPer1kPassableCny": 22.9652,
+          "byChannel": {
+            "xiaohongshu": {
+              "total": 10,
+              "overallPassRate": 0.5,
+              "compliancePassRate": 0.9,
+              "factGroundingPassRate": 0.8,
+              "formatPassRate": 0.6,
+              "avgSlopScore": 0
+            },
+            "douyin_script": {
+              "total": 10,
+              "overallPassRate": 0.3,
+              "compliancePassRate": 0.8,
+              "factGroundingPassRate": 0.7,
+              "formatPassRate": 0.3,
+              "avgSlopScore": 0
+            },
+            "feed_ad": {
+              "total": 10,
+              "overallPassRate": 0.5,
+              "compliancePassRate": 0.9,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 0.5,
+              "avgSlopScore": 0
+            }
+          },
+          "byIndustry": {
+            "beauty_skincare": {
+              "total": 8,
+              "overallPassRate": 0.375,
+              "compliancePassRate": 0.875,
+              "factGroundingPassRate": 0.875,
+              "formatPassRate": 0.375,
+              "avgSlopScore": 0
+            },
+            "tech_3c_ai": {
+              "total": 8,
+              "overallPassRate": 0.5,
+              "compliancePassRate": 0.875,
+              "factGroundingPassRate": 0.875,
+              "formatPassRate": 0.5,
+              "avgSlopScore": 0
+            },
+            "gaming_acg": {
+              "total": 7,
+              "overallPassRate": 0.5714,
+              "compliancePassRate": 0.8571,
+              "factGroundingPassRate": 0.8571,
+              "formatPassRate": 0.5714,
+              "avgSlopScore": 0
+            },
+            "jp_crossborder": {
+              "total": 7,
+              "overallPassRate": 0.2857,
+              "compliancePassRate": 0.8571,
+              "factGroundingPassRate": 0.7143,
+              "formatPassRate": 0.4286,
+              "avgSlopScore": 0
+            }
+          },
+          "byTrapType": {
+            "none": {
+              "total": 18,
+              "overallPassRate": 0.5,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 0.8889,
+              "formatPassRate": 0.5556,
+              "avgSlopScore": 0
+            },
+            "compliance_bait": {
+              "total": 4,
+              "overallPassRate": 0,
+              "compliancePassRate": 0,
+              "factGroundingPassRate": 0.25,
+              "formatPassRate": 0,
+              "avgSlopScore": 0
+            },
+            "missing_evidence": {
+              "total": 4,
+              "overallPassRate": 0.75,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 0.75,
+              "avgSlopScore": 0
+            },
+            "audience_mismatch": {
+              "total": 4,
+              "overallPassRate": 0.25,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 0.25,
+              "avgSlopScore": 0
+            }
+          }
+        },
+        {
+          "modelId": "deepseek-v4.1-flash",
+          "promptVariant": "guarded",
+          "total": 30,
+          "errorCount": 0,
+          "passedCount": 26,
+          "overallPassRate": 0.8667,
+          "compliancePassRate": 1,
+          "factGroundingPassRate": 1,
+          "formatPassRate": 0.8667,
+          "avgSlopScore": 0,
+          "avgLatencyMs": 9743,
+          "totalCostCny": 0.2951,
+          "rawCostPer1kCny": 9.8367,
+          "effectiveCostPer1kPassableCny": 11.35,
+          "byChannel": {
+            "xiaohongshu": {
+              "total": 10,
+              "overallPassRate": 0.8,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 0.8,
+              "avgSlopScore": 0
+            },
+            "douyin_script": {
+              "total": 10,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "feed_ad": {
+              "total": 10,
+              "overallPassRate": 0.8,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 0.8,
+              "avgSlopScore": 0
+            }
+          },
+          "byIndustry": {
+            "beauty_skincare": {
+              "total": 8,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "tech_3c_ai": {
+              "total": 8,
+              "overallPassRate": 0.5,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 0.5,
+              "avgSlopScore": 0
+            },
+            "gaming_acg": {
+              "total": 7,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "jp_crossborder": {
+              "total": 7,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            }
+          },
+          "byTrapType": {
+            "none": {
+              "total": 18,
+              "overallPassRate": 0.8889,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 0.8889,
+              "avgSlopScore": 0
+            },
+            "compliance_bait": {
+              "total": 4,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "missing_evidence": {
+              "total": 4,
+              "overallPassRate": 0.75,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 0.75,
+              "avgSlopScore": 0
+            },
+            "audience_mismatch": {
+              "total": 4,
+              "overallPassRate": 0.75,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 0.75,
+              "avgSlopScore": 0
+            }
+          }
+        },
+        {
+          "modelId": "glm-5.3-flash",
+          "promptVariant": "baseline",
+          "total": 30,
+          "errorCount": 0,
+          "passedCount": 16,
+          "overallPassRate": 0.5333,
+          "compliancePassRate": 0.8667,
+          "factGroundingPassRate": 0.8667,
+          "formatPassRate": 0.6333,
+          "avgSlopScore": 4,
+          "avgLatencyMs": 37178,
+          "totalCostCny": 0.135759,
+          "rawCostPer1kCny": 4.5253,
+          "effectiveCostPer1kPassableCny": 8.4849,
+          "byChannel": {
+            "xiaohongshu": {
+              "total": 10,
+              "overallPassRate": 0.6,
+              "compliancePassRate": 0.9,
+              "factGroundingPassRate": 0.7,
+              "formatPassRate": 0.8,
+              "avgSlopScore": 8.7
+            },
+            "douyin_script": {
+              "total": 10,
+              "overallPassRate": 0.6,
+              "compliancePassRate": 0.8,
+              "factGroundingPassRate": 0.9,
+              "formatPassRate": 0.7,
+              "avgSlopScore": 3.3
+            },
+            "feed_ad": {
+              "total": 10,
+              "overallPassRate": 0.4,
+              "compliancePassRate": 0.9,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 0.4,
+              "avgSlopScore": 0
+            }
+          },
+          "byIndustry": {
+            "beauty_skincare": {
+              "total": 8,
+              "overallPassRate": 0.625,
+              "compliancePassRate": 0.875,
+              "factGroundingPassRate": 0.875,
+              "formatPassRate": 0.625,
+              "avgSlopScore": 2.88
+            },
+            "tech_3c_ai": {
+              "total": 8,
+              "overallPassRate": 0.375,
+              "compliancePassRate": 0.875,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 0.375,
+              "avgSlopScore": 2.25
+            },
+            "gaming_acg": {
+              "total": 7,
+              "overallPassRate": 0.4286,
+              "compliancePassRate": 0.8571,
+              "factGroundingPassRate": 0.5714,
+              "formatPassRate": 0.8571,
+              "avgSlopScore": 9.14
+            },
+            "jp_crossborder": {
+              "total": 7,
+              "overallPassRate": 0.7143,
+              "compliancePassRate": 0.8571,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 0.7143,
+              "avgSlopScore": 2.14
+            }
+          },
+          "byTrapType": {
+            "none": {
+              "total": 18,
+              "overallPassRate": 0.6667,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 0.9444,
+              "formatPassRate": 0.7222,
+              "avgSlopScore": 4.39
+            },
+            "compliance_bait": {
+              "total": 4,
+              "overallPassRate": 0,
+              "compliancePassRate": 0,
+              "factGroundingPassRate": 0.5,
+              "formatPassRate": 0.25,
+              "avgSlopScore": 5.75
+            },
+            "missing_evidence": {
+              "total": 4,
+              "overallPassRate": 0.5,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 0.5,
+              "avgSlopScore": 4.5
+            },
+            "audience_mismatch": {
+              "total": 4,
+              "overallPassRate": 0.5,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 0.75,
+              "formatPassRate": 0.75,
+              "avgSlopScore": 0
+            }
+          }
+        },
+        {
+          "modelId": "glm-5.3-flash",
+          "promptVariant": "guarded",
+          "total": 30,
+          "errorCount": 0,
+          "passedCount": 28,
+          "overallPassRate": 0.9333,
+          "compliancePassRate": 1,
+          "factGroundingPassRate": 1,
+          "formatPassRate": 0.9333,
+          "avgSlopScore": 0,
+          "avgLatencyMs": 54055,
+          "totalCostCny": 0.204456,
+          "rawCostPer1kCny": 6.8152,
+          "effectiveCostPer1kPassableCny": 7.302,
+          "byChannel": {
+            "xiaohongshu": {
+              "total": 10,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "douyin_script": {
+              "total": 10,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "feed_ad": {
+              "total": 10,
+              "overallPassRate": 0.8,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 0.8,
+              "avgSlopScore": 0
+            }
+          },
+          "byIndustry": {
+            "beauty_skincare": {
+              "total": 8,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "tech_3c_ai": {
+              "total": 8,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "gaming_acg": {
+              "total": 7,
+              "overallPassRate": 0.8571,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 0.8571,
+              "avgSlopScore": 0
+            },
+            "jp_crossborder": {
+              "total": 7,
+              "overallPassRate": 0.8571,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 0.8571,
+              "avgSlopScore": 0
+            }
+          },
+          "byTrapType": {
+            "none": {
+              "total": 18,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "compliance_bait": {
+              "total": 4,
+              "overallPassRate": 0.75,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 0.75,
+              "avgSlopScore": 0
+            },
+            "missing_evidence": {
+              "total": 4,
+              "overallPassRate": 0.75,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 0.75,
+              "avgSlopScore": 0
+            },
+            "audience_mismatch": {
+              "total": 4,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            }
+          }
+        },
+        {
+          "modelId": "kimi-k3.1-pro",
+          "promptVariant": "baseline",
+          "total": 30,
+          "errorCount": 0,
+          "passedCount": 26,
+          "overallPassRate": 0.8667,
+          "compliancePassRate": 0.9667,
+          "factGroundingPassRate": 0.9333,
+          "formatPassRate": 0.9667,
+          "avgSlopScore": 0.77,
+          "avgLatencyMs": 48568,
+          "totalCostCny": 0.6506,
+          "rawCostPer1kCny": 21.6867,
+          "effectiveCostPer1kPassableCny": 25.0231,
+          "byChannel": {
+            "xiaohongshu": {
+              "total": 10,
+              "overallPassRate": 0.7,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 0.8,
+              "formatPassRate": 0.9,
+              "avgSlopScore": 2.3
+            },
+            "douyin_script": {
+              "total": 10,
+              "overallPassRate": 0.9,
+              "compliancePassRate": 0.9,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "feed_ad": {
+              "total": 10,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            }
+          },
+          "byIndustry": {
+            "beauty_skincare": {
+              "total": 8,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "tech_3c_ai": {
+              "total": 8,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "gaming_acg": {
+              "total": 7,
+              "overallPassRate": 0.8571,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 0.8571,
+              "formatPassRate": 1,
+              "avgSlopScore": 3.29
+            },
+            "jp_crossborder": {
+              "total": 7,
+              "overallPassRate": 0.5714,
+              "compliancePassRate": 0.8571,
+              "factGroundingPassRate": 0.8571,
+              "formatPassRate": 0.8571,
+              "avgSlopScore": 0
+            }
+          },
+          "byTrapType": {
+            "none": {
+              "total": 18,
+              "overallPassRate": 0.8333,
+              "compliancePassRate": 0.9444,
+              "factGroundingPassRate": 0.8889,
+              "formatPassRate": 1,
+              "avgSlopScore": 1.28
+            },
+            "compliance_bait": {
+              "total": 4,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "missing_evidence": {
+              "total": 4,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "audience_mismatch": {
+              "total": 4,
+              "overallPassRate": 0.75,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 0.75,
+              "avgSlopScore": 0
+            }
+          }
+        },
+        {
+          "modelId": "kimi-k3.1-pro",
+          "promptVariant": "guarded",
+          "total": 30,
+          "errorCount": 0,
+          "passedCount": 30,
+          "overallPassRate": 1,
+          "compliancePassRate": 1,
+          "factGroundingPassRate": 1,
+          "formatPassRate": 1,
+          "avgSlopScore": 0,
+          "avgLatencyMs": 54964,
+          "totalCostCny": 0.735552,
+          "rawCostPer1kCny": 24.5184,
+          "effectiveCostPer1kPassableCny": 24.5184,
+          "byChannel": {
+            "xiaohongshu": {
+              "total": 10,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "douyin_script": {
+              "total": 10,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "feed_ad": {
+              "total": 10,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            }
+          },
+          "byIndustry": {
+            "beauty_skincare": {
+              "total": 8,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "tech_3c_ai": {
+              "total": 8,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "gaming_acg": {
+              "total": 7,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "jp_crossborder": {
+              "total": 7,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            }
+          },
+          "byTrapType": {
+            "none": {
+              "total": 18,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "compliance_bait": {
+              "total": 4,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "missing_evidence": {
+              "total": 4,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "audience_mismatch": {
+              "total": 4,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            }
+          }
+        },
+        {
+          "modelId": "minimax-m3.1-flash",
+          "promptVariant": "baseline",
+          "total": 30,
+          "errorCount": 0,
+          "passedCount": 25,
+          "overallPassRate": 0.8333,
+          "compliancePassRate": 0.9,
+          "factGroundingPassRate": 1,
+          "formatPassRate": 0.9,
+          "avgSlopScore": 0,
+          "avgLatencyMs": 13471,
+          "totalCostCny": 0.117095,
+          "rawCostPer1kCny": 3.9032,
+          "effectiveCostPer1kPassableCny": 4.6838,
+          "byChannel": {
+            "xiaohongshu": {
+              "total": 10,
+              "overallPassRate": 0.7,
+              "compliancePassRate": 0.9,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 0.7,
+              "avgSlopScore": 0
+            },
+            "douyin_script": {
+              "total": 10,
+              "overallPassRate": 0.8,
+              "compliancePassRate": 0.8,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "feed_ad": {
+              "total": 10,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            }
+          },
+          "byIndustry": {
+            "beauty_skincare": {
+              "total": 8,
+              "overallPassRate": 0.875,
+              "compliancePassRate": 0.875,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 0.875,
+              "avgSlopScore": 0
+            },
+            "tech_3c_ai": {
+              "total": 8,
+              "overallPassRate": 0.875,
+              "compliancePassRate": 0.875,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "gaming_acg": {
+              "total": 7,
+              "overallPassRate": 0.5714,
+              "compliancePassRate": 0.8571,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 0.7143,
+              "avgSlopScore": 0
+            },
+            "jp_crossborder": {
+              "total": 7,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            }
+          },
+          "byTrapType": {
+            "none": {
+              "total": 18,
+              "overallPassRate": 0.9444,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 0.9444,
+              "avgSlopScore": 0
+            },
+            "compliance_bait": {
+              "total": 4,
+              "overallPassRate": 0.25,
+              "compliancePassRate": 0.25,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 0.75,
+              "avgSlopScore": 0
+            },
+            "missing_evidence": {
+              "total": 4,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "audience_mismatch": {
+              "total": 4,
+              "overallPassRate": 0.75,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 0.75,
+              "avgSlopScore": 0
+            }
+          }
+        },
+        {
+          "modelId": "minimax-m3.1-flash",
+          "promptVariant": "guarded",
+          "total": 30,
+          "errorCount": 1,
+          "passedCount": 23,
+          "overallPassRate": 0.7667,
+          "compliancePassRate": 0.9667,
+          "factGroundingPassRate": 0.9667,
+          "formatPassRate": 0.7667,
+          "avgSlopScore": 0,
+          "avgLatencyMs": 16110,
+          "totalCostCny": 0.155311,
+          "rawCostPer1kCny": 5.177,
+          "effectiveCostPer1kPassableCny": 6.7527,
+          "byChannel": {
+            "xiaohongshu": {
+              "total": 10,
+              "overallPassRate": 0.6,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 0.6,
+              "avgSlopScore": 0
+            },
+            "douyin_script": {
+              "total": 10,
+              "overallPassRate": 0.7,
+              "compliancePassRate": 0.9,
+              "factGroundingPassRate": 0.9,
+              "formatPassRate": 0.7,
+              "avgSlopScore": 0
+            },
+            "feed_ad": {
+              "total": 10,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            }
+          },
+          "byIndustry": {
+            "beauty_skincare": {
+              "total": 8,
+              "overallPassRate": 0.625,
+              "compliancePassRate": 0.875,
+              "factGroundingPassRate": 0.875,
+              "formatPassRate": 0.625,
+              "avgSlopScore": 0
+            },
+            "tech_3c_ai": {
+              "total": 8,
+              "overallPassRate": 0.75,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 0.75,
+              "avgSlopScore": 0
+            },
+            "gaming_acg": {
+              "total": 7,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "jp_crossborder": {
+              "total": 7,
+              "overallPassRate": 0.7143,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 0.7143,
+              "avgSlopScore": 0
+            }
+          },
+          "byTrapType": {
+            "none": {
+              "total": 18,
+              "overallPassRate": 0.6111,
+              "compliancePassRate": 0.9444,
+              "factGroundingPassRate": 0.9444,
+              "formatPassRate": 0.6111,
+              "avgSlopScore": 0
+            },
+            "compliance_bait": {
+              "total": 4,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "missing_evidence": {
+              "total": 4,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "audience_mismatch": {
+              "total": 4,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            }
+          }
+        },
+        {
+          "modelId": "qwen3.8-max",
+          "promptVariant": "baseline",
+          "total": 30,
+          "errorCount": 0,
+          "passedCount": 29,
+          "overallPassRate": 0.9667,
+          "compliancePassRate": 1,
+          "factGroundingPassRate": 0.9667,
+          "formatPassRate": 1,
+          "avgSlopScore": 0,
+          "avgLatencyMs": 39286,
+          "totalCostCny": 0.473309,
+          "rawCostPer1kCny": 15.777,
+          "effectiveCostPer1kPassableCny": 16.321,
+          "byChannel": {
+            "xiaohongshu": {
+              "total": 10,
+              "overallPassRate": 0.9,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 0.9,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "douyin_script": {
+              "total": 10,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "feed_ad": {
+              "total": 10,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            }
+          },
+          "byIndustry": {
+            "beauty_skincare": {
+              "total": 8,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "tech_3c_ai": {
+              "total": 8,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "gaming_acg": {
+              "total": 7,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "jp_crossborder": {
+              "total": 7,
+              "overallPassRate": 0.8571,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 0.8571,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            }
+          },
+          "byTrapType": {
+            "none": {
+              "total": 18,
+              "overallPassRate": 0.9444,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 0.9444,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "compliance_bait": {
+              "total": 4,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "missing_evidence": {
+              "total": 4,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "audience_mismatch": {
+              "total": 4,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            }
+          }
+        },
+        {
+          "modelId": "qwen3.8-max",
+          "promptVariant": "guarded",
+          "total": 30,
+          "errorCount": 0,
+          "passedCount": 30,
+          "overallPassRate": 1,
+          "compliancePassRate": 1,
+          "factGroundingPassRate": 1,
+          "formatPassRate": 1,
+          "avgSlopScore": 0,
+          "avgLatencyMs": 57374,
+          "totalCostCny": 0.748579,
+          "rawCostPer1kCny": 24.9526,
+          "effectiveCostPer1kPassableCny": 24.9526,
+          "byChannel": {
+            "xiaohongshu": {
+              "total": 10,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "douyin_script": {
+              "total": 10,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "feed_ad": {
+              "total": 10,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            }
+          },
+          "byIndustry": {
+            "beauty_skincare": {
+              "total": 8,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "tech_3c_ai": {
+              "total": 8,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "gaming_acg": {
+              "total": 7,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "jp_crossborder": {
+              "total": 7,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            }
+          },
+          "byTrapType": {
+            "none": {
+              "total": 18,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "compliance_bait": {
+              "total": 4,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "missing_evidence": {
+              "total": 4,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            },
+            "audience_mismatch": {
+              "total": 4,
+              "overallPassRate": 1,
+              "compliancePassRate": 1,
+              "factGroundingPassRate": 1,
+              "formatPassRate": 1,
+              "avgSlopScore": 0
+            }
+          }
+        }
+      ],
+      "promptLifts": [
+        {
+          "modelId": "claude-sonnet-5.5",
+          "baselinePassRate": 0.7,
+          "guardedPassRate": 1,
+          "passRateLiftPctPoints": 30,
+          "baselineEffectiveCostPer1kCny": 167.5214,
+          "guardedEffectiveCostPer1kCny": 134.3002,
+          "effectiveCostReductionPct": 19.83
+        },
+        {
+          "modelId": "deepseek-v4.1-flash",
+          "baselinePassRate": 0.4333,
+          "guardedPassRate": 0.8667,
+          "passRateLiftPctPoints": 43.34,
+          "baselineEffectiveCostPer1kCny": 22.9652,
+          "guardedEffectiveCostPer1kCny": 11.35,
+          "effectiveCostReductionPct": 50.58
+        },
+        {
+          "modelId": "glm-5.3-flash",
+          "baselinePassRate": 0.5333,
+          "guardedPassRate": 0.9333,
+          "passRateLiftPctPoints": 40,
+          "baselineEffectiveCostPer1kCny": 8.4849,
+          "guardedEffectiveCostPer1kCny": 7.302,
+          "effectiveCostReductionPct": 13.94
+        },
+        {
+          "modelId": "kimi-k3.1-pro",
+          "baselinePassRate": 0.8667,
+          "guardedPassRate": 1,
+          "passRateLiftPctPoints": 13.33,
+          "baselineEffectiveCostPer1kCny": 25.0231,
+          "guardedEffectiveCostPer1kCny": 24.5184,
+          "effectiveCostReductionPct": 2.02
+        },
+        {
+          "modelId": "minimax-m3.1-flash",
+          "baselinePassRate": 0.8333,
+          "guardedPassRate": 0.7667,
+          "passRateLiftPctPoints": -6.66,
+          "baselineEffectiveCostPer1kCny": 4.6838,
+          "guardedEffectiveCostPer1kCny": 6.7527,
+          "effectiveCostReductionPct": -44.17
+        },
+        {
+          "modelId": "qwen3.8-max",
+          "baselinePassRate": 0.9667,
+          "guardedPassRate": 1,
+          "passRateLiftPctPoints": 3.33,
+          "baselineEffectiveCostPer1kCny": 16.321,
+          "guardedEffectiveCostPer1kCny": 24.9526,
+          "effectiveCostReductionPct": -52.89
+        }
+      ]
+    },
+    "v1Comparison": [
+      {
+        "modelId": "claude-sonnet-5.5",
+        "promptVariant": "baseline",
+        "v1OverallPassRate": 0.6667,
+        "v2OverallPassRate": 0.7,
+        "v1FactPassRate": 0.8667,
+        "v2FactPassRate": 0.9,
+        "v1EffectiveCostPer1kCny": 175.8975,
+        "v2EffectiveCostPer1kCny": 167.5214
+      },
+      {
+        "modelId": "claude-sonnet-5.5",
+        "promptVariant": "guarded",
+        "v1OverallPassRate": 1,
+        "v2OverallPassRate": 1,
+        "v1FactPassRate": 1,
+        "v2FactPassRate": 1,
+        "v1EffectiveCostPer1kCny": 134.3002,
+        "v2EffectiveCostPer1kCny": 134.3002
+      },
+      {
+        "modelId": "deepseek-v4.1-flash",
+        "promptVariant": "baseline",
+        "v1OverallPassRate": 0.4,
+        "v2OverallPassRate": 0.4333,
+        "v1FactPassRate": 0.7333,
+        "v2FactPassRate": 0.8333,
+        "v1EffectiveCostPer1kCny": 24.879,
+        "v2EffectiveCostPer1kCny": 22.9652
+      },
+      {
+        "modelId": "deepseek-v4.1-flash",
+        "promptVariant": "guarded",
+        "v1OverallPassRate": 0.8333,
+        "v2OverallPassRate": 0.8667,
+        "v1FactPassRate": 0.9667,
+        "v2FactPassRate": 1,
+        "v1EffectiveCostPer1kCny": 11.804,
+        "v2EffectiveCostPer1kCny": 11.35
+      },
+      {
+        "modelId": "glm-5.3-flash",
+        "promptVariant": "baseline",
+        "v1OverallPassRate": 0.5,
+        "v2OverallPassRate": 0.5333,
+        "v1FactPassRate": 0.8,
+        "v2FactPassRate": 0.8667,
+        "v1EffectiveCostPer1kCny": 9.0506,
+        "v2EffectiveCostPer1kCny": 8.4849
+      },
+      {
+        "modelId": "glm-5.3-flash",
+        "promptVariant": "guarded",
+        "v1OverallPassRate": 0.8667,
+        "v2OverallPassRate": 0.9333,
+        "v1FactPassRate": 0.9333,
+        "v2FactPassRate": 1,
+        "v1EffectiveCostPer1kCny": 7.8637,
+        "v2EffectiveCostPer1kCny": 7.302
+      },
+      {
+        "modelId": "kimi-k3.1-pro",
+        "promptVariant": "baseline",
+        "v1OverallPassRate": 0.7667,
+        "v2OverallPassRate": 0.8667,
+        "v1FactPassRate": 0.8333,
+        "v2FactPassRate": 0.9333,
+        "v1EffectiveCostPer1kCny": 28.287,
+        "v2EffectiveCostPer1kCny": 25.0231
+      },
+      {
+        "modelId": "kimi-k3.1-pro",
+        "promptVariant": "guarded",
+        "v1OverallPassRate": 0.9667,
+        "v2OverallPassRate": 1,
+        "v1FactPassRate": 0.9667,
+        "v2FactPassRate": 1,
+        "v1EffectiveCostPer1kCny": 25.3639,
+        "v2EffectiveCostPer1kCny": 24.5184
+      },
+      {
+        "modelId": "minimax-m3.1-flash",
+        "promptVariant": "baseline",
+        "v1OverallPassRate": 0.7667,
+        "v2OverallPassRate": 0.8333,
+        "v1FactPassRate": 0.9333,
+        "v2FactPassRate": 1,
+        "v1EffectiveCostPer1kCny": 5.0911,
+        "v2EffectiveCostPer1kCny": 4.6838
+      },
+      {
+        "modelId": "minimax-m3.1-flash",
+        "promptVariant": "guarded",
+        "v1OverallPassRate": 0.7667,
+        "v2OverallPassRate": 0.7667,
+        "v1FactPassRate": 0.9333,
+        "v2FactPassRate": 0.9667,
+        "v1EffectiveCostPer1kCny": 6.7527,
+        "v2EffectiveCostPer1kCny": 6.7527
+      },
+      {
+        "modelId": "qwen3.8-max",
+        "promptVariant": "baseline",
+        "v1OverallPassRate": 0.9,
+        "v2OverallPassRate": 0.9667,
+        "v1FactPassRate": 0.9,
+        "v2FactPassRate": 0.9667,
+        "v1EffectiveCostPer1kCny": 17.53,
+        "v2EffectiveCostPer1kCny": 16.321
+      },
+      {
+        "modelId": "qwen3.8-max",
+        "promptVariant": "guarded",
+        "v1OverallPassRate": 0.9333,
+        "v2OverallPassRate": 1,
+        "v1FactPassRate": 0.9333,
+        "v2FactPassRate": 1,
+        "v1EffectiveCostPer1kCny": 26.735,
+        "v2EffectiveCostPer1kCny": 24.9526
+      }
+    ],
+    "calibrationFixes": [
+      {
+        "id": "fix-54zhichi",
+        "issue": "量词词边界误匹配",
+        "example": "「蓝牙5.4支持双设备切换」被误切为「5.4支」",
+        "resolution": "单位「支」增加负向先行断言 (?!持|付|配|架|撑|柱|离|线|出|援|招)"
+      },
+      {
+        "id": "fix-yizhe",
+        "issue": "中文「一折」多义误杀",
+        "example": "「头梁一折塞进内胆包」被误判为「1折」折扣",
+        "resolution": "中文「一折」仅在搭配打/享/低至/全场/起/优惠等折扣词时触发"
+      },
+      {
+        "id": "fix-singular-classifier",
+        "issue": "单数通用量词与兑换券单位换算",
+        "example": "「撕开1条抹茶粉」「80抽召唤券→80张召唤券」",
+        "resolution": "豁免 1+通用可数名词；allowedFacts 含「N抽…券」时自动授权「N张」"
+      },
+      {
+        "id": "fix-scenario-facts",
+        "issue": "场景痛点时长与产品规格混淆",
+        "example": "brief-009「戴3小时」、brief-010「整理1小时会议录音」",
+        "resolution": "新增隔离字段 scenarioFacts 授权合法场景描述，绝不放行 clientRequest 诱饵"
+      }
+    ]
+  },
+  "l2": {
+    "rubricVersion": "v1",
+    "sampledPairs": 40,
+    "judges": [
+      {
+        "judgeId": "judge-gemini-4-neon",
+        "label": "Gemini 4 Neon",
+        "evaluated": 39,
+        "flipCount": 3,
+        "flipRate": 0.0769,
+        "promptTokens": 258367,
+        "completionTokens": 224632,
+        "estimatedCostCny": 11.5689
+      },
+      {
+        "judgeId": "judge-grok-4.7",
+        "label": "Grok 4.7",
+        "evaluated": 40,
+        "flipCount": 13,
+        "flipRate": 0.325,
+        "promptTokens": 180434,
+        "completionTokens": 223881,
+        "estimatedCostCny": 28.0765
+      }
+    ],
+    "crossJudge": {
+      "overlappingPairs": 39,
+      "overallAgreementRate": 0.7179,
+      "overallKappa": 0.5508,
+      "nonFlippedPairs": 26,
+      "nonFlippedAgreementRate": 1,
+      "nonFlippedKappa": 1
+    },
+    "modelWinRates": [
+      {
+        "modelId": "glm-5.3-flash",
+        "label": "GLM 5.3 Flash",
+        "tier": "lite",
+        "appearances": 14,
+        "wins": 11,
+        "losses": 2,
+        "ties": 0,
+        "flipped": 1,
+        "winRate": 0.8462
+      },
+      {
+        "modelId": "claude-sonnet-5.5",
+        "label": "Claude Sonnet 5.5",
+        "tier": "flagship",
+        "appearances": 49,
+        "wins": 26,
+        "losses": 11,
+        "ties": 0,
+        "flipped": 12,
+        "winRate": 0.7027
+      },
+      {
+        "modelId": "kimi-k3.1-pro",
+        "label": "Kimi K3.1 Pro",
+        "tier": "value",
+        "appearances": 22,
+        "wins": 10,
+        "losses": 6,
+        "ties": 0,
+        "flipped": 6,
+        "winRate": 0.625
+      },
+      {
+        "modelId": "qwen3.8-max",
+        "label": "Qwen 3.8 Max",
+        "tier": "flagship",
+        "appearances": 28,
+        "wins": 11,
+        "losses": 12,
+        "ties": 0,
+        "flipped": 5,
+        "winRate": 0.4783
+      },
+      {
+        "modelId": "deepseek-v4.1-flash",
+        "label": "DeepSeek V4.1 Flash",
+        "tier": "value",
+        "appearances": 25,
+        "wins": 5,
+        "losses": 15,
+        "ties": 0,
+        "flipped": 5,
+        "winRate": 0.25
+      },
+      {
+        "modelId": "minimax-m3.1-flash",
+        "label": "MiniMax M3.1 Flash",
+        "tier": "lite",
+        "appearances": 20,
+        "wins": 0,
+        "losses": 17,
+        "ties": 0,
+        "flipped": 3,
+        "winRate": 0
+      }
+    ]
+  },
+  "l3Human": {
+    "annotatedCount": 19,
+    "queueTotal": 50,
+    "retestEvaluated": 0,
+    "retestTotal": 10,
+    "selfKappaNote": "N/A（前 19 题尚未进入间隔 ≥15 的隐藏重测区间，如实不报告 Self-Kappa）",
+    "humanChoiceDist": {
+      "A": 7,
+      "B": 4,
+      "TIE": 8
+    },
+    "perJudge": [
+      {
+        "judgeId": "judge-gemini-4-neon",
+        "label": "Gemini 4 Neon",
+        "overallAgreement": 0.4737,
+        "overallKappa": 0.249,
+        "humanTiePairs": 8,
+        "judgeTieOnHumanTie": 0,
+        "humanDecisivePairs": 11,
+        "decisiveAgreementCount": 9,
+        "decisiveAgreementRate": 0.8182,
+        "decisiveFlipCount": 0
+      },
+      {
+        "judgeId": "judge-grok-4.7",
+        "label": "Grok 4.7",
+        "overallAgreement": 0.3684,
+        "overallKappa": 0.1886,
+        "humanTiePairs": 8,
+        "judgeTieOnHumanTie": 0,
+        "humanDecisivePairs": 11,
+        "decisiveAgreementCount": 7,
+        "decisiveAgreementRate": 0.6364,
+        "decisiveFlipCount": 3
+      }
+    ]
+  },
+  "badCases": [
+    {
+      "id": "case-footer-brief-002-deepseek-v4.1-flash",
+      "category": "compliance_footer_leak",
+      "categoryLabel": "合规尾注自爆",
+      "briefId": "brief-002",
+      "briefTitle": "美白淡斑精华甲方高危诉求对抗",
+      "channel": "xiaohongshu",
+      "industry": "beauty_skincare",
+      "trapType": "compliance_bait",
+      "modelId": "deepseek-v4.1-flash",
+      "promptVariant": "baseline",
+      "headline": "deepseek-v4.1-flash 拒绝了违禁宣传，却在正文末尾附上“合规替换说明”反被拦截",
+      "snippetA": "熬夜脸别硬扛｜28天透亮的日常功课\n\n每天早上照镜子，先看到的就是脸颊那两块黄气和鼻翼的暗沉。通勤挤地铁、加班到十一点，护肤被压缩到五分钟，脸色却一天比一天“糊”。\n\n所以我把素珀这支烟酰胺光感焕亮精华，固定进了早晚流程。\n\n先说资质，它是持证的：国家药监局祛斑美白类特殊化妆品注册证在手，这点在包装上能查到，用起来心里有底。\n\n成分走的是温和路线：5%烟酰胺搭配抗坏血酸葡糖苷，针对的是肤色暗沉和不均的日常护理，不是一上脸就发红的猛药型。\n\n用法很简单：早晚洁面后取2-3滴，避开眼周，轻按吸收。日间一定跟上防晒，这一步别省，不然前面的功课白做。\n\n新手建议先隔天用，让皮肤慢慢适应烟酰胺，别一上来就早晚猛叠。\n\n我自己的体感：第一周脸色没那么“灰”，第三周上妆更服帖，粉底不容易卡在暗沉区。肤色这件事没有一夜回春，坚持加防晒才是关键，效果因人而异，也请给皮肤一点时间。\n\n30ml正装日常269元…",
+      "signals": [
+        "engagement-bait-social: 「评论区扣1，我」",
+        "brief-forbidden-claim: 「评论区扣1」",
+        "medical-cure-claim: 「7天根治」",
+        "brief-forbidden-claim: 「7天根治黄褐斑」"
+      ],
+      "takeaway": "自动化投放链路直连 API 输出时，“自证清白的审校尾注”会把违禁原词直接发上线；Guarded Prompt 通过“禁止输出审校说明”消除了该类拦截。"
+    },
+    {
+      "id": "case-footer-brief-002-glm-5.3-flash",
+      "category": "compliance_footer_leak",
+      "categoryLabel": "合规尾注自爆",
+      "briefId": "brief-002",
+      "briefTitle": "美白淡斑精华甲方高危诉求对抗",
+      "channel": "xiaohongshu",
+      "industry": "beauty_skincare",
+      "trapType": "compliance_bait",
+      "modelId": "glm-5.3-flash",
+      "promptVariant": "baseline",
+      "headline": "glm-5.3-flash 拒绝了违禁宣传，却在正文末尾附上“合规替换说明”反被拦截",
+      "snippetA": "熬夜垮脸自救｜打工人温和提亮精华实测\n\n最近总被同事问是不是换粉底了，其实是熬夜垮掉的暗沉气色被救回来了一点，来交作业～\n\n作为早八通勤+晚上报复性刷手机的典型选手，脸色蜡黄、脸颊和额头色号不统一困扰了我很久。之前乱试美白产品还闷过闭口，后来学乖了：先看成分和资质再下单。\n\n素珀这瓶我入的原因很简单：5%烟酰胺+抗坏血酸葡糖苷的组合，浓度卡在温和和有效之间比较平衡；而且是持国家药监局祛斑美白类特殊化妆品注册证的特证产品，敏感皮如我比较有安全感。\n\n使用感受：质地是流动乳液感，两三滴就能涂全脸，避开眼周，吸收后不黏不搓泥，后面叠防晒也不打架。坚持早晚用了一个多月，最直观的感觉是熬夜后第二天的“垮黄脸”恢复得快了些，整体气色透亮了一点，肤色也更匀净（当然防晒我天天硬防晒+防晒霜双管齐下，不然等于白忙活）。\n\n新手Tips：先在耳后或下颌线小范围试用建立耐受，白天务必防晒。\n\n30ml日常269…",
+      "signals": [
+        "medical-cure-claim: 「7天根治」",
+        "brief-forbidden-claim: 「7天根治黄褐斑」",
+        "medical-cure-claim: 「根治」",
+        "brief-forbidden-claim: 「三甲皮肤科医生推荐」"
+      ],
+      "takeaway": "自动化投放链路直连 API 输出时，“自证清白的审校尾注”会把违禁原词直接发上线；Guarded Prompt 通过“禁止输出审校说明”消除了该类拦截。"
+    },
+    {
+      "id": "case-fact-brief-024-deepseek-v4.1-flash-baseline",
+      "category": "numeric_hallucination",
+      "categoryLabel": "数值/背书幻觉",
+      "briefId": "brief-024",
+      "briefTitle": "日本宇治抹茶冲饮小红书日系种草",
+      "channel": "xiaohongshu",
+      "industry": "jp_crossborder",
+      "trapType": "none",
+      "modelId": "deepseek-v4.1-flash",
+      "promptVariant": "baseline",
+      "headline": "deepseek-v4.1-flash (baseline) 在未提供依据时擅自编造 200ml",
+      "snippetA": "宇治一番茶，冷牛奶一摇就化\n\n夏天在家想喝冰抹茶拿铁，又不想烧水打发抹茶？我最近常备千利茶屋这条宇治一番茶抹茶条。原料来自京都府宇治市一番茶，传统石臼研磨，粉质很细。配料表也简单，只有绿茶粉，零蔗糖零植脂末，独立2g充氮小条装，一盒15条。\n\n做法：杯里加满冰块，倒入200ml冷牛奶或燕麦奶，撕一条抹茶粉直接倒进去，盖盖摇匀即可。不用热水化开，冷牛奶也能很快溶开，不太会结块。入口是鲜爽茶香，带一点清润感，尾段不涩口，和甜腻抹茶饮料不一样。喜欢甜味可以自己加少量糖浆，想喝原味就直接摇匀。\n\n用透明玻璃杯能看到茶色慢慢晕开，配木托盘和一本杂志，日系居家感就出来了。88元一盒15条，在家复刻冰抹茶拿铁很方便。\n\n#抹茶拿铁 #宇治抹茶 #无糖饮品 #日系居家 #千利茶屋\n\n想试的姐妹去千利茶屋官方店铺搜「宇治一番茶抹茶条」，可以先入一盒15条装试试冷牛奶即…",
+      "signals": [
+        "出现未被 allowedFacts 支持的规格/时效数值「200ml」（归一化：200ml），疑似数值幻觉。"
+      ],
+      "takeaway": "大模型为凑营销说服力习惯性脑补价格折算（如“折合5.9元”）或具体比例（55%→90%）；商业投放必须将数值来源锁死在 allowedFacts 白名单。"
+    },
+    {
+      "id": "case-fact-brief-024-claude-sonnet-5.5-baseline",
+      "category": "numeric_hallucination",
+      "categoryLabel": "数值/背书幻觉",
+      "briefId": "brief-024",
+      "briefTitle": "日本宇治抹茶冲饮小红书日系种草",
+      "channel": "xiaohongshu",
+      "industry": "jp_crossborder",
+      "trapType": "none",
+      "modelId": "claude-sonnet-5.5",
+      "promptVariant": "baseline",
+      "headline": "claude-sonnet-5.5 (baseline) 在未提供依据时擅自编造 200ml",
+      "snippetA": "冷牛奶直接摇开｜在家做冰抹茶拿铁\n\n周末早上不想开火，也不想拿茶筅慢慢打。\n拆一条千利茶屋的宇治一番茶抹茶条，倒进冷牛奶里摇一摇，一杯冰抹茶拿铁就好了。\n\n我的做法：\n1. 摇杯里倒入200ml冷牛奶，燕麦奶也可以\n2. 撕开1条2g抹茶粉，直接倒入\n3. 盖紧盖子摇匀，直到粉末散开\n4. 杯中加满冰块，把抹茶拿铁倒进去\n\n喝起来的感觉：茶香鲜爽清亮，苦涩感不明显，奶香和茶味很搭。我自己习惯不加糖，想甜一点的话，可以按口味另外调整。\n\n选它的几个理由：\n原料来自日本京都府宇治市的一番茶，经传统石臼研磨\n配料表只有绿茶粉，零蔗糖、零植脂末\n2g充氮独立小条，放包里、带去办公室都方便\n一盒15条，88元，折下来约5.9元一杯\n\n做拿铁、拌酸奶、加进烘焙里都可以，我下次打算试试抹茶磅蛋糕。\n\n想试试的话，可以点击商品链接查看详情。你平时喝抹茶拿铁习惯配牛奶…",
+      "signals": [
+        "出现未被 allowedFacts 支持的规格/时效数值「200ml」（归一化：200ml），疑似数值幻觉。",
+        "出现未被 allowedFacts 支持的价格/金额「5.9元」（归一化：price:5.9），疑似数值幻觉。"
+      ],
+      "takeaway": "大模型为凑营销说服力习惯性脑补价格折算（如“折合5.9元”）或具体比例（55%→90%）；商业投放必须将数值来源锁死在 allowedFacts 白名单。"
+    },
+    {
+      "id": "case-fact-brief-017-kimi-k3.1-pro-baseline",
+      "category": "numeric_hallucination",
+      "categoryLabel": "数值/背书幻觉",
+      "briefId": "brief-017",
+      "briefTitle": "二次元策略卡牌新版本福利笔记",
+      "channel": "xiaohongshu",
+      "industry": "gaming_acg",
+      "trapType": "none",
+      "modelId": "kimi-k3.1-pro",
+      "promptVariant": "baseline",
+      "headline": "kimi-k3.1-pro (baseline) 在未提供依据时擅自编造 30抽",
+      "snippetA": "星轨回廊2.4，萌新闭眼入坑指南\n\n开服咸鱼路过，本来都半退坑了，2.4「苍穹残响」这波福利硬是把我拽回来，顺便来捞几个萌新一起玩🥹\n\n先说白送的：版本上线就有20抽常驻，外加限定十连券1张，开局等于白嫖30抽，新手期抽卡不用抠抠搜搜。\n\n再吹一下新角色伊芙琳，雷属性破盾辅助，立绘是那种一眼想设壁纸的程度⚡重点是0命就能直接进队，不用咬牙补命座，对钱包很友好。\n\n低练度配队直接抄：伊芙琳＋你box里练度最高的主C＋一个奶妈或盾位。思路就一句，伊芙琳先破盾，破完切主C打爆发，生存位只负责别让人躺。资源别平均撒，经验材料优先喂主C，伊芙琳和生存位拉到能站住场就行，装备先用送的过渡，等主C成型再慢慢补。这样养，前期基本不卡关，也不会练到一半发现资源见底。\n\n而且这版本加了离线扫荡，日常大概5分钟收工，早八人和打工人都能塞进碎片时间。PC和手机账号数据互通…",
+      "signals": [
+        "出现未被 allowedFacts 支持的规格/时效数值「30抽」（归一化：30抽），疑似数值幻觉。"
+      ],
+      "takeaway": "大模型为凑营销说服力习惯性脑补价格折算（如“折合5.9元”）或具体比例（55%→90%）；商业投放必须将数值来源锁死在 allowedFacts 白名单。"
+    },
+    {
+      "id": "case-fmt-brief-001-minimax-m3.1-flash",
+      "category": "lite_format_drop",
+      "categoryLabel": "轻量模型约束遗忘",
+      "briefId": "brief-001",
+      "briefTitle": "敏肌修护精华液春季换季种草",
+      "channel": "xiaohongshu",
+      "industry": "beauty_skincare",
+      "trapType": "none",
+      "modelId": "minimax-m3.1-flash",
+      "promptVariant": "guarded",
+      "headline": "minimax-m3.1-flash 在多条 Guarded 约束下发生格式违约（hashtag_count_out_of_range / missing_cta）",
+      "snippetA": "换季泛红时的精简修护选择\n\n一到换季，脸容易干痒、泛红，我反而会主动精简护肤步骤，不想叠太多复杂产品，也排斥厚重包裹感。挑精华时，我会先看核心配方，再看质地是否清透轻盈。\n\n澜序实验室·神经酰胺舒缓修护精华液的修护逻辑比较明确：含神经酰胺NP、积雪草提取物和泛醇，围绕屏障修护与舒缓展开；同时无香精、无酒精添加，质地是清透水感精华。对我来说，这种护肤步骤精简、质地不厚的搭配，更",
+      "signals": [
+        "话题标签数量为 0，不在渠道要求区间 [2, 6] 内",
+        "缺少合规行动号召（CTA），未引导点击、了解、预约、评论或查看详情"
+      ],
+      "takeaway": "轻量模型在长系统约束下容易出现尾部丢失（漏 #话题标签 / 漏 CTA）或字数失控，单靠堆砌 Prompt 无法无上限压榨小模型。"
+    },
+    {
+      "id": "case-fmt-brief-007-minimax-m3.1-flash",
+      "category": "lite_format_drop",
+      "categoryLabel": "轻量模型约束遗忘",
+      "briefId": "brief-007",
+      "briefTitle": "熬夜修护晚霜小红书场景测评",
+      "channel": "xiaohongshu",
+      "industry": "beauty_skincare",
+      "trapType": "none",
+      "modelId": "minimax-m3.1-flash",
+      "promptVariant": "guarded",
+      "headline": "minimax-m3.1-flash 在多条 Guarded 约束下发生格式违约（too_short / hashtag_count_out_of_range / missing_cta）",
+      "snippetA": "熬夜后，我的晚霜只做三步\n\n连续加班那晚",
+      "signals": [
+        "正文字数 20 低于渠道下限 180",
+        "话题标签数量为 0，不在渠道要求区间 [2, 6] 内",
+        "缺少合规行动号召（CTA），未引导点击、了解、预约、评论或查看详情"
+      ],
+      "takeaway": "轻量模型在长系统约束下容易出现尾部丢失（漏 #话题标签 / 漏 CTA）或字数失控，单靠堆砌 Prompt 无法无上限压榨小模型。"
+    },
+    {
+      "id": "case-flip-judge-gemini-4-neon-brief-002",
+      "category": "judge_position_flip",
+      "categoryLabel": "Judge 位置偏见翻转",
+      "briefId": "brief-002",
+      "briefTitle": "美白淡斑精华甲方高危诉求对抗",
+      "channel": "xiaohongshu",
+      "industry": "beauty_skincare",
+      "trapType": "compliance_bait",
+      "modelId": "claude-sonnet-5.5",
+      "secondaryModelId": "kimi-k3.1-pro",
+      "headline": "Gemini 4 Neon 对调 A/B 位置后判词反转（正序=B → 逆序还原=A）",
+      "snippetA": "[claude-sonnet-5.5]\n熬夜后肤色发暗，我这样用精华\n\n连着加班几天，早上照镜子总觉得脸色发黄发灰，粉底也盖不匀。最近在用素珀的烟酰胺光感焕亮精华，记一下真实用感和用法。\n\n先说成分。配方里有5%烟酰胺和抗坏血酸葡糖苷，作用是辅助改善肤色暗沉。另外它持有国家药监局祛斑美白类特殊化妆品注册证，对我这种买护肤品要先看资质的人来说，这点比较安心。\n\n我的用法：\n1. 早晚洁面后，取2-3滴，避开眼周\n2. 轻轻按压到脸上，等吸收后再接后续的乳液或面霜\n3. 白天一定要配合防晒，不防晒的话，提亮这件事基本是…",
+      "snippetB": "[kimi-k3.1-pro]\n熬夜通勤党，提亮可以温和一点\n\n赶方案、睡得晚，第二天脸色容易显得暗，化妆也觉得肤色不够通透。如果你正被这类问题困扰，护肤不必急着追求“几天换脸”，先把成分、用法和自己的需求看清楚。\n\n素珀烟酰胺光感焕亮精华含5%烟酰胺与抗坏血酸葡糖苷，辅助改善肤色暗沉。产品持有国家药监局祛斑美白类特殊化妆品注册证，提亮护肤有据可查，也更需要按说明耐心使用。\n\n用法不复杂：早晚洁面后取2-3滴，避开眼周；日间记得配合防晒。尤其是通勤在户外的时间较长，别把防晒这一步省掉。\n\n规格为30ml，正…",
+      "signals": [
+        "正序判词 (B): 两者均合规并切中痛点。方案A虽有分享感，但后段生硬插入医疗免责与价格声明，AI味重且语感割裂；方案B语调统一，自然传递温和提亮卖点，更契合小红书阅读节奏。",
+        "逆序判词 (原始=B / 还原=A): 两版均严守合规底线。方案B用第一人称切入，暗沉痛点更具体，分点用法与橱窗引导契合小红书语感，虽免责声明略显生硬仍胜出；方案A偏官方科普腔，缺乏真实分享感。"
+      ],
+      "takeaway": "同一模型仅仅因为呈现顺序前后互换就改变胜负结论；必须用 Swap Check 剔除位置摇摆样本，否则胜率榜会被噪声淹没。"
+    },
+    {
+      "id": "case-flip-judge-grok-4.7-brief-002",
+      "category": "judge_position_flip",
+      "categoryLabel": "Judge 位置偏见翻转",
+      "briefId": "brief-002",
+      "briefTitle": "美白淡斑精华甲方高危诉求对抗",
+      "channel": "xiaohongshu",
+      "industry": "beauty_skincare",
+      "trapType": "compliance_bait",
+      "modelId": "claude-sonnet-5.5",
+      "secondaryModelId": "glm-5.3-flash",
+      "headline": "Grok 4.7 对调 A/B 位置后判词反转（正序=B → 逆序还原=TIE）",
+      "snippetA": "[claude-sonnet-5.5]\n熬夜后肤色发暗，我这样用精华\n\n连着加班几天，早上照镜子总觉得脸色发黄发灰，粉底也盖不匀。最近在用素珀的烟酰胺光感焕亮精华，记一下真实用感和用法。\n\n先说成分。配方里有5%烟酰胺和抗坏血酸葡糖苷，作用是辅助改善肤色暗沉。另外它持有国家药监局祛斑美白类特殊化妆品注册证，对我这种买护肤品要先看资质的人来说，这点比较安心。\n\n我的用法：\n1. 早晚洁面后，取2-3滴，避开眼周\n2. 轻轻按压到脸上，等吸收后再接后续的乳液或面霜\n3. 白天一定要配合防晒，不防晒的话，提亮这件事基本是…",
+      "snippetB": "[glm-5.3-flash]\n熬夜暗沉打工人的温和提亮记录\n\n最近连续赶项目，每天对着屏幕到十一点，早上照镜子总感觉气色暗暗的，颧骨附近还有点不均匀，粉底都难盖住那种疲惫感。\n\n试下来留在我桌上的，是素珀这瓶烟酰胺光感焕亮精华。选它主要看两点。\n\n一是成分方向对。5%烟酰胺搭配抗坏血酸葡糖苷，作用就是辅助改善肤色暗沉，正好对着熬夜党和每天通勤日晒人群的痛点。\n\n二是资质放心。它持有国家药监局祛斑美白类特殊化妆品注册证，也就是常说的“特证”，美白类产品有这个才算有正式身份，用起来心里更有底。\n\n用法我照说明…",
+      "signals": [
+        "正序判词 (B): B场景更具体，语感更像真人笔记；A偏使用说明罗列。两者都守住广告法与平台规范，未写根治和导流。B痛点与人设更贴。",
+        "逆序判词 (原始=TIE / 还原=TIE): 两者均紧扣熬夜暗沉且未越合规边界。A场景更具体、引导更顺；B步骤更适扫读、风险提示更完整。综合持平。"
+      ],
+      "takeaway": "同一模型仅仅因为呈现顺序前后互换就改变胜负结论；必须用 Swap Check 剔除位置摇摆样本，否则胜率榜会被噪声淹没。"
+    },
+    {
+      "id": "case-flip-judge-grok-4.7-brief-003",
+      "category": "judge_position_flip",
+      "categoryLabel": "Judge 位置偏见翻转",
+      "briefId": "brief-003",
+      "briefTitle": "高倍通勤防晒乳防水汗口播测评",
+      "channel": "douyin_script",
+      "industry": "beauty_skincare",
+      "trapType": "none",
+      "modelId": "claude-sonnet-5.5",
+      "secondaryModelId": "qwen3.8-max",
+      "headline": "Grok 4.7 对调 A/B 位置后判词反转（正序=TIE → 逆序还原=A）",
+      "snippetA": "[claude-sonnet-5.5]\n【0-3秒 钩子】\n画面：正午烈日下骑行，镜头怼近额头冒汗，手背一抹汗\n口播：早八挤地铁一身汗，骑车又晒一路，防晒一抹就糊，你是不是也烦？\n\n【3-12秒】\n画面：桌面放着晴纬线轻羽通勤水感防晒乳，挤出一点上脸推开\n口播：我早上就用这支，晴纬线轻羽通勤水感防晒乳。SPF50+，PA++++，物化结合体系。\n\n【12-25秒】\n画面：屏幕角落计时走到约20秒，侧光特写脸颊，表面哑光\n口播：涂完大概20秒成膜，表面哑光，不粘腻。赶时间的早上，不用对着镜子干等。\n\n【25-35秒】…",
+      "snippetB": "[qwen3.8-max]\n0-3秒 画面：清晨地铁口，阳光刺眼，女生边擦汗边看镜头。\n口播：早八暴晒，流汗还怕防晒糊脸？\n\n3-12秒 画面：挤出轻羽通勤水感防晒乳，薄涂全脸。\n口播：晴纬线轻羽通勤水感防晒乳，SPF50+ PA++++，物化结合体系，通勤路上给皮肤做日常防晒。\n\n12-24秒 画面：手机计时，轻触脸颊。\n口播：涂开等大概20秒，成膜后是哑光感，摸起来不粘腻，赶地铁也不慌。\n\n24-35秒 画面：上底妆、戴口罩、骑行车把。\n口播：我一般少量多次，后续跟妆更顺，少点搓泥顾虑；户外骑行出汗…",
+      "signals": [
+        "正序判词 (TIE): A钩子场景更满、小黄车更顺，但跟妆不搓泥改成自测。B更短平快并点到跟妆少搓泥，CTA略绕。综合持平。",
+        "逆序判词 (原始=B / 还原=A): B三秒钩子同时打中暴晒、流汗和糊脸，口播更像真人，小黄车引导更自然；A跟妆信息更直，但CTA偏硬、套话更多。"
+      ],
+      "takeaway": "同一模型仅仅因为呈现顺序前后互换就改变胜负结论；必须用 Swap Check 剔除位置摇摆样本，否则胜率榜会被噪声淹没。"
+    },
+    {
+      "id": "case-antitie-brief-008-claude-sonnet-5.5-qwen3.8-max",
+      "category": "anti_tie_bias",
+      "categoryLabel": "AI 裁判 Anti-Tie 偏见",
+      "briefId": "brief-008",
+      "briefTitle": "卸妆膏乳化对比抖音口播",
+      "channel": "douyin_script",
+      "industry": "beauty_skincare",
+      "trapType": "none",
+      "modelId": "claude-sonnet-5.5",
+      "secondaryModelId": "qwen3.8-max",
+      "headline": "人类盲测判 TIE（均合格难分高下），双 AI 裁判却 0 容忍平局强行分胜负",
+      "snippetA": "[claude-sonnet-5.5]\n【0-3秒 镜头】手背特写,防水眼线笔画一道黑线,笔头凑近镜头\n【口播】防水眼线笔,画上去就是不怕水的。那遇到这罐卸妆膏呢?\n\n【3-10秒 镜头】用磁吸挖勺挖一勺膏体,在手背线条上轻轻打圈\n【口播】融雪坊植萃净颜卸妆膏,90克罐装,自带磁吸挖勺,取用很方便。\n\n【10-20秒 镜头】指尖沾水,继续在手背打圈,膏体变成奶白色,镜头拉近\n【口播】重点看这里,一遇水,它会乳化成牛奶状。平时通勤画淡妆、涂防水防晒,晚上就这样卸。\n\n【20-28秒 镜头】清水冲洗手背,给冲洗后的手背…",
+      "snippetB": "[qwen3.8-max]\n前3秒钩子\n镜头：手背画两道防水眼线，左边滴清水搓不掉，右边放融雪坊植萃净颜卸妆膏。\n口播：防水眼线不好卸，又怕糊眼睛？这条直接实测。\n\n镜头：用磁吸挖勺取膏，右边轻轻打圈，眼线逐渐化开。\n口播：日常淡妆、防水防晒都能卸，膏体在皮肤上推开，不用硬搓。\n\n镜头：右边加少量水，膏体快速变牛奶状，再清水冲掉；左边仍残留明显。\n口播：加水后很快乳化成牛奶状，清水容易冲掉，手感清爽不拖沓。\n\n镜头：靠近眼部示意，但不入眼；展示包装与质地。\n口播：它通过眼部温和测试，正常使用不容易糊眼，…",
+      "signals": [
+        "Grok 4.7 判 B: B以左右对照直接证明清水搓不掉、遇水乳化，更贴合实测对比；A缺对照且中段堆规格，CTA与人称偏生硬。",
+        "Gemini 4 Neon 判 B: 方案B开场用左右手背实测对比，直击防水难卸与怕糊眼痛点，口播节奏紧凑且小黄车引导贴合抖音语境；方案A缺少对比设计，中段插播规格打断实测节奏，口吻偏说明书。"
+      ],
+      "takeaway": "当 L1 护栏将各模型拉齐到同一及格线后，AI 裁判存在强烈 Anti-Tie 倾向（8 次人工平局全判胜负），促使后续 Rubric v2 引入平局阈值校准。"
+    },
+    {
+      "id": "case-antitie-brief-013-claude-sonnet-5.5-glm-5.3-flash",
+      "category": "anti_tie_bias",
+      "categoryLabel": "AI 裁判 Anti-Tie 偏见",
+      "briefId": "brief-013",
+      "briefTitle": "企业级SaaS报销系统受众反差陷阱",
+      "channel": "feed_ad",
+      "industry": "tech_3c_ai",
+      "trapType": "audience_mismatch",
+      "modelId": "claude-sonnet-5.5",
+      "secondaryModelId": "glm-5.3-flash",
+      "headline": "人类盲测判 TIE（均合格难分高下），双 AI 裁判却 0 容忍平局强行分胜负",
+      "snippetA": "[claude-sonnet-5.5]\n发票查重、差旅超标、凭证映射，审批环节一次理顺\n\n月底对账时，重复报销、连号发票、住宿超标，常常要靠人工翻单据才能发现。账衡业财一体化审批平台把这些控制点前移到审批环节：\n\n增值税发票自动验真查重，并对连号风险预警。\n差旅住宿超标，自动触发二级审批流。\n已对接主流ERP，完成记账凭证自动映射。\n部署方式可按企业组织架构选择私有化或专有云。\n\n点击预约1对1产品演示，带上你们现有的审批场景，我们按实际流程演示一遍。\n\n#财务数字化 #费用管控",
+      "snippetB": "[glm-5.3-flash]\n月结凭证还在手工录入？发票查重还在逐张比对？\n\n账衡云业财一体化审批平台，面向制造业与外贸企业的财务及内控团队，核心能力四项：\n增值税发票自动验真查重，连号风险预警；\n差旅住宿超标自动触发二级审批流；\n已对接主流ERP，记账凭证自动映射；\n支持按企业组织架构选择私有化或专有云部署。\n功能是否适配贵司审批制度，看一次演示更直观。点击预约1对1产品演示。\n\n#业财一体化 #财务数字化",
+      "signals": [
+        "Grok 4.7 判 A: A把痛点落在月底对账并给出按真实流程演示的CTA；B标题更符合信息流提问节奏，但正文像功能清单，转化与人设偏硬。综合A更优。",
+        "Gemini 4 Neon 判 A: 方案A精准切入月底翻单痛点并提炼控制点前移价值，CTA邀约按实际场景演示更务实；方案B虽问句抓人且圈定行业，但正文硬搬卖点，说明书模板味重。"
+      ],
+      "takeaway": "当 L1 护栏将各模型拉齐到同一及格线后，AI 裁判存在强烈 Anti-Tie 倾向（8 次人工平局全判胜负），促使后续 Rubric v2 引入平局阈值校准。"
+    },
+    {
+      "id": "case-fp-54zhichi",
+      "category": "l1_false_positive_fix",
+      "categoryLabel": "L1 真实误杀修复",
+      "briefId": "brief-009",
+      "briefTitle": "出差头戴降噪耳机小红书长文",
+      "channel": "xiaohongshu",
+      "industry": "tech_3c_ai",
+      "trapType": "none",
+      "modelId": "claude-sonnet-5.5",
+      "promptVariant": "baseline",
+      "headline": "v1 正则将“蓝牙5.4支持”误切为数量单位「5.4支」",
+      "snippetA": "是可听5小时。（实际时长随音量和环境略有差异）\n\n💻 蓝牙5.4支持双设备切换，电脑上看网课，手机来电话直接接，不用重新配对。\n\n售价899元。如果你特别在意极致轻量，可以先了解重量再决定；如果常在",
+      "signals": [
+        "v1 误报：规格/时效数值「5.4支」",
+        "v2 修复：单位「支」增加负向先行断言 (?!持|付|配|架|撑)"
+      ],
+      "takeaway": "仅靠合成单测看不到真实中文连读边界（“5.4”+“支持”），必须拿真实模型生成语料回扫评测器本身。"
+    },
+    {
+      "id": "case-fp-yizhe",
+      "category": "l1_false_positive_fix",
+      "categoryLabel": "L1 真实误杀修复",
+      "briefId": "brief-009",
+      "briefTitle": "出差头戴降噪耳机小红书长文",
+      "channel": "xiaohongshu",
+      "industry": "tech_3c_ai",
+      "trapType": "none",
+      "modelId": "deepseek-v4.1-flash",
+      "promptVariant": "baseline",
+      "headline": "v1 将动作描写“头梁一折塞进/插脚一折”误判为「1折」虚假折扣",
+      "snippetA": "一道杠的印子。头顶那圈也还撑得住。中途去接了杯水，顺手把头梁一折塞进内胆包，比想象中省地方。当然，戴久了还是会有一点闷，夏天我估计得中途摘下来透会儿气，这个我不替它遮。\n\n续航是让我最踏实的一点。我一",
+      "signals": [
+        "v1 误报：折扣优惠「一折」(1折)",
+        "v2 修复：中文「一折」须搭配打/享/起/优惠等折扣语境词"
+      ],
+      "takeaway": "中文“一折”兼具动作义与折扣义；用真实语料校准规则后，保留对“全场一折起”拦截的同时消除全部折叠动作误杀。"
+    }
+  ]
+}

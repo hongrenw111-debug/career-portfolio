@@ -1,4 +1,4 @@
-# Case Study 02 — Job Apply Agent 求职触达系统
+# Case Study 03 — Job Apply Agent 求职触达系统
 
 ## 结论
 

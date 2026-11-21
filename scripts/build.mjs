@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const dist = resolve(root, "dist");
 
-const publicEntries = ["index.html", "styles.css", "app.js", "assets", "data/portfolio.json"];
+const publicEntries = ["index.html", "styles.css", "app.js", "assets", "data/portfolio.json", "adbench-zh"];
 
 await rm(dist, { recursive: true, force: true });
 await mkdir(dist, { recursive: true });

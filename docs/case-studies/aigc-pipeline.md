@@ -1,4 +1,4 @@
-# Case Study 03 — AIGC 图像量产与一致性工作流
+# Case Study 06 — AIGC 图像量产与一致性工作流
 
 ## 结论
 

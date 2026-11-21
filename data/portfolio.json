@@ -2,7 +2,7 @@
   "profile": {
     "name": "王宏仁",
     "role": "AI 运营 / AI 应用 · 会造工具的内容运营",
-    "summary": "面向 AI 运营与 AI 应用岗位：既能做内容生产、自动化触达与数据复盘，也能亲手把 AI 工作流做成带护栏、可验证的工程系统——开源 AI 导演工作台、小红书自动化引擎、求职 Agent、浏览器运行时与模型网关均由本人搭建并日常使用。",
+    "summary": "面向 AI 运营与 AI 应用岗位：既能做内容生产、自动化触达与数据复盘，也能亲手把 AI 工作流做成带护栏、可验证的工程系统——中文营销 AIGC 评测基准（adbench-zh）、开源 AI 导演工作台、小红书自动化引擎、求职 Agent、浏览器运行时与模型网关均由本人搭建并日常使用。",
     "contacts": [
       {
         "label": "邮箱",
@@ -22,13 +22,13 @@
     ]
   },
   "snapshot": {
-    "date": "截至 2026-10-22",
+    "date": "截至 2026-11-20",
     "label": "各项目最近一次验证记录，日期与来源逐项标注",
     "metrics": [
       {
-        "value": "209",
-        "label": "FlowForge CI 测试",
-        "note": "2026-09-01 · CI 最后成功"
+        "value": "79",
+        "label": "adbench-zh 单测",
+        "note": "2026-11-20 本机实测"
       },
       {
         "value": "175",
@@ -41,13 +41,83 @@
         "note": "2026-10-22 本机实测"
       },
       {
-        "value": "258",
-        "label": "cs2-arb 单测",
-        "note": "2026-10-22 本机实测"
+        "value": "209",
+        "label": "FlowForge CI 测试",
+        "note": "2026-09-01 CI 最后成功"
       }
     ]
   },
   "projects": [
+    {
+      "slug": "adbench-zh",
+      "index": "CASE 09",
+      "name": "adbench-zh · 中文营销 AIGC 评测基准与有效成本看板",
+      "shortName": "adbench-zh",
+      "category": "EVALUATION · COST & COMPLIANCE",
+      "domain": "AIGC 评测",
+      "status": "未开源 · 交互看板已集成",
+      "statusType": "verified",
+      "featured": false,
+      "demoUrl": "./adbench-zh/",
+      "demoLabel": "打开在线评测排行榜与 Bad Case 看板",
+      "headline": "先校准评测尺子与位置偏见，再算清商业文案的千篇有效成本。",
+      "summary": "面向中文商业营销投放的 AIGC 评测基准与纯静态数据看板：基于 30 条跨行业跨渠道 Brief（含 40% 对抗陷阱）完成 6 个主力模型 × 2 套提示词共 359 / 360 次真实采样，串起零大模型硬检（v1→v2 真实语料校准）、千篇有效成本折算、异构双裁判位置互换与 19 题双盲 Anti-Tie 偏见实证。",
+      "problem": "商业营销文案同时受《广告法》、平台合规和产品事实红线约束。直接让 LLM 打分容易放过『口头拒绝却在文末重述违禁词』的泄漏；只比较 API 裸价会忽略一次通过率差异，而一刀切塞进长护栏提示词又会反推高基线模型的成本。",
+      "solution": "将硬约束与主观质量评估分层解耦：L1 用零 LLM 纯函数检测合规、隔离事实白名单（allowedFacts + scenarioFacts 与 clientRequest 严格分开）和渠道契约，并用首轮 359 条真实产出回扫修复误杀；L2 用与被测六家族无重叠的 Gemini 4 Neon + Grok 4.7 做 40 对位置互换对比，再导出不含网关路由与凭证的静态交互看板。",
+      "architecture": [
+        "30 条对抗商业 Brief",
+        "6 模型 × 2 提示词采样",
+        "L1 零 LLM 硬检（v2 校准）",
+        "千篇有效成本折算",
+        "L2 异构双裁判位置互换",
+        "L3 19/50 题盲测与看板"
+      ],
+      "facts": [
+        {
+          "value": "359/360",
+          "label": "有效采样",
+          "note": "6 模型 × 2 提示词，359 条非零 token 有效"
+        },
+        {
+          "value": "-50.6%",
+          "label": "DeepSeek 有效成本",
+          "note": "Guarded 将通过率 43.3% 升至 86.7%，¥22.97→¥11.35"
+        },
+        {
+          "value": "100.0%",
+          "label": "双裁判共识",
+          "note": "26 对共识 κ = 1.0；19/50 盲测 Self-κ 标 N/A"
+        },
+        {
+          "value": "79/79",
+          "label": "自动化测试",
+          "note": "2026-11-20 pnpm check 与 Brief 校验全过"
+        }
+      ],
+      "responsibilities": [
+        "设计 30 条覆盖美妆护肤、3C 与 AI、游戏二次元、日系跨境及三渠道的结构化 Brief 与 40% 对抗陷阱",
+        "实现零 LLM 纯函数 L1 检测器，并依据首轮 359 条真实产出完成 4 类误杀修复（5.4支持、头梁一折等）",
+        "建立千篇有效可用成本折算口径，验证护栏提示词在低基线与高基线模型上的非均匀 ROI",
+        "组织 Gemini 4 Neon + Grok 4.7 异构双裁判 40 对左右互换测试，定量暴露 Grok 32.5% 位置翻转噪音",
+        "执行单人双盲标注至 19 / 50 题发现 AI 裁判 Anti-Tie 偏见（0/8 判平），如实保留 N/A Self-Kappa 并构建静态交互看板"
+      ],
+      "proof": [
+        "2026-11-20 实测 pnpm check：tsc --noEmit 零错误，8 个测试文件 79 个用例全部通过，30 条 Brief Schema 校验通过",
+        "mvp30-v1 全量采样 359 / 360 有效：DeepSeek V4.1 Flash Guarded 通过率 43.3%→86.7%（有效成本 -50.6%）；Qwen 3.8 Max 由 96.7%→100.0% 反而涨价 +52.9%",
+        "L2 位置互换实验：Grok 4.7 翻转率 32.5%（13/40），Gemini 4 Neon 7.7%（3/39）；过滤翻转对后 26 对共识样本两家一致率由 71.8% 跃升至 100.0%（κ = 1.0）",
+        "L3 人工盲测实测完成 19 / 50 题（A=7, TIE=8, B=4，重测 0 / 10 故 Self-Kappa 标 N/A）：8 题人类判平 AI 全员 0 判平，11 题分胜负 Gemini 一致率 9 / 11（81.8%）",
+        "静态交互看板已集成至作品集 ./adbench-zh/，经脱敏机检拦截内部网关路径与账号信息，并与静态服务路径穿越测试回归联动"
+      ],
+      "stack": [
+        "TypeScript",
+        "Node.js",
+        "Vitest",
+        "Zod",
+        "OpenAI-compatible API",
+        "Static SVG Dashboard"
+      ],
+      "next": "扩充商业 Brief 至百条级并完成完整 50 题双盲队列以测出有效 Self-Kappa，随后脱敏整理独立公开 Git 仓库。"
+    },
     {
       "slug": "agentgate",
       "index": "CASE 01",
@@ -55,7 +125,7 @@
       "shortName": "AgentGate",
       "category": "AI PLATFORM · RELIABILITY",
       "domain": "模型可靠性",
-      "status": "本地运行 · 公开重构准备",
+      "status": "本地运行 · 未开源（公开重构准备）",
       "statusType": "verified",
       "featured": false,
       "headline": "给模型调用增加一层真正理解故障的可靠性边界。",
@@ -184,7 +254,7 @@
       "shortName": "Job Apply Agent",
       "category": "AGENT ENGINEERING · LLM APPLICATION",
       "domain": "求职自动化",
-      "status": "本地运行 · 真机校准中",
+      "status": "本地运行 · 未开源（真机校准中）",
       "statusType": "active",
       "featured": false,
       "headline": "让每一次投递都基于一份可核查的定制简历，而不是同一份海投模板。",
@@ -248,7 +318,7 @@
       "shortName": "XHS 内容引擎",
       "category": "CONTENT OPS · COMPLIANCE",
       "domain": "内容运营",
-      "status": "合规检测 + 数据闭环已实测 · 175 测试全绿",
+      "status": "未开源 · 合规检测与数据链路已实测（175 测试全绿）",
       "statusType": "verified",
       "featured": true,
       "headline": "用平台真实的审核拒绝数据，反向校准发布前的合规检测。",
@@ -317,7 +387,7 @@
       "shortName": "ego-win",
       "category": "RUNTIME PORT · CDP BINDING",
       "domain": "浏览器自动化",
-      "status": "本地运行 · 仓库待公开",
+      "status": "本地运行 · 未开源（仓库待公开）",
       "statusType": "active",
       "featured": false,
       "headline": "上游是 macOS 应用，缺的只是一层原生绑定——那就只补这一层。",
@@ -381,7 +451,7 @@
       "shortName": "AIGC 量产管线",
       "category": "AIGC PRODUCTION · CONTENT OPS",
       "domain": "批量生图",
-      "status": "个人工作流 · 日用交付中",
+      "status": "个人工作流 · 未开源（日用交付中）",
       "statusType": "active",
       "featured": false,
       "headline": "用约束而不是运气，解决批量生图的角色形变与画风漂移。",
@@ -444,7 +514,7 @@
       "shortName": "cs2-arb",
       "category": "DOMAIN MODELING · DECISION SUPPORT",
       "domain": "决策建模",
-      "status": "仅模拟与决策辅助 · 258 测试全绿",
+      "status": "仅模拟与决策辅助 · 未开源（258 测试全绿）",
       "statusType": "verified",
       "featured": false,
       "headline": "先证明数据源拿不稳，再决定不去爬它。",
@@ -483,7 +553,7 @@
       "responsibilities": [
         "写 ADR 记录「放弃自爬悠悠私有接口」的判断：实测该接口需约 10 天过期的 Bearer token、AES 设备码、TLS 指纹检测与数据中心 IP 风控（错误码 84104），不适合做行情层",
         "把手续费、提现成本、余额折价与冷却期做成可配置模型，而非散落在计算里的魔法数字",
-        "实现方向 A（现金换余额）与方向 B（余额换现金）双向机会扫描、跨品种闭环与历史分位",
+        "实现方向 A（现金换余额）与方向 B（余额换现金）双向机会扫描、跨品种套利路径与历史分位",
         "建立离线快照回归：fixtures 下录制快照，测试全程不触网"
       ],
       "proof": [
@@ -509,7 +579,7 @@
       "shortName": "RyzaChat:AI",
       "category": "REALTIME AI · INTERACTIVE MEDIA",
       "domain": "实时交互媒体",
-      "status": "本地原型 · 有已知未修项",
+      "status": "本地原型 · 不计划开源（有已知未修项）",
       "statusType": "active",
       "featured": false,
       "headline": "把大模型、语音、Spine 动画与面捕组合成一款本地 AI 角色游戏。",
@@ -568,6 +638,7 @@
     {
       "name": "AI 运营与内容生产",
       "projects": [
+        "adbench-zh",
         "flowforge",
         "xhs-content-engine",
         "aigc-pipeline",
@@ -577,6 +648,7 @@
     {
       "name": "LLM 应用与提示词工程",
       "projects": [
+        "adbench-zh",
         "job-apply-agent",
         "xhs-content-engine",
         "flowforge",
@@ -604,6 +676,7 @@
     {
       "name": "可靠性与恢复",
       "projects": [
+        "adbench-zh",
         "agentgate",
         "flowforge",
         "xhs-content-engine",
@@ -631,6 +704,7 @@
     {
       "name": "领域建模",
       "projects": [
+        "adbench-zh",
         "cs2-arb"
       ]
     },
@@ -644,6 +718,7 @@
     {
       "name": "端到端交付",
       "projects": [
+        "adbench-zh",
         "agentgate",
         "flowforge",
         "xhs-content-engine",
@@ -655,9 +730,11 @@
   ],
   "resume": {
     "headline": "AI 运营 / AI 应用落地方向",
-    "intro": "广告学背景 + AI 工程实操的复合型选手：既能策划内容与商业转化，也能亲手搭建开源 AI 导演工作台、AIGC 量产管线、小红书合规引擎与求职 Agent，并用严格的测试与护栏保证它们可靠运行。",
+    "intro": "广告学背景 + AI 工程实操的复合型选手：既能策划内容与商业转化，也能亲手搭建中文营销 AIGC 评测基准、开源 AI 导演工作台、小红书合规引擎与求职 Agent，并用严格的测试与护栏保证它们可靠运行。",
     "bullets": [
-      "主导开源 FlowForge（AI 导演调度工作台）：实现首创尾帧接力模式（MAD=2.00 连贯运镜衔接），复用 Chrome 会话零 API Key 驱动 Google Flow，Ubuntu + Windows 双系统 CI 209 测试通过。",
+      "独立构建 adbench-zh 中文营销 AIGC 评测基准：用 30 条跨行业对抗 Brief 完成 6 模型 × 2 提示词共 359 / 360 次实测，先经真实语料校准 4 类 L1 零 LLM 硬检误杀（v1→v2），再以双异构位置互换裁判捕捉 Grok 32.5% 翻转噪音（共识 26 对 κ = 1.0），验证护栏提示词将 DeepSeek 千篇有效成本降低 50.6% 而推高 Qwen 成本 52.9%，并如实标注 19 / 50 题盲测 Anti-Tie 偏见与 N/A Self-Kappa（79 项自动测试全绿）。",
+      "开源 FlowForge（AI 导演调度工作台）：设计尾帧接力模式（MAD=2.00 连贯运镜衔接），复用 Chrome 会话零 API Key 驱动 Google Flow，Ubuntu + Windows 双系统 CI 209 测试通过。",
+      "搭建双通道 Gemini Provider Guard（AgentGate 原型）：隔离后端与 8+8 无重叠节点池，按网络、配额、模型缺失与后端失联根因分类恢复，响应头或首个响应字节发出后禁止自动重放。",
       "构建小红书内容自动化引擎与 0-LLM 合规检测闸门：17 条规则反向校准平台真实拒绝日志，未通过违规 13→0 清零，打通无 table DOM 的真实指标采集链路（当前 6 篇已发布样本），175 自动化测试全绿。",
       "独立开发 job-apply-agent 求职 Agent：JD 解构、证据映射、按岗定制简历与话术，取材红线加 cannot-align 拦截保证不编造经历，159 项测试保障全流程。",
       "开发 ego-win：用 CDP 实现 ego lite 官方 harness 在 Windows 上缺失的原生绑定层，上游 SDK 逐字节不改；63 个单元测试与上游 68/69 真实浏览器用例双闸门把关。",

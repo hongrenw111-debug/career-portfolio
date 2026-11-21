@@ -13,7 +13,16 @@ const requiredFiles = [
   "docs/RESUME_BULLETS.md"
 ];
 
-const publicFiles = ["index.html", "styles.css", "app.js", "data/portfolio.json"];
+const publicFiles = [
+  "index.html",
+  "styles.css",
+  "app.js",
+  "data/portfolio.json",
+  "adbench-zh/index.html",
+  "adbench-zh/styles.css",
+  "adbench-zh/app.js",
+  "adbench-zh/data/benchmark-snapshot.json"
+];
 const failures = [];
 
 async function mustExist(relativePath) {
@@ -29,11 +38,22 @@ await Promise.all(requiredFiles.map(mustExist));
 
 const html = await readFile(resolve(root, "index.html"), "utf8");
 const localReferences = [...html.matchAll(/(?:src|href)="(\.\/[^"#?]+)"/g)].map((match) => match[1]);
-await Promise.all(localReferences.map((reference) => mustExist(reference.replace(/^\.\//, ""))));
+await Promise.all(localReferences.map((reference) => {
+  const clean = reference.replace(/^\.\//, "");
+  return mustExist(clean.endsWith("/") ? `${clean}index.html` : clean);
+}));
 
 const data = JSON.parse(await readFile(resolve(root, "data/portfolio.json"), "utf8"));
-if (!Array.isArray(data.projects) || data.projects.length !== 8) {
-  failures.push("作品集必须包含 8 个核心项目");
+if (!Array.isArray(data.projects) || data.projects.length !== 9) {
+  failures.push("作品集必须包含 9 个核心项目");
+}
+
+for (const project of data.projects ?? []) {
+  if (typeof project.demoUrl === "string" && project.demoUrl.startsWith("./")) {
+    const cleanRel = project.demoUrl.replace(/^\.\//, "").replace(/\/$/, "");
+    const targetEntry = cleanRel.endsWith(".html") ? cleanRel : `${cleanRel}/index.html`;
+    await mustExist(targetEntry);
+  }
 }
 
 // 每个案例必须有对应的深度文档，且文档不得引用已退役的 slug

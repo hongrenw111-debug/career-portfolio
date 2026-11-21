@@ -43,7 +43,16 @@ test("motion is optional and small screens have a dedicated layout", () => {
   assert.match(css, /@media \(max-width: 760px\)/);
 });
 
+test("adbench-zh case includes live dashboard link and honest 19/50 calibration boundary", () => {
+  const adbench = data.projects.find((project) => project.slug === "adbench-zh");
+  assert.ok(adbench);
+  assert.equal(adbench.demoUrl, "./adbench-zh/");
+  assert.match(adbench.proof.join(" "), /19\s*\/\s*50/);
+  assert.match(adbench.proof.join(" "), /N\/A/);
+});
+
 test("dynamic text is escaped before template rendering", () => {
   assert.match(app, /const escapeHtml/);
   assert.match(app, /escapeHtml\(project\.headline\)/);
+  assert.match(app, /escapeHtml\(project\.demoUrl\)/);
 });

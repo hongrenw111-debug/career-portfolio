@@ -46,10 +46,21 @@ const server = createServer(async (request, response) => {
       return;
     }
 
-    const info = await stat(candidate);
+    let target = candidate;
+    let info = await stat(target);
+    if (info.isDirectory()) {
+      target = resolve(target, "index.html");
+      const rootPrefix = `${projectRoot}${sep}`.toLowerCase();
+      if (!target.toLowerCase().startsWith(rootPrefix)) {
+        response.writeHead(400);
+        response.end("Bad Request");
+        return;
+      }
+      info = await stat(target);
+    }
     if (!info.isFile()) throw new Error("Not a file");
-    const body = await readFile(candidate);
-    const type = contentTypes.get(extname(candidate).toLowerCase()) ?? "application/octet-stream";
+    const body = await readFile(target);
+    const type = contentTypes.get(extname(target).toLowerCase()) ?? "application/octet-stream";
 
     response.writeHead(200, {
       "Content-Type": type,
@@ -57,7 +68,7 @@ const server = createServer(async (request, response) => {
       "Cache-Control": "no-store",
       "X-Content-Type-Options": "nosniff",
       "Referrer-Policy": "no-referrer",
-      "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
+      "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
     });
     if (request.method === "HEAD") response.end();
     else response.end(body);
