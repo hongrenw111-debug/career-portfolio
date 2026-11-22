@@ -75,7 +75,7 @@ $htmlUri = ([System.Uri](Resolve-Path 'docs\resume-source.html').Path).AbsoluteU
 | 项目 | 当前依据 | 公开状态 |
 |---|---|---|
 | adbench-zh评测基准 | 30 条对抗 Brief、359/360 真实采样、L1 v2 校准、L2 40 对位置互换、19/50 盲测、79 单测全绿（2026-11-20） | 未开源（仓库待整理公开）；交互看板已集成于 `./adbench-zh/` |
-| GeoShield 防洗脑套件 | Deep Module 无环架构、32 文件 AST 边界校验、22/22 离线回归全绿、5 维对抗脚本实测加固（2026-11-23） | 公开开源（MIT，`hongrenw111-debug/geo-shield`）；Ubuntu + Windows 双系统 CI 全绿 |
+| GeoShield 防洗脑套件 | Deep Module 无环架构、32 文件 AST 边界校验、22/22 离线回归全绿、5 维对抗脚本实测加固（2026-11-23） | 公开开源（PolyForm 非商业许可，商用需授权，`hongrenw111-debug/geo-shield`）；Ubuntu + Windows 双系统 CI 全绿 |
 | 小红书内容引擎 | 当前源码、175 测试全绿（2026-10-22）、17 条 0-LLM 合规闸门与平铺 DOM 采集链路 | 未开源；流水线就绪，半自动人工确认发布，采集样本 6 篇 |
 | FlowForge AI 导演 | GitHub 公开开源仓库、GitHub Actions CI 209 测试通过（最后成功运行 2026-09-01） | 公开开源（MIT）；仓库自 2026-09-01 后无提交 |
 | Job Apply Agent | 当前源码、4 份 ADR、2026-10-22 `node --test` 159/159 实测（09-14 为 107/107） | 本地运行 · 未开源；真机选择器校准中 |

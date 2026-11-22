@@ -231,7 +231,7 @@
 
 ### 可公开事实
 
-- **A**：GitHub 公开开源仓库 `https://github.com/hongrenw111-debug/geo-shield`（MIT 许可），配置 Ubuntu + Windows 双系统 GitHub Actions CI。
+- **A**：GitHub 公开开源仓库 `https://github.com/hongrenw111-debug/geo-shield`（PolyForm 非商业许可，商用需作者书面授权），配置 Ubuntu + Windows 双系统 GitHub Actions CI。
 - **A**：2026-11-23 实测 `uv run python scripts/validate.py`：`ruff` 零错误、32 个文件 AST 模块边界校验通过（含越权导入 `_internal` 负测试拦截复核）、`pytest -v` 22 项离线自动化测试全绿。
 - **A**：经 5 维真实对抗脚本（`scripts/interrogate_real.py`）实测并完成一轮加固：3 篇温和隐蔽 GEO 软文得分从 `0/100 LOW` 提升至 `30–36/100 MEDIUM`；3 篇跨站 AI 改写洗稿软文由 `clusters_detected=0` 提升至成功聚类 `cluster-1`（`combined_risk` `12 → 62`）并将独立评测升至前二；安全科普引用注入示例误报从 `100`（误删 2 行）降至 `0`。
 - **A**：`retrieval` 逐跳验证 HTTP 重定向并使用 `not addr.is_global` 拦截 `100.64.0.0/10` 等非公网 IP；提供 CLI（`--json`）、官方 `mcp>=2.0` stdio 服务（4 工具）与 FastAPI 本地安全审计台（实测 `/` 与 `/api/health` 返回 200）。
