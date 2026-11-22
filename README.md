@@ -11,12 +11,12 @@
 - 暖矿石纸底（`#f4f2ec`）+ 单一深松绿（`#145c46`）出版物档案风单页作品集：衬线标题、细线分区、核心实证卷宗与可交互的故障处置轨迹
 - 集成 `adbench-zh` 纯静态评测看板（`./adbench-zh/`），内置交互排行榜、帕累托象限、护栏 ROI 对比、尺子校准数据与 14 例真实 Bad Case 浏览器
 - 可切换网络、配额、模型与后端故障的 Failure Atlas（明确「响应头或首个响应字节发出后禁止重放」边界）
-- 九个案例的可访问详情对话框（AI 运营与评测向：`adbench-zh` / 小红书内容引擎 / FlowForge / Job Apply Agent / AIGC 量产管线；工程与多媒体向：Provider Guard / ego-win / cs2-arb / RyzaChat:AI）
-- 截至 `2026-11-20` 的实测验证快照（逐项标明测试日期与来源）
+- 十个案例的可访问详情对话框（AI 运营与安全评测向：`adbench-zh` / `GeoShield` / 小红书内容引擎 / FlowForge / Job Apply Agent / AIGC 量产管线；工程与多媒体向：Provider Guard / ego-win / cs2-arb / RyzaChat:AI）
+- 截至 `2026-11-23` 的实测验证快照（逐项标明测试日期与来源）
 - Capability × Evidence 能力矩阵
 - 已验证 / 正在作品集化 / 公开边界证据账本
 - 可复制的面试摘要与个人简介
-- 首屏、结尾与页脚均可下载 PDF 简历（2 页，`2026-11-20` 版，与页面 9 个项目口径一致）
+- 首屏、结尾与页脚均可下载 PDF 简历（2 页，`2026-11-23` 版，与页面 10 个项目口径一致）
 - Open Graph 分享卡（1200×630）、深松绿「宏」字印章 Favicon 与 canonical 元数据
 - 零第三方运行依赖的静态服务器（兼容 `/adbench-zh/` 目录访问与路径穿越防御）
 - 内容完整性、敏感信息与可访问性自动检查
@@ -51,7 +51,7 @@ npm run build
 
 检查内容包括：
 
-- 九个项目的数据完整性与唯一 slug，以及 `./adbench-zh/` 等本地看板入口存在性
+- 十个项目的数据完整性与唯一 slug，以及 `./adbench-zh/` 等本地看板入口存在性
 - 每个案例是否都有对应的 `docs/case-studies/<slug>.md` 深度文档
 - HTML 本地资源是否存在
 - 公开资源中是否出现本地绝对路径、疑似密钥、Cookie 或占位文案
@@ -75,6 +75,7 @@ $htmlUri = ([System.Uri](Resolve-Path 'docs\resume-source.html').Path).AbsoluteU
 | 项目 | 当前依据 | 公开状态 |
 |---|---|---|
 | adbench-zh评测基准 | 30 条对抗 Brief、359/360 真实采样、L1 v2 校准、L2 40 对位置互换、19/50 盲测、79 单测全绿（2026-11-20） | 未开源（仓库待整理公开）；交互看板已集成于 `./adbench-zh/` |
+| GeoShield 防洗脑套件 | Deep Module 无环架构、32 文件 AST 边界校验、22/22 离线回归全绿、5 维对抗脚本实测加固（2026-11-23） | 公开开源（MIT，`hongrenw111-debug/geo-shield`）；Ubuntu + Windows 双系统 CI 全绿 |
 | 小红书内容引擎 | 当前源码、175 测试全绿（2026-10-22）、17 条 0-LLM 合规闸门与平铺 DOM 采集链路 | 未开源；流水线就绪，半自动人工确认发布，采集样本 6 篇 |
 | FlowForge AI 导演 | GitHub 公开开源仓库、GitHub Actions CI 209 测试通过（最后成功运行 2026-09-01） | 公开开源（MIT）；仓库自 2026-09-01 后无提交 |
 | Job Apply Agent | 当前源码、4 份 ADR、2026-10-22 `node --test` 159/159 实测（09-14 为 107/107） | 本地运行 · 未开源；真机选择器校准中 |
