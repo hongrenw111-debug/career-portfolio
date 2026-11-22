@@ -44,8 +44,8 @@ await Promise.all(localReferences.map((reference) => {
 }));
 
 const data = JSON.parse(await readFile(resolve(root, "data/portfolio.json"), "utf8"));
-if (!Array.isArray(data.projects) || data.projects.length !== 9) {
-  failures.push("作品集必须包含 9 个核心项目");
+if (!Array.isArray(data.projects) || data.projects.length !== 10) {
+  failures.push("作品集必须包含 10 个核心项目");
 }
 
 for (const project of data.projects ?? []) {

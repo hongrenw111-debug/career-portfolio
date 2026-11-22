@@ -51,6 +51,14 @@ test("adbench-zh case includes live dashboard link and honest 19/50 calibration 
   assert.match(adbench.proof.join(" "), /N\/A/);
 });
 
+test("geo-shield case links public GitHub repository and records local boundary", () => {
+  const geo = data.projects.find((project) => project.slug === "geo-shield");
+  assert.ok(geo);
+  assert.equal(geo.demoUrl, "https://github.com/hongrenw111-debug/geo-shield");
+  assert.match(geo.proof.join(" "), /22/);
+  assert.match(geo.proof.join(" "), /MEDIUM|403/);
+});
+
 test("dynamic text is escaped before template rendering", () => {
   assert.match(app, /const escapeHtml/);
   assert.match(app, /escapeHtml\(project\.headline\)/);

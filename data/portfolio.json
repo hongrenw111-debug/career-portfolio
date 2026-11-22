@@ -18,11 +18,16 @@
         "label": "开源项目",
         "value": "flowforge",
         "href": "https://github.com/hongrenw111-debug/flowforge"
+      },
+      {
+        "label": "开源防洗脑",
+        "value": "geo-shield",
+        "href": "https://github.com/hongrenw111-debug/geo-shield"
       }
     ]
   },
   "snapshot": {
-    "date": "截至 2026-11-20",
+    "date": "截至 2026-11-23",
     "label": "各项目最近一次验证记录，日期与来源逐项标注",
     "metrics": [
       {
@@ -117,6 +122,74 @@
         "Static SVG Dashboard"
       ],
       "next": "扩充商业 Brief 至百条级并完成完整 50 题双盲队列以测出有效 Self-Kappa，随后脱敏整理独立公开 Git 仓库。"
+    },
+    {
+      "slug": "geo-shield",
+      "index": "CASE 10",
+      "name": "GeoShield · 反 GEO 软文洗脑与抗提示注入防御套件",
+      "shortName": "GeoShield",
+      "category": "AI SECURITY · ANTI-GEO & MCP",
+      "domain": "AI 安全防洗脑",
+      "status": "公开开源 · CLI / MCP / Web",
+      "statusType": "verified",
+      "featured": false,
+      "demoUrl": "https://github.com/hongrenw111-debug/geo-shield",
+      "demoLabel": "查看 GitHub 开源仓库",
+      "headline": "先清洗网页隐藏指令与记忆投毒链接，再重排软文与跨站洗稿矩阵。",
+      "summary": "面向 AI 搜索与 Agent 联网选品的开源防御引擎（MIT 许可）：覆盖网页隐藏 DOM/CSS/Unicode 隐写剥离、AI 分享跳转链接记忆投毒安检、四维可解释 GEO 软文打分（支持可选 OpenAI 兼容 LLM 语义审计）与跨站协同洗稿聚类重排，并同步交付 CLI、标准 MCP Server 与本地 FastAPI 审计台。",
+      "problem": "联网 AI 在回答消费选品与工具对比时易受两类污染：一是伪装成客观测评的高权重 GEO 软文与跨站洗稿矩阵，二是藏在白字 DOM、隐形 Unicode 或“Summarize with AI”跳转 URL 中的间接提示注入与持久记忆投毒；同时，纯字面规则极易误伤引用注入示例的安全文章与带 ?ref= 的技术文档。",
+      "solution": "采用严格无环 Deep Module 架构与 AST 边界检查：在 sanitize 层做块级流抽取、样式隐藏类解析、跨行归一化检测并豁免引号内元讨论；在 retrieval 层落实 not addr.is_global 与逐跳重定向 SSRF 防护；在 verify 层拉取完整正文、对高危注入一票否决出 XML 上下文，并结合高内聚团聚类与跨站品牌协同矩阵降权。",
+      "architecture": [
+        "AI 跳转链接安检",
+        "SSRF 逐跳检索完整正文",
+        "隐身 DOM / Unicode 清洗",
+        "四维 GEO + 混合 LLM 审计",
+        "协同洗稿矩阵聚类重排",
+        "<untrusted_web_evidence> XML / MCP"
+      ],
+      "facts": [
+        {
+          "value": "22/22",
+          "label": "离线回归",
+          "note": "2026-11-23 pytest + ruff + 32 文件边界全过"
+        },
+        {
+          "value": "0 → 1 簇",
+          "label": "改写洗稿聚类",
+          "note": "跨站 3 篇 AI 改写软文聚簇降权，独立评测升至前二"
+        },
+        {
+          "value": "100 → 0",
+          "label": "科普误报归零",
+          "note": "安全博客引用攻击示例不再被误删正文行"
+        },
+        {
+          "value": "MIT",
+          "label": "公开开源",
+          "note": "CLI + mcp>=2.0 + FastAPI + 双系统 CI"
+        }
+      ],
+      "responsibilities": [
+        "设计零内部依赖叶模块（sanitize / geo_score / retrieval）与 AST 模块边界守卫脚本，杜绝跨层私有导入",
+        "实现 HTML 隐藏类/同色字、Unicode 变体选择符/同形字、跨行 %0A 注入及嵌套重定向 AI 链接清洗",
+        "针对 5 维真实对抗脚本暴露的盲区完成闭环迭代：修复仅审摘要不抓正文、SSRF 100.64.0.0/10 放行与假平衡价格托词漏报",
+        "交付标准化 CLI（--json）、4 工具 MCP Server、零构建暗色 Web 审计台及多端 Agent 薄 Skill"
+      ],
+      "proof": [
+        "2026-11-23 实测 scripts/validate.py：ruff 零告警、32 个文件 AST 边界校验通过（含越权导入负测试拦截复核）、22 项离线测试全绿",
+        "5 维真实对抗脚本对比：3 篇温和隐蔽 GEO 软文由 0/100 LOW 提至 30–36/100 MEDIUM；真实中英文搜索由 0 升至 5/5 结果，榜首结构化比价文识别 geo_risk=41 降权至 #5",
+        "跨站 3 篇 AI 改写洗稿软文（云帆协同）成功触发 coordinated_pitch 聚类（combined_risk 12→62），两篇独立评测排至 #1/#2；安全科普误报由 100 降为 0",
+        "端到端验证：CLI inspect-link 检出 CRITICAL（96 分），Web 面板 / 与 /api/health 返回 200；同时如实记录纯本地 MEDIUM 边界、折叠菜单隐藏 DOM 噪声与 HTTP 403 登录墙限制"
+      ],
+      "stack": [
+        "Python 3.12+",
+        "uv",
+        "FastAPI",
+        "MCP SDK 2.x",
+        "BeautifulSoup4",
+        "httpx / Pydantic"
+      ],
+      "next": "补充更多真实网页导航噪声白名单（如 aria-hidden 菜单降噪），并按社区反馈持续迭代跨语种语义审计提示词与公开评测集。"
     },
     {
       "slug": "agentgate",
@@ -649,6 +722,7 @@
       "name": "LLM 应用与提示词工程",
       "projects": [
         "adbench-zh",
+        "geo-shield",
         "job-apply-agent",
         "xhs-content-engine",
         "flowforge",
@@ -667,6 +741,7 @@
     {
       "name": "协议与 API",
       "projects": [
+        "geo-shield",
         "agentgate",
         "ego-win",
         "cs2-arb",
@@ -677,6 +752,7 @@
       "name": "可靠性与恢复",
       "projects": [
         "adbench-zh",
+        "geo-shield",
         "agentgate",
         "flowforge",
         "xhs-content-engine",
@@ -686,6 +762,7 @@
     {
       "name": "Agent 工程",
       "projects": [
+        "geo-shield",
         "agentgate",
         "flowforge",
         "ego-win",
@@ -719,6 +796,7 @@
       "name": "端到端交付",
       "projects": [
         "adbench-zh",
+        "geo-shield",
         "agentgate",
         "flowforge",
         "xhs-content-engine",
@@ -733,6 +811,7 @@
     "intro": "广告学背景 + AI 工程实操的复合型选手：既能策划内容与商业转化，也能亲手搭建中文营销 AIGC 评测基准、开源 AI 导演工作台、小红书合规引擎与求职 Agent，并用严格的测试与护栏保证它们可靠运行。",
     "bullets": [
       "独立构建 adbench-zh 中文营销 AIGC 评测基准：用 30 条跨行业对抗 Brief 完成 6 模型 × 2 提示词共 359 / 360 次实测，先经真实语料校准 4 类 L1 零 LLM 硬检误杀（v1→v2），再以双异构位置互换裁判捕捉 Grok 32.5% 翻转噪音（共识 26 对 κ = 1.0），验证护栏提示词将 DeepSeek 千篇有效成本降低 50.6% 而推高 Qwen 成本 52.9%，并如实标注 19 / 50 题盲测 Anti-Tie 偏见与 N/A Self-Kappa（79 项自动测试全绿）。",
+      "开源 GeoShield（反 GEO 软文洗脑与抗提示注入套件，MIT）：基于 Deep Module 无环架构交付 CLI / mcp>=2.0 / FastAPI 审计台（32 文件 AST 边界校验 + 22 项离线测试全绿），经 5 维对抗脚本闭环加固隐身 DOM/Unicode/嵌套 AI 链接清洗与跨站改写协同聚类（3 篇改写软文聚簇降权至后排、安全科普误报 100→0）。",
       "开源 FlowForge（AI 导演调度工作台）：设计尾帧接力模式（MAD=2.00 连贯运镜衔接），复用 Chrome 会话零 API Key 驱动 Google Flow，Ubuntu + Windows 双系统 CI 209 测试通过。",
       "搭建双通道 Gemini Provider Guard（AgentGate 原型）：隔离后端与 8+8 无重叠节点池，按网络、配额、模型缺失与后端失联根因分类恢复，响应头或首个响应字节发出后禁止自动重放。",
       "构建小红书内容自动化引擎与 0-LLM 合规检测闸门：17 条规则反向校准平台真实拒绝日志，未通过违规 13→0 清零，打通无 table DOM 的真实指标采集链路（当前 6 篇已发布样本），175 自动化测试全绿。",

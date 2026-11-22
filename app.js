@@ -198,7 +198,7 @@
             <span>${escapeHtml(project.stack.slice(0, 3).join(" / "))}</span>
           </div>
           <div class="project-row-actions">
-            ${project.demoUrl ? `<a class="project-row-demo" href="${escapeHtml(project.demoUrl)}" target="_blank" rel="noopener noreferrer">打开看板</a>` : ""}
+            ${project.demoUrl ? `<a class="project-row-demo" href="${escapeHtml(project.demoUrl)}" target="_blank" rel="noopener noreferrer">${project.demoUrl.startsWith("http") ? "查看仓库" : "打开看板"}</a>` : ""}
             <button class="project-row-open" type="button" data-project-open="${escapeHtml(project.slug)}" aria-label="打开 ${escapeHtml(project.shortName)} 详情">查看</button>
           </div>
         </div>
